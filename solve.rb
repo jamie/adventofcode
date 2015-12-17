@@ -2,8 +2,8 @@ Dir["*/solve.rb"].each do |solver|
   path, script = solver.split("/")
   Dir.chdir path
   start = Time.now
-  solution = `ruby solve.rb`.chomp
-  solution2 = File.exist?('solve2.rb') ? `ruby solve2.rb`.chomp : ''
+  solution, solution2 = `ruby solve.rb`.chomp.split("\n")
+  solution2 = `ruby solve2.rb`.chomp if File.exist?('solve2.rb')
   stop = Time.now
   Dir.chdir '..'
 
