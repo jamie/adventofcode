@@ -13,7 +13,7 @@ loop do
     end
   end
 
-  p [house, ary[house]]
+  #p [house, ary[house]]
   if ary[house] >= goal
     puts house
     break
