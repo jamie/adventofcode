@@ -1,21 +1,35 @@
 input = 3014387
 
-elves = input.times.to_a
+class Elf
+  attr_reader :number, :next
 
-# adjust numbering
-elves << elves.size
-elves.shift
+  def initialize(number)
+    @number = number
+    @next = nil
+  end
 
-i = 0
-while elves.size > 1
-  elf = elves[i]
+  def append(elf)
+    @next = elf
+  end
 
-  # Ruby is _really_ not optimized for doing this with a stock array.
-  # 44 minute runtime compared to <1sec on part 1.
-  gone = elves.delete_at((i + elves.size/2).floor % elves.size)
-
-  i += 1 if gone > elf
-  i = 0 if i >= elves.size
+  def delete_next
+    @next = @next.next
+  end
 end
 
-puts elves.first
+head = cursor = Elf.new(1)
+2.upto(input) do |i|
+  cursor.append(Elf.new(i))
+  cursor = cursor.next
+end
+cursor.append(head)
+
+(input/2).floor.times { cursor = cursor.next }
+step = true
+while cursor.next != cursor
+  cursor.delete_next
+  cursor = cursor.next if step
+  step = !step
+end
+
+puts cursor.number
