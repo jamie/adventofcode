@@ -3,7 +3,7 @@ input = [0, 1, 1, 1, 1, 1, 2, 3, 2, 2, 2, 2]
 # NODES =    %w(HG HM LG LM)
 # input = [0, 1, 2, 1, 3, 1]
 
-queue = [input]
+queue = {17 => [input]}
 
 def valid?(state)
   floors = Hash[NODES.zip(state)]
@@ -21,10 +21,26 @@ def valid?(state)
   true
 end
 
+def score(steps, state)
+  state.inject(&:+) - steps/2
+end
+
+def enqueue(queue, steps, elevator, state)
+  queue[score(steps, state)] ||= []
+  queue[score(steps, state)] << [steps, elevator] + state
+end
+
 seen = { input[1..-1] => 0 }
+current = nil
 
 while !queue.empty? do
-  steps, elevator, *state = queue.shift
+  60.downto(1) do |i|
+    if queue[i] && !queue[i].empty?
+      current = queue[i].shift
+      break
+    end
+  end
+  steps, elevator, *state = current
 
   next unless valid?(state)
 
@@ -44,7 +60,7 @@ while !queue.empty? do
       new_state[i] = new_elevator
 
       next if seen[[new_elevator] + new_state]
-      queue << [steps+1, new_elevator] + new_state
+      enqueue(queue, steps+1, new_elevator, new_state)
       seen[[new_elevator] + new_state] = [elevator] + state
     end
 
@@ -61,12 +77,10 @@ while !queue.empty? do
         new_state[i2] = new_elevator
 
         next if seen[[new_elevator] + new_state]
-        queue << [steps+1, new_elevator] + new_state
+        enqueue(queue, steps+1, new_elevator, new_state)
         seen[[new_elevator] + new_state] = [elevator] + state
       end
     end
 
   end
-
-  p [queue.size, seen.size, steps] if rand(1000).zero?
 end
