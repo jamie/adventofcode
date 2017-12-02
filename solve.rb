@@ -15,7 +15,5 @@ Dir["#{year}/day-#{day}.rb"].each do |script|
   stop = Time.now
   Dir.chdir '..'
 
-  puts "%s (%5.2fs)" % [script, (stop-start)]
-  puts "%10s" % solution
-  puts "%10s" % solution2
+  puts "%s %10s %10s (%5.2fs)" % [script, solution, solution2, (stop-start)]
 end
