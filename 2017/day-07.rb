@@ -1,41 +1,46 @@
 input = File.readlines('input/07')
 
-parents = {}
-childrens = {}
-weights = {}
+Node = Struct.new(:parent, :name, :weight, :children)
+nodes = {}
+
+# Parse input
 input.each do |entry|
   entry =~ /(.*) \((\d+)\)( -> (.*))?/
-  parent, weight, children = $1, $2, $4
-  weights[parent] = weight.to_i
-  if children
-    childrens[parent] = children.split(", ")
-    children.split(", ").each do |child|
-      parents[child] = parent
-    end
+  name, weight, children = $1, $2.to_i, $4
+  children = children.split(", ") if children
+
+  node = Node.new(nil, name, weight, children)
+  nodes[name] = node
+end
+
+# Link tree
+nodes.each do |_, node|
+  next if node.children.nil?
+  node.children.map! do |child_name|
+    child_node = nodes[child_name]
+    child_node.parent = node
+    child_node
   end
 end
 
-node = parents.keys.first
-node = parents[node] while parents[node]
-root = node
-puts root
+# Find root (Part One)
+root_candidates = nodes.values.select{|node| node.parent.nil?}
+fail "Multiple Roots" if root_candidates.size > 1 # sanity
+root = root_candidates[0]
+puts root.name
 
-def check_weight(node, childrens, weights)
-  childs = childrens[node]
-  return weights[node] if childs.nil?
-  child_weights = {}
-  childs.map do |child|
-    child_weights[child] = check_weight(child, childrens, weights)
-  end
-  if child_weights.values.uniq.size > 1
-    heavy_child = child_weights.key(child_weights.values.max)
-    overweight = child_weights.values.max - child_weights.values.min
-    puts weights[heavy_child] - overweight
+# Weigh tree (Part Two)
+def check_weight(node)
+  return node.weight if node.children.nil?
+
+  weights = node.children.map{|c| check_weight(c)}
+  if weights.uniq.size == 1
+    return node.weight + weights.inject(&:+)
+  else
+    diff = weights.max - weights.min
+    id = weights.index(weights.max)
+    puts node.children[id].weight - diff
     exit
   end
-  
-  weights[node] + child_weights.values.inject(&:+)
 end
-check_weight(root, childrens, weights)
-
-
+check_weight(root)
