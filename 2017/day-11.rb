@@ -2,23 +2,33 @@ input = File.read('input/11')
 
 steps = input.split(",")
 
-def magnatude(x, y, z)
-  [x, y, z].map(&:abs).max
+# Cube coords, thanks redblobgames
+class C < Struct.new(:x, :y, :z)
+  def +(other)
+    self.x += other.x
+    self.y += other.y
+    self.z += other.z
+    self
+  end
+  def magnitude
+    [x, y, z].map(&:abs).max
+  end
 end
 
-# Cube coords, thanks redblobgames
-x = y = z = 0
+tr = {
+  'n'  => C.new( 0,  1, -1),
+  'ne' => C.new( 1,  0, -1),
+  'se' => C.new( 1, -1,  0),
+  's'  => C.new( 0, -1,  1),
+  'sw' => C.new(-1,  0,  1),
+  'nw' => C.new(-1,  1,  0),
+}
+
+pos = C.new(0, 0, 0)
 distances = []
-steps.each do |step|
-  case step
-  when 'n' ; y += 1; z -= 1
-  when 's' ; y -= 1; z += 1
-  when 'nw'; y += 1; x -= 1
-  when 'se'; y -= 1; x += 1
-  when 'ne'; x += 1; z -= 1
-  when 'sw'; x -= 1; z += 1
-  end
-  distances << magnatude(x, y, z)
+steps.each do |dir|
+  pos += tr[dir]
+  distances << pos.magnitude
 end
 puts distances.last
 puts distances.max
