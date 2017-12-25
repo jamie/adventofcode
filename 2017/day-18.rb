@@ -1,52 +1,39 @@
 input = File.readlines('input/18')
 
-registers = Hash.new{0}
+require './bytecode-interpreter'
 
-def value(val, registers)
-  (val =~ /[0-9]/ ? val.to_i : registers[val])
-end
+prog = Program.new(input, 0)
+prog.run
+puts prog.output
 
-index = 0
-output = nil
-loop do
-  statement = input[index]
-  index += 1
-  case statement
-  when /snd (.)/
-    val = $1
-    output = registers[val]
-  
-  when /set (.) (.+)/
-    reg, val = $1, $2
-    registers[reg] = value(val, registers)
+# Part 2, redefine some opcodes
+class Program
+private
+  def snd(reg)
+    self.send_count += 1
+    other.receive registers[reg]
+  end
 
-  when /add (.) (.+)/
-    reg, val = $1, $2
-    registers[reg] += value(val, registers)
-  
-  when /mul (.) (.+)/
-    reg, val = $1, $2
-    registers[reg] *= value(val, registers)
-  
-  when /mod (.) (.+)/
-    reg, val = $1, $2
-    registers[reg] %= value(val, registers)
-  
-  when /rcv (.)/
-    val = value($1, registers)
-    if val != 0
-      puts output
-      exit
+  def rcv(reg)
+    if queue.empty?
+      self.index -= 1
+    else
+      registers[reg] = queue.shift
     end
-  
-  when /jgz (.) (.+)/
-    val, off = $1, $2
-    if value(val, registers) > 0
-      index += value(off, registers) - 1
-    end
-  
-  else
-    puts "Unknown instruction: #{input[index]}"
-    exit
   end
 end
+
+p0 = Program.new(input, 0)
+p1 = Program.new(input, 1)
+p0.other = p1
+p1.other = p0
+
+loop do
+  break if p0.waiting? && p1.waiting?
+  break if p0.halted? || p1.halted?
+
+  p0.step
+  p1.step
+end
+puts p1.send_count
+
