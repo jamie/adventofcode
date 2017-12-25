@@ -2,7 +2,7 @@ input = File.readlines('input/18')
 
 require './bytecode-interpreter'
 
-prog = Program.new(input, 0)
+prog = Program.new(input)
 prog.run
 puts prog.output
 
