@@ -6,7 +6,7 @@ year = Dir["20*"].last if year.nil?
 day = "0#{day}" if day && day.to_i < 10
 day = "*" if day.nil?
 
-Dir["#{year}/day-#{day}.rb"].each do |script|
+Dir["#{year}-rb/day-#{day}.rb"].sort.each do |script|
   path, file = script.split("/")
 
   Dir.chdir path
