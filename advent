@@ -21,11 +21,11 @@ def run(script)
   _year, lang, _file = script.split('/')
 
   output = case lang
-  when 'ruby'
-    `ruby -Ilib/ruby #{script}`
   when 'nim'
     # Redirecting stderr to strip build debug output
     `nim c --hints=off -p=lib/nim --run #{script}`
+  when 'ruby'
+    `ruby -Ilib/ruby #{script}`
   else
     return nil
   end
