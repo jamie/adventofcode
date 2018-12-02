@@ -17,21 +17,23 @@ day = ARGV.detect{|v| v =~ /\A\d?\d\z/}
 day = "0#{day}" if day && day.to_i < 10
 day = "*" if day.nil?
 
-p [year, lang, day]
-
 def run(script)
   _year, lang, _file = script.split('/')
-  case lang
+
+  output = case lang
   when 'ruby'
-    `ruby -Ilib/ruby #{script}`.chomp.split("\n")
+    `ruby -Ilib/ruby #{script}`
   when 'nim'
-    # TODO
+    # Redirecting stderr to strip build debug output
+    `nim c --hints=off -p=lib/nim --run #{script}`
   else
-    nil
+    return nil
   end
+
+  output.chomp.split("\n")
 end
 
-Dir["#{year}/#{lang}/#{day}*"].sort.each do |script|
+Dir["#{year}/#{lang}/*#{day}*.*"].sort.each do |script|
   start = Time.now
   solution, solution2 = run(script)
   stop = Time.now

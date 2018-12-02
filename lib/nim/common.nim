@@ -3,4 +3,4 @@ import strformat
 import strutils
 
 proc readInput(year:int, day:int): string =
-  strip(readFile(fmt"../../input/{year}/{day:02}"))
+  strip(readFile(fmt"{year}/input/{day:02}"))
