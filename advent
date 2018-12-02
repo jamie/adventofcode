@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+
+## ARGV can be provided in any order, [year, day, lang] being distinct.
+
+# Extract language, default all
+lang = ARGV.detect{|v| v =~ /[a-z]+/}
+ARGV.delete(lang)
+lang ||= '*'
+
+# Extract year, default latest
+year = ARGV.detect{|v| v =~ /\A2[0-9]{3}\z/}
+ARGV.delete(year)
+year ||= Dir["20*"].last
+
+# Extract day, default whole-year
+day = ARGV.detect{|v| v =~ /\A\d?\d\z/}
+day = "0#{day}" if day && day.to_i < 10
+day = "*" if day.nil?
+
+p [year, lang, day]
+
+def run(script)
+  _year, lang, _file = script.split('/')
+  case lang
+  when 'ruby'
+    `ruby -Ilib/ruby #{script}`.chomp.split("\n")
+  when 'nim'
+    # TODO
+  else
+    nil
+  end
+end
+
+Dir["#{year}/#{lang}/#{day}*"].sort.each do |script|
+  start = Time.now
+  solution, solution2 = run(script)
+  stop = Time.now
+  duration = stop-start
+  next if solution.nil?
+
+  puts "%15s (%5.2fs)   %-10s %-10s" % [script, duration, solution, solution2]
+end
