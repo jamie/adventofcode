@@ -1,4 +1,4 @@
-include "common.nim"
+include "advent.nim"
 
 import strutils
 import sequtils
