@@ -1,4 +1,5 @@
-input = File.readlines('input/21')
+require 'advent'
+input = Advent.input(2017, 21)
 require 'pp'
 
 class Pattern

@@ -1,4 +1,5 @@
-input = File.readlines('input/13')
+require 'advent'
+input = Advent.input(2017, 13)
 
 scanners = input.map do |line|
   line =~ /(\d+): (\d+)/

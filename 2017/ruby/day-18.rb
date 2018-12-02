@@ -1,6 +1,7 @@
-input = File.readlines('input/18')
+require 'advent'
+input = Advent.input(2017, 18)
 
-require './bytecode-interpreter'
+require 'bytecode-interpreter'
 
 prog = Program.new(input)
 prog.run

@@ -1,4 +1,5 @@
-input = File.readlines('input/20')
+require 'advent'
+input = Advent.input(2017, 20)
 
 class Particle
   attr_reader :pos

@@ -1,6 +1,7 @@
-input = "hxtvlmkl"
+require 'advent'
+input = Advent.input(2017, 14)[0]
 
-require './knothash'
+require 'knothash'
 
 class KnotHash
   def bitdigest

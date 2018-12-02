@@ -1,4 +1,5 @@
-input = File.readlines('input/22').map(&:chomp)
+require 'advent'
+input = Advent.input(2017, 22)
 
 Virus = Struct.new(:x, :y, :dir) do
   TURN_RIGHT = {

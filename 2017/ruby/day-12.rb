@@ -1,4 +1,5 @@
-input = File.readlines('input/12')
+require 'advent'
+input = Advent.input(2017, 12)
 
 index = Hash[input.map{|line|
   line =~ /(\d+) <-> ([0-9, ]+)/

@@ -1,4 +1,5 @@
-input = File.readlines('input/05').map(&:to_i)
+require 'advent'
+input = Advent.input(2017, 5, :to_i)
 
 def run(jumps, lo, hi)
   i = 0

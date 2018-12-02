@@ -1,4 +1,6 @@
-a, b = 703, 516
+require 'advent'
+input = Advent.input(2017, 15)
+a, b = input.map{|line| line.split(/\s/).last.to_i }
 # a, b = 65, 8921
 
 a_factor = 16807

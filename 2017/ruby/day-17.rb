@@ -1,4 +1,5 @@
-input = "369".to_i
+require 'advent'
+input = Advent.input(2017, 17, :to_i)[0]
 
 buffer = [0]
 index = 0

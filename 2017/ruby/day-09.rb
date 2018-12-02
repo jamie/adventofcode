@@ -1,4 +1,6 @@
-stream = File.read('input/09').chomp.split(//)
+require 'advent'
+input = Advent.input(2017, 9)[0]
+stream = input.chomp.split(//)
 
 $garbage = []
 

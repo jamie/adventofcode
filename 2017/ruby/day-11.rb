@@ -1,5 +1,5 @@
-input = File.read('input/11')
-
+require 'advent'
+input = Advent.input(2017, 11)[0]
 steps = input.split(",")
 
 # Cube coords, thanks redblobgames

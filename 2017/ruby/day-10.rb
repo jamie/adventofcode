@@ -1,6 +1,7 @@
-input = "197,97,204,108,1,29,5,71,0,50,2,255,248,78,254,63"
+require 'advent'
+input = Advent.input(2017, 10)[0]
 
-require './knothash'
+require 'knothash'
 
 lengths = input.split(',').map(&:to_i)
 knot = KnotHash.new(lengths, [])

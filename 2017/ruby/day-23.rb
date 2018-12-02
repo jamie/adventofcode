@@ -1,6 +1,7 @@
-input = File.readlines('input/23')
+require 'advent'
+input = Advent.input(2017, 23)
 
-require './bytecode-interpreter'
+require 'bytecode-interpreter'
 
 class MulCountingProgram < Program
   attr_reader :mul_count

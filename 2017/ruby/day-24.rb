@@ -1,4 +1,5 @@
-input = File.readlines('input/24')
+require 'advent'
+input = Advent.input(2017, 24)
 components = input.map{|line| line.split('/').map(&:to_i).sort }.sort
 
 # Pre-attach edges with only 2 instances, reduce combinatorics slightly

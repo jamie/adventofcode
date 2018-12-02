@@ -18,14 +18,14 @@ day = "0#{day}" if day && day.to_i < 10
 day = "*" if day.nil?
 
 def run(script)
-  _year, lang, _file = script.split('/')
+  year, lang, _file = script.split('/')
 
   output = case lang
   when 'nim'
     # Redirecting stderr to strip build debug output
     `nim c --hints=off -p=lib/nim --run #{script}`
   when 'ruby'
-    `ruby -Ilib/ruby #{script}`
+    `ruby -Ilib/ruby -I#{year}/#{lang} #{script}`
   else
     return nil
   end

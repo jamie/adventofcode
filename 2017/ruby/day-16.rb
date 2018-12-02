@@ -1,4 +1,5 @@
-input = File.read('input/16').chomp
+require 'advent'
+input = Advent.input(2017, 16)[0]
 programs = 'abcdefghijklmnop'
 
 moves = input.split(",")

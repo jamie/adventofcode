@@ -1,4 +1,5 @@
-input = File.readlines('input/07')
+require 'advent'
+input = Advent.input(2017, 7)
 
 Node = Struct.new(:parent, :name, :weight, :children)
 nodes = {}

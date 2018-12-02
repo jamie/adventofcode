@@ -1,4 +1,5 @@
-input = File.readlines('input/19')
+require 'advent'
+input = Advent.input(2017, 19)
 
 pos = [0, input[0].index('|')]
 dir = :d

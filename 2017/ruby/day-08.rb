@@ -1,4 +1,5 @@
-input = File.readlines('input/08')
+require 'advent'
+input = Advent.input(2017, 8)
 
 registers = Hash.new{0}
 all_values = []

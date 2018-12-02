@@ -1,4 +1,5 @@
-target = 361527
+require 'advent'
+target = Advent.input(2017, 3, :to_i)[0]
 
 x, y = 0, 0
 dx, dy = 1, 1

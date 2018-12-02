@@ -1,4 +1,5 @@
-input = File.readlines('input/04').map(&:chomp)
+require 'advent'
+input = Advent.input(2017, 4)
 
 input.select {|line|
   words = line.split(/ +/)

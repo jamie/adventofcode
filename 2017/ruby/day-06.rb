@@ -1,4 +1,6 @@
-memory = File.read('input/06').split(/\s+/).map(&:to_i)
+require 'advent'
+input = Advent.input(2017, 6)[0]
+memory = input.split(/\s+/).map(&:to_i)
 
 seen = {}
 loop do
