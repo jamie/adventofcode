@@ -40,5 +40,5 @@ Dir["#{year}/#{lang}/*#{day}*.*"].sort.each do |script|
   duration = stop-start
   next if solution.nil?
 
-  puts "%15s (%5.2fs)   %-10s %-10s" % [script, duration, solution, solution2]
+  puts "(%5.2fs) %-15s   %-10s %-10s" % [duration, script, solution, solution2]
 end
