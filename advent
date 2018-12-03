@@ -1,5 +1,19 @@
 #!/usr/bin/env ruby
 
+if ARGV[0] == 'get'
+  # hack to download input
+  now = Time.now.utc - 5*60*60
+  out = "%4d/input/%02d" % [now.year, now.day]
+
+  unless File.exist?(out)
+    url = "https://adventofcode.com/%d/day/%d/input" % [now.year, now.day]
+    session = File.read(".session")
+    `curl -o #{out} -b session=#{session} #{url}`
+  end
+
+  exit
+end
+
 ## ARGV can be provided in any order, [year, day, lang] being distinct.
 
 # Extract language, default all
