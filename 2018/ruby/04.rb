@@ -14,7 +14,7 @@ input.each do |line|
       # Slept til end of shift
       (sleep_start.min ... 60).each do |min|
         sleeps[guard][min] += 1
-      end  
+      end
     end
 
     guard = $1
