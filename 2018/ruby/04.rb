@@ -1,8 +1,6 @@
 require 'advent'
 input = Advent.input(2018, 4).sort
 
-require 'time'
-
 # Analysis
 sleeps = {}
 guard = nil
