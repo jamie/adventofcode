@@ -37,7 +37,8 @@ def run(script)
   output = case lang
   when 'nim'
     # Redirecting stderr to strip build debug output
-    `nim c --hints=off -p=lib/nim --run #{script}`
+    # Building in release mode for performance
+    `nim c --hints=off -p=lib/nim -d=release --run #{script}`
   when 'ruby'
     `ruby -Ilib/ruby -I#{year}/#{lang} #{script}`
   else
@@ -54,5 +55,5 @@ Dir["#{year}/#{lang}/*#{day}*.*"].sort.each do |script|
   duration = stop-start
   next if solution.nil?
 
-  puts "(%5.2fs) %-15s   %-10s %-10s" % [duration, script, solution, solution2]
+  puts "(%5.2fs) %-20s %-10s %-10s" % [duration, script, solution, solution2]
 end
