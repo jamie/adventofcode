@@ -3,8 +3,8 @@ input = Advent.input(2018, 5)[0]
 
 def squeeze!(input)
   ('a'..'z').each do |unit|
-    a = input.gsub!("#{unit}#{unit.upcase}", "")
-    b = input.gsub!("#{unit.upcase}#{unit}", "")
+    input.gsub!("#{unit}#{unit.upcase}", "")
+    input.gsub!("#{unit.upcase}#{unit}", "")
   end
 end
 
