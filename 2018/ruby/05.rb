@@ -21,4 +21,5 @@ end
 puts minimize(input).size
 
 # Part 2
+input = minimize(input) # Reuse some work
 puts ('a'..'z').map{|bad| minimize(input.gsub(/#{bad}/i, '')).size }.min
