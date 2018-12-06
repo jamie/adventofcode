@@ -13,19 +13,18 @@ echo sum
 # Part 2
 import sets
 
+const INPUT_LEN = INPUT.len()
 var
-  freqs = initSet[int](256)
+  freqs = initSet[int](65536)
   freq: int = 0
-  input = INPUT
-  value: int
+  i: int = 0
 
 while freqs.missingOrExcl(freq):
   freqs.incl(freq)
 
-  # Performance here is crap, we should really try and just iterate
-  if input.len() == 0:
-    input = input.concat(INPUT)
-  freq = freq + input[0]
-  input.delete(0,0)
+  freq = freq + INPUT[i]
+  i = i + 1
+  if i >= INPUT_LEN:
+    i = 0
 
 echo freq
