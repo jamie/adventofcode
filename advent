@@ -38,7 +38,8 @@ def run(script)
   when 'nim'
     # Redirecting stderr to strip build debug output
     # Building in release mode for performance
-    `nim c --hints=off -p=lib/nim -d=release --run #{script}`
+    `nim c --hints=off -p=lib/nim -d=release #{script}`
+    `#{script.split('.')[0]}`
   when 'ruby'
     `ruby -Ilib/ruby -I#{year}/#{lang} #{script}`
   else
