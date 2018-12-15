@@ -38,27 +38,6 @@ puts players.max
 
 # Had to switch Array out for a linked list, mutating the middle of an Array
 # is really just too slow at that size.
-class Node
-  attr_accessor :value, :left, :right
-  def initialize(value, left=nil, right=nil)
-    @value = value
-    @left = left || self
-    @right = right || self
-  end
-
-  def delete!
-    left.right = right
-    right.left = left
-    [right, value]
-  end
-
-  def append!(value)
-    node = Node.new(value, self, right)
-    self.right = node
-    node.right.left = node
-    node
-  end
-end
 
 players = [0] * PLR
 player = 0
@@ -71,11 +50,11 @@ current = board
   if marble % 23 == 0
     players[player] += marble
     7.times { current = current.left }
-    current, deleted_val = current.delete!
+    current, deleted_val = current.delete
     players[player] += deleted_val
   else
     current = current.right
-    current = current.append!(marble)
+    current = current.append(marble)
   end
 
   player += 1
