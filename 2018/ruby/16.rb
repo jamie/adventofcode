@@ -1,51 +1,7 @@
 require 'advent'
 input = Advent.input(2018, 16)
 
-class CPU
-  attr_accessor :registers
-  def initialize(registers)
-    @registers = registers.dup
-  end
-
-  def run(opcode)
-    op, @a, @b, @c = opcode
-
-    set case op
-    when 'addr'; ra + rb
-    when 'addi'; ra + @b
-    when 'mulr'; ra * rb
-    when 'muli'; ra * @b
-    when 'banr'; ra & rb
-    when 'bani'; ra & @b
-    when 'borr'; ra | rb
-    when 'bori'; ra | @b
-    when 'setr'; ra
-    when 'seti'; @a
-    when 'gtir'; @a > rb ? 1 : 0
-    when 'gtri'; ra > @b ? 1 : 0
-    when 'gtrr'; ra > rb ? 1 : 0
-    when 'eqir'; @a == rb ? 1 : 0
-    when 'eqri'; ra == @b ? 1 : 0
-    when 'eqrr'; ra == rb ? 1 : 0
-    else
-      'nil'
-    end
-
-    self
-  end
-
-  def set(value)
-    registers[@c] = value
-  end
-
-  def ra
-    registers[@a]
-  end
-
-  def rb
-    registers[@b]
-  end
-end
+require 'device_cpu'
 
 # Part 1: Test Cases
 # NB: destructive use of input
