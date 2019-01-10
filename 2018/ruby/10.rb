@@ -22,16 +22,15 @@ def render(stars)
   y_max = stars.map{|x,y,dx,dy| y}.max
 
   (y_min..y_max).each do |y|
-    (x_min..x_max).each do |x|
+    line = (x_min..x_max).map do |x|
       if stars.any?{|sx,sy,dx,dy| x == sx && y == sy}
-        print '#'
+        '#'
       else
-        print ' '
+        ' '
       end
     end
-    puts
+    puts line.join if line.include?('#')
   end
-  puts
 end
 
 i = 0
@@ -59,8 +58,8 @@ loop do
 end
 
 # Part 1
-render(stars) # Manually render for batch output
-puts "XECXBPZB" 
+render(stars)
+# puts "XECXBPZB" # Manually render for batch output
 
 # Part 2
 puts i
