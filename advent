@@ -16,6 +16,86 @@ if ARGV[0] == 'get'
   exit
 end
 
+
+class Runner
+  attr_reader :script, :duration, :solutions
+  attr_reader :year, :day, :lang
+
+  def self.find(year, day, lang)
+    script = Dir["#{year}/#{lang}/*#{day}*.*"].first
+    if script
+      self.for(script)
+    else
+      Null.new
+    end
+  end
+
+  def self.for(script)
+    _year, lang, file = script.split('/')
+    if file =~ /\d+/
+      const_get("Runner::#{lang.capitalize}").new(script)
+    else
+      nil
+    end
+  end
+
+  def initialize(script)
+    @script = script
+    @year, @lang, file = script.split('/')
+    @day = file.match(/(\d+)/).captures[0]
+  end
+
+  def run
+    build
+    start = Time.now
+    output = execute
+    stop = Time.now
+
+    @duration = stop-start
+    @solutions = output.chomp.split("\n")
+    self
+  end
+
+  def duration_s
+    "%9.2fs" % @duration
+  end
+
+  private def build
+    # NOP for most
+  end
+
+  class Null < Runner
+    def initialize
+    end
+
+    def run
+      self
+    end
+
+    def duration_s
+      "          "
+    end
+  end
+
+  class Nim < Runner
+    private def build
+      # Building in release mode for performance
+      `nim c --hints=off -p=lib/nim -d=release #{script}`
+    end
+    private def execute
+      # Redirecting stderr to strip build debug output
+      `#{script.split('.')[0]}`
+    end
+  end
+
+  class Ruby < Runner
+    private def execute
+      `ruby -Ilib/ruby -I#{year}/#{lang} #{script}`
+    end
+  end
+end
+
+
 ## ARGV can be provided in any order, [year, day, lang] being distinct.
 
 # Extract language, default all
@@ -33,30 +113,25 @@ day = ARGV.detect{|v| v =~ /\A\d?\d\z/}
 day = "0#{day}" if day && day.to_i < 10
 day = "*" if day.nil?
 
-def run(script)
-  year, lang, _file = script.split('/')
+runners = Dir["#{year}/#{lang}/*#{day}*.*"].map{|script| Runner.for(script) }.compact
+langs = runners.map(&:lang).sort.uniq
+dates = runners.map{|runner| [runner.year, runner.day]}.sort.uniq
 
-  output = case lang
-  when 'nim'
-    # Redirecting stderr to strip build debug output
-    # Building in release mode for performance
-    `nim c --hints=off -p=lib/nim -d=release #{script}`
-    `#{script.split('.')[0]}`
-  when 'ruby'
-    `ruby -Ilib/ruby -I#{year}/#{lang} #{script}`
-  else
-    return nil
+puts "Date       " + langs.map{|lang| "%10s" % lang}.join(' ') + "  Solutions"
+
+dates.each do |year, day|
+  date = "#{year}-#{day}".ljust(10)
+  runs = langs.map do |lang|
+    Runner.find(year, day, lang).run
   end
 
-  output.chomp.split("\n")
-end
-
-Dir["#{year}/#{lang}/*#{day}*.*"].sort.each do |script|
-  start = Time.now
-  solution, solution2 = run(script)
-  stop = Time.now
-  duration = stop-start
-  next if solution.nil?
-
-  puts "(%5.2fs) %-20s %-10s %-10s" % [duration, script, solution, solution2]
+  solutions = runs.map(&:solutions).compact.uniq
+  solutions = [["Discrepancy"]] if solutions.size > 1
+  solution = solutions.first
+  if solution.size <= 2
+    puts [date, runs.map(&:duration_s), nil, solution].flatten.join(' ')
+  else
+    puts [date, runs.map(&:duration_s), nil, solution[0]].flatten.join(' ')
+    solution[1..-1].each{|line| puts " "*(11*(runs.size+1)+1) + line }
+  end
 end
