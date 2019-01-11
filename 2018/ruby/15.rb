@@ -98,13 +98,10 @@ class Map
     while queue.any?
       dx, dy = queue.shift
       [[dx, dy-1], [dx-1, dy], [dx+1, dy], [dx, dy+1]].each do |nx, ny|
-        if at(nx, ny).kind_of? EmptyCell
-          distances[[nx, ny]] ||= 999
-          if distances[[nx, ny]] > distances[[dx, dy]] + 1
-            distances[[nx, ny]] = distances[[dx, dy]] + 1
-            queue << [nx, ny]
-          end
-        end
+        next if distances[[nx, ny]]
+        next unless at(nx, ny).empty?
+        distances[[nx, ny]] = distances[[dx, dy]] + 1
+        queue << [nx, ny]
       end
     end
 
@@ -162,7 +159,10 @@ class Unit
   def to_s
     "#{sigil}(#{hp})"
   end
-  
+
+  def empty?
+    false
+  end
 
   def act!(map)
     return if hp <= 0 # premature death check
@@ -241,6 +241,10 @@ class EmptyCell < Struct.new(:x, :y)
 
   def target_sort
     [0, y, x]
+  end
+
+  def empty?
+    true
   end
 end
 
