@@ -72,6 +72,10 @@ class Runner
       self
     end
 
+    def duration
+      0.0
+    end
+
     def duration_s
       "          "
     end
@@ -118,12 +122,16 @@ runners = Dir["#{year}/#{lang}/*#{day}*.*"].map{|script| Runner.for(script) }.co
 langs = runners.map(&:lang).sort.uniq
 dates = runners.map{|runner| [runner.year, runner.day]}.sort.uniq
 
+totals = {}
 # Render table
 puts "Date       " + langs.map{|lang| "%10s" % lang}.join(' ') + "  Solutions"
 dates.each do |year, day|
   date = "#{year}-#{day}".ljust(10)
   runs = langs.map do |lang|
-    Runner.find(year, day, lang).run
+    Runner.find(year, day, lang).run.tap do |run|
+      totals[lang] ||= 0.0
+      totals[lang] += run.duration
+    end
   end
 
   solutions = runs.map(&:solutions).compact.uniq
@@ -135,4 +143,10 @@ dates.each do |year, day|
     puts [date, runs.map(&:duration_s), nil, solution[0]].flatten.join(' ')
     solution[1..-1].each{|line| puts " "*(11*(runs.size+1)+1) + line }
   end
+end
+if dates.size > 1
+  puts
+  # Render Summary
+  puts "           " + langs.map{|lang| "%10s" % lang}.join(' ')
+  puts "Total Time:" + langs.map{|lang| "%9.2fs" % totals[lang] }.join(' ')
 end
