@@ -1,7 +1,7 @@
 require 'advent'
 input = Advent.input(2017, 7)
 
-Node = Struct.new(:parent, :name, :weight, :children)
+NTreeNode = Struct.new(:parent, :name, :weight, :children)
 nodes = {}
 
 # Parse input
@@ -10,7 +10,7 @@ input.each do |entry|
   name, weight, children = $1, $2.to_i, $4
   children = children.split(", ") if children
 
-  node = Node.new(nil, name, weight, children)
+  node = NTreeNode.new(nil, name, weight, children)
   nodes[name] = node
 end
 
