@@ -137,12 +137,9 @@ dates.each do |year, day|
   solutions = runs.map(&:solutions).compact.uniq
   solutions = [["Discrepancy"]] if solutions.size > 1
   solution = solutions.first
-  if solution.size <= 2
-    puts [date, runs.map(&:duration_s), nil, solution].flatten.join(' ')
-  else
-    puts [date, runs.map(&:duration_s), nil, solution[0]].flatten.join(' ')
-    solution[1..-1].each{|line| puts " "*(11*(runs.size+1)+1) + line }
-  end
+
+  puts [date, runs.map(&:duration_s), nil, solution[0]].flatten.join(' ')
+  solution[1..-1].each{|line| puts " "*(11*(runs.size+1)+1) + line }
 end
 if dates.size > 1
   puts
