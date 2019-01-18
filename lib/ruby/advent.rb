@@ -70,3 +70,37 @@ class LinkedList
     LinkedList.new(@cursor)
   end
 end
+
+class PriorityDeque
+  attr_reader :queue
+  def initialize
+    @queue = {}
+  end
+
+  def add(priority, value)
+    @queue[priority] ||= []
+    @queue[priority] << value
+  end
+
+  def pop
+    priority = @queue.keys.max
+    value = @queue[priority].pop
+    if @queue[priority].empty?
+      @queue.delete(priority)
+    end
+    value
+  end
+
+  def shift
+    priority = @queue.keys.max
+    value = @queue[priority].shift
+    if @queue[priority].empty?
+      @queue.delete(priority)
+    end
+    value
+  end
+
+  def size
+    @queue.values.sum(&:size)
+  end
+end

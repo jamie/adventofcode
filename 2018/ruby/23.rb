@@ -26,26 +26,7 @@ strongest = bots.sort_by(&:r).last
 puts bots.select{|bot| strongest.in_range?(bot) }.size
 
 # Part 2
-class PStack
-  attr_reader :queue
-  def initialize
-    @queue = {}
-  end
-
-  def add(priority, value)
-    @queue[priority] ||= []
-    @queue[priority] << value
-  end
-
-  def pop
-    priority = @queue.keys.max
-    value = @queue[priority].pop
-    if @queue[priority].empty?
-      @queue.delete(priority)
-    end
-    value
-  end
-end
+PStack = PriorityDeque
 
 class Region < Struct.new(:xmin, :xmax, :ymin, :ymax, :zmin, :zmax)
   def coverage(nanobots)
