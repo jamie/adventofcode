@@ -1,11 +1,15 @@
-data = File.read('input')
-ups = data.gsub(/[^(]/, '')
-downs = data.gsub(/[^)]/, '')
+require 'advent'
+input = Advent.input(2015, 1)[0]
+
+# Part 1
+ups = input.gsub(/[^(]/, '')
+downs = input.gsub(/[^)]/, '')
 puts ups.size - downs.size
-data = File.read('input')
+
+# Part 2
 floor = 0
 pos = 0
-data.split(//).each do |char|
+input.split(//).each do |char|
   pos += 1
   case char
   when '('

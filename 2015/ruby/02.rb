@@ -1,6 +1,10 @@
+require 'advent'
+input = Advent.input(2015, 2)
+
+# Part 1
 total_area = 0
 
-File.read('input').each_line do |line|
+input.each do |line|
   x, y, z = line.chomp.split('x').map(&:to_i)
 
   sides = [x*y, y*z, z*x, x*y, y*z, z*x]
@@ -9,9 +13,11 @@ File.read('input').each_line do |line|
 end
 
 puts total_area
+
+# Part 2
 total_ribbon = 0
 
-File.read('input').each_line do |line|
+input.each do |line|
   x, y, z = line.chomp.split('x').map(&:to_i)
 
   total_ribbon += [x,y,z].sort[0..1].inject(&:+) * 2

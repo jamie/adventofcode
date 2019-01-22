@@ -1,6 +1,10 @@
+require 'advent'
+input = Advent.input(2015, 5)
+
+# Part 1
 nice = 0
 
-File.read('input').chomp.split("\n").each do |string|
+input.each do |string|
   if string =~ /[aeiou].*[aeiou].*[aeiou]/
     if string =~ /(.)\1/
       if string !~ /ab|cd|pq|xy/
@@ -11,9 +15,11 @@ File.read('input').chomp.split("\n").each do |string|
 end
 
 puts nice
+
+# Part 2
 nice = 0
 
-File.read('input').chomp.split("\n").each do |string|
+input.each do |string|
   if string =~ /(..).*\1/
     if string =~ /(.).\1/
       nice += 1

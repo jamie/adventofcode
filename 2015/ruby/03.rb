@@ -1,3 +1,7 @@
+require 'advent'
+input = Advent.input(2015, 3)[0]
+
+# Part 1
 world = []
 x = 0
 y = 0
@@ -10,7 +14,7 @@ end
 
 gift!(world, x, y)
 
-File.read('input').split(//).each do |cmd|
+input.split(//).each do |cmd|
   case cmd
   when '>'
     x += 1
@@ -25,6 +29,8 @@ File.read('input').split(//).each do |cmd|
 end
 
 puts world.flatten.compact.size
+
+# Part 2
 world = []
 
 Actor = Struct.new(:x, :y)
@@ -41,7 +47,7 @@ gift!(world, santa)
 
 santas = [santa, robot]
 
-File.read('input').split(//).each do |cmd|
+input.split(//).each do |cmd|
   actor = santas.shift
   case cmd
   when '>'

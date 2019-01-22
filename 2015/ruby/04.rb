@@ -1,22 +1,23 @@
+require 'advent'
+input = Advent.input(2015, 4)[0]
 require 'digest'
-input = "bgvyzdsv"
 
+# Part 1
 i = 0
 loop do
   i += 1
   if Digest::MD5.hexdigest(input+i.to_s) =~ /^00000/
     puts i
-    exit
+    break
   end
 end
-require 'digest'
-input = "bgvyzdsv"
 
+# Part 2
 i = 0
 loop do
   i += 1
   if Digest::MD5.hexdigest(input+i.to_s) =~ /^000000/
     puts i
-    exit
+    break
   end
 end
