@@ -1,8 +1,13 @@
-json = File.read('input')
+require 'advent'
+input = Advent.input(2015, 12)
+
+# Part 1
+json = input[0]
 
 puts json.scan(/-?\d+/).map(&:to_i).inject(&:+)
+
+# Part 2
 require 'json'
-json = File.read('input')
 data = JSON.parse(json)
 
 def score(node)

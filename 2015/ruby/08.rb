@@ -1,10 +1,16 @@
+require 'advent'
+input = Advent.input(2015, 8)
+
+# Part 1
 diff = 0
-File.read('input').split("\n").each do |line|
+input.each do |line|
   diff += line.length - eval(line).length
 end
 puts diff
+
+# Part 2
 diff = 0
-File.read('input').split("\n").each do |line|
+input.each do |line|
   diff += line.inspect.length - line.length
 end
 puts diff

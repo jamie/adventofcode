@@ -1,8 +1,14 @@
-# Manually solved:
+require 'advent'
+input = Advent.input(2015, 22)
+# Manually solved, parts 1 and 2:
 # 953: prspmmmmm
 puts 953
+# 1289: prsprdpdm
+puts 1289
 exit
+# TODO: This looks like it could be legit solved given more effort.
 
+# Part 1
 mob = {
   hp: 55,
   atk: 8,
@@ -94,11 +100,9 @@ loop do
 end
 
 puts min
-# Manually solved:
-# 1289: prsprdpdm
-puts 1289
-exit
 
+
+# Part 2
 mob = {
   hp: 55,
   atk: 8,

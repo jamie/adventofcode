@@ -1,4 +1,8 @@
-board = File.readlines('input').map(&:chomp)
+require 'advent'
+input = Advent.input(2015, 18)
+
+# Part 1
+board = input.dup
 $len = board[0].size
 $step = 100
 
@@ -34,7 +38,9 @@ $step.times do
 end
 
 puts board.join.scan(/#/).size
-board = File.readlines('input').map(&:chomp)
+
+# Part 2
+board = input.dup
 $len = board[0].size
 $step = 100
 

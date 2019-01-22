@@ -1,5 +1,7 @@
-input = File.readlines('input')
+require 'advent'
+input = Advent.input(2015, 19)
 
+# Part 1
 molecule = input.pop
 transforms = input.inject({}) do |h, line|
   src, dst = line.chomp.split(" => ")
@@ -19,9 +21,8 @@ atoms.size.times do |i|
 end
 
 p transformed.uniq.size
-input = File.readlines('input')
 
-medicine = input.pop
+# Part 2
 transforms = input.inject({}) do |h, line|
   src, dst = line.chomp.split(" => ")
   fail if h[dst]
@@ -49,5 +50,5 @@ def dig(depth, current, transforms)
   end
 end
 
-dig(0, medicine, transforms)
+dig(0, molecule, transforms)
 

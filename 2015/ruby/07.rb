@@ -1,6 +1,10 @@
+require 'advent'
+input = Advent.input(2015, 7)
+
+# Part 1
 kit = {}
 
-File.read('input').each_line do |line|
+input.each do |line|
   line =~ /(.*) -> (.*)/
   gate, wire = $1, $2
   kit[wire] = gate
@@ -30,9 +34,11 @@ def eval(kit, gate)
 end
 
 puts eval(kit, 'a')
+
+# Part 2
 kit = {}
 
-File.read('input').each_line do |line|
+input.each do |line|
   line =~ /(.*) -> (.*)/
   gate, wire = $1, $2
   kit[wire] = gate

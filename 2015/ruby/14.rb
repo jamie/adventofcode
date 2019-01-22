@@ -1,7 +1,11 @@
+require 'advent'
+input = Advent.input(2015, 14)
+
+# Part 1
 reindeer = []
 race_time = 2503
 
-File.read('input').each_line do |line|
+input.each do |line|
   line =~ /(.*) can fly (.*) km\/s for (.*) seconds, but then must rest for (.*) seconds./
   reindeer << Regexp.last_match.captures.map{|val| val =~ /\d/ ? val.to_i : val}
 end
@@ -25,10 +29,12 @@ reindeer.each do |deer|
 end
 
 puts reindeer.sort_by(&:last).last.last
+
+# Part 2
 reindeer = []
 race_time = 2503
 
-File.read('input').each_line do |line|
+input.each do |line|
   line =~ /(.*) can fly (.*) km\/s for (.*) seconds, but then must rest for (.*) seconds./
   reindeer << {
     name:      $1,
@@ -44,7 +50,7 @@ reindeer.each do |deer|
   deer[:activity] = [:fly] * deer[:endurance] + [:rest] * deer[:recovery]
 end
 
-2503.times do
+race_time.times do
   reindeer.each do |deer|
     action = deer[:activity].shift
     deer[:location] += deer[:speed] if action == :fly

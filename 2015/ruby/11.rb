@@ -1,3 +1,6 @@
+require 'advent'
+input = Advent.input(2015, 11)
+
 # I literally just solved this one in my head.
 
 # Input "cqjxjnds" needed two doubles and a sequence. I could double the X, run

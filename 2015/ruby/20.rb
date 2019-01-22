@@ -1,3 +1,7 @@
+require 'advent'
+input = Advent.input(2015, 20)
+
+# Part 1
 goal = 3_400_000_0
 
 ary = []
@@ -20,6 +24,8 @@ loop do
   end
   house += 1
 end
+
+# Part 2
 goal = 3_400_000_0
 
 ary = []

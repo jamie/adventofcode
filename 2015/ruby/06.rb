@@ -1,3 +1,7 @@
+require 'advent'
+input = Advent.input(2015, 6)
+
+# Part 1
 class Light
   def initialize
     off
@@ -26,7 +30,7 @@ lights = Array.new(1000) {
   }
 }
 
-File.read('input').each_line do |line|
+input.each do |line|
 # turn on 606,361 through 892,600
 # turn off 448,208 through 645,684
 # toggle 50,472 through 452,788
@@ -42,6 +46,8 @@ File.read('input').each_line do |line|
 end
 
 puts lights.flatten.select{|light| light.on?}.size
+
+# Part 2
 class Light
   attr_reader :bright
 
@@ -72,7 +78,7 @@ lights = Array.new(1000) {
   }
 }
 
-File.read('input').each_line do |line|
+input.each do |line|
 # turn on 606,361 through 892,600
 # turn off 448,208 through 645,684
 # toggle 50,472 through 452,788

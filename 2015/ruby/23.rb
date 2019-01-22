@@ -1,7 +1,9 @@
+require 'advent'
+input = Advent.input(2015, 23)
+
+# Part 1
+code = input.dup
 r = {'a'=>0, 'b'=>0}
-
-code = File.readlines('input').map(&:chomp)
-
 i = 0
 
 loop do
@@ -20,10 +22,10 @@ loop do
 end
 
 puts r['b']
+
+# Part 2
+code = input.dup
 r = {'a'=>1, 'b'=>0}
-
-code = File.readlines('input').map(&:chomp)
-
 i = 0
 
 loop do

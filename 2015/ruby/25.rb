@@ -1,15 +1,17 @@
-# row 2978, column 3083.
+require 'advent'
+input = Advent.input(2015, 25)[0]
+target_row, target_col = input.match(/row (\d+), column (\d+)/).captures.map(&:to_i)
 
 row = col = 1
 
 value = 20151125
 
-while row < 2978
+while row < target_row
   row.times { value = (value * 252533) % 33554393 }
   row += 1
 end
 
-while col < 3083
+while col < target_col
   (row+col).times { value = (value * 252533) % 33554393 }
   col += 1
 end

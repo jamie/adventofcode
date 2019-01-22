@@ -1,4 +1,8 @@
-containers = File.readlines('input').map(&:to_i).sort.reverse
+require 'advent'
+input = Advent.input(2015, 17, :to_i)
+
+# Part 1
+containers = input.sort.reverse
 
 total = 0
 (1..containers.size).each do |count|
@@ -8,7 +12,8 @@ total = 0
 end
 puts total
 
-containers = File.readlines('input').map(&:to_i).sort.reverse
+# Part 2
+containers = input.sort.reverse
 
 total = 0
 (1..containers.size).each do |count|

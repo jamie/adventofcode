@@ -1,4 +1,8 @@
-ingredients = File.readlines('input').map{|line|
+require 'advent'
+input = Advent.input(2015, 15)
+
+# Part 1
+ingredients = input.map{|line|
   line =~ /(.*): capacity (.*), durability (.*), flavor (.*), texture (.*), calories (.*)/
   [
     $2.to_i,
@@ -27,7 +31,9 @@ max = 0
 end
 
 puts max
-ingredients = File.readlines('input').map{|line|
+
+# Part 2
+ingredients = input.map{|line|
   line =~ /(.*): capacity (.*), durability (.*), flavor (.*), texture (.*), calories (.*)/
   [
     $2.to_i,

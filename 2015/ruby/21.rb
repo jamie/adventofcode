@@ -1,3 +1,7 @@
+require 'advent'
+input = Advent.input(2015, 21)
+
+# Part 1
 mob = {
   hp: 104,
   atk: 8,
@@ -39,6 +43,8 @@ ring = [
 ]
 
 puts 78 # Worked out in head, exact match stats cheapest
+
+# Part 2
 mob = {
   hp: 104,
   atk: 8,

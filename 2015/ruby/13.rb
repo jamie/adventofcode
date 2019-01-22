@@ -1,6 +1,10 @@
+require 'advent'
+input = Advent.input(2015, 13)
+
+# Part 1
 happiness = Hash.new{|h,k|h[k] = {} }
 
-File.read('input').each_line do |line|
+input.each do |line|
   line =~ /(.*) would (.*) (.*) happiness units by sitting next to (.*)\./
   person, feeling, amount, other = $1, $2, $3.to_i, $4
   amount *= -1 if feeling == "lose"
@@ -19,9 +23,11 @@ seatings = happiness.keys.permutation.to_a.map{|order|
 }
 
 puts seatings.max
+
+# Part 2
 happiness = Hash.new{|h,k|h[k] = {} }
 
-File.read('input').each_line do |line|
+input.each do |line|
   line =~ /(.*) would (.*) (.*) happiness units by sitting next to (.*)\./
   person, feeling, amount, other = $1, $2, $3.to_i, $4
   amount *= -1 if feeling == "lose"

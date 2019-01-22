@@ -1,6 +1,10 @@
+require 'advent'
+input = Advent.input(2015, 9)
+
+# Part 1
 map = Hash.new{|h,k| h[k] = {}}
 
-File.read('input').each_line do |line|
+input.each do |line|
   line =~ /(.*) to (.*) = (.*)/
   map[$1][$2] = $3.to_i
   map[$2][$1] = $3.to_i
@@ -15,9 +19,11 @@ length = cities.permutation.to_a.map{|path|
   dist
 }.min
 puts length
+
+# Part 2
 map = Hash.new{|h,k| h[k] = {}}
 
-File.read('input').each_line do |line|
+input.each do |line|
   line =~ /(.*) to (.*) = (.*)/
   map[$1][$2] = $3.to_i
   map[$2][$1] = $3.to_i

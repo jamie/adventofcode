@@ -1,5 +1,8 @@
-boxes = File.readlines('input').map(&:to_i)
+require 'advent'
+input = Advent.input(2015, 24)
+boxes = input.map(&:to_i)
 
+# Part 1
 def sum(ary)
   ary.inject(&:+)
 end  
@@ -29,15 +32,9 @@ loop do
 end
 
 puts solutions.map{|group| qe(group) }.min
-boxes = File.readlines('input').map(&:to_i)
 
-def sum(ary)
-  ary.inject(&:+)
-end  
-def qe(ary)
-  ary.inject(&:*)
-end
 
+# Part 2
 target_weight = sum(boxes) / 4
 
 num_boxes = 1
