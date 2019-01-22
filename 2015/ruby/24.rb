@@ -3,14 +3,10 @@ input = Advent.input(2015, 24)
 boxes = input.map(&:to_i)
 
 # Part 1
-def qe(ary)
-  ary.inject(&:*)
-end
-
 target_weight = boxes.sum / 3
 
 num_boxes = 1
-num_boxes += 1 while boxes[(boxes.size-num_boxes)..-1].sum < target_weight
+num_boxes += 1 while boxes[-num_boxes..-1].sum < target_weight
 start_num_boxes = num_boxes
 
 solutions = []
@@ -28,14 +24,14 @@ loop do
   num_boxes += 1
 end
 
-puts solutions.map{|group| qe(group) }.min
+puts solutions.map{|group| group.inject(&:*) }.min
 
 
 # Part 2
 target_weight = boxes.sum / 4
 
 num_boxes = 1
-num_boxes += 1 while boxes[(boxes.size-num_boxes)..-1].sum < target_weight
+num_boxes += 1 while boxes[-num_boxes..-1].sum < target_weight
 start_num_boxes = num_boxes
 
 solutions = []
@@ -59,4 +55,4 @@ loop do
   num_boxes += 1
 end
 
-puts solutions.map{|group| qe(group) }.min
+puts solutions.map{|group| group.inject(&:*) }.min

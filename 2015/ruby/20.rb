@@ -1,24 +1,24 @@
 require 'advent'
-input = Advent.input(2015, 20)
+input = Advent.input(2015, 20, :to_i)[0]
+
+# Performance cheating a _lot_ by starting iteration late
 
 # Part 1
-goal = 3_400_000_0
-
-ary = []
-house = 400000
+house = 780000
+goal = input / 10
 loop do
   #break if house == 10
-  ary[house] = 0
+  value = 0
   sqrt = Math.sqrt(house)
   (1..sqrt).each do |elf|
     if house % elf == 0
-      ary[house] += elf*10
-      ary[house] += (house/elf)*10 unless elf==sqrt
+      value += elf
+      value += (house/elf) unless elf==sqrt
     end
   end
 
-  #p [house, ary[house]]
-  if ary[house] >= goal
+  #p [house, value]
+  if value >= goal
     puts house
     break
   end
@@ -26,27 +26,25 @@ loop do
 end
 
 # Part 2
-goal = 3_400_000_0
-
-ary = []
-house = 800000
+house = 820000
+goal = input / 11
 loop do
   #break if house == 10
-  ary[house] = 0
+  value = 0
   sqrt = Math.sqrt(house)
   (1..sqrt).each do |elf|
     if house % elf == 0
       recip = house/elf
 
-      ary[house] += elf*11 if recip < 51
+      value += elf if recip < 51
       unless elf==sqrt
-        ary[house] += recip*11 if elf < 51
+        value += recip if elf < 51
       end
     end
   end
 
-  #p [house, ary[house]]
-  if ary[house] >= goal
+  #p [house, value]
+  if value >= goal
     puts house
     break
   end
