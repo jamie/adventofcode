@@ -27,7 +27,8 @@ end
 
 TIME.times do
   reindeer.each(&:travel!)
-  reindeer.sort_by(&:location).last.score!
+  scoring_location = reindeer.map(&:location).max
+  reindeer.select{|deer| deer.location == scoring_location}.each(&:score!)
 end
 
 # Part 1
