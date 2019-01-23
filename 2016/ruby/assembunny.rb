@@ -8,7 +8,12 @@ class Assembunny
 
   def reset!
     @output = []
-    @registers = Hash.new(0)
+    @registers = {
+      'a' => 0,
+      'b' => 0,
+      'c' => 0,
+      'd' => 0
+    }
   end
 
   def set_register(key, value)
@@ -34,11 +39,12 @@ class Assembunny
       when 'dec'
         registers[x] -= 1
       when 'cpy'
-        xval = (x =~ /\d/ ? x.to_i : registers[x])
+        xval = registers[x] || x.to_i
         registers[y] = xval
       when 'jnz'
-        xval = (x =~ /\d/ ? x.to_i : registers[x])
-        pc += y.to_i - 1 if xval != 0
+        xval = registers[x] || x.to_i
+        yval = registers[y] || y.to_i
+        pc += yval - 1 if xval != 0
       when 'tgl'
         index = registers[x] + pc
         next if prog[index].nil?
