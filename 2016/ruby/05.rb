@@ -1,6 +1,9 @@
+require 'advent'
+input = Advent.input(2016, 4)[0]
+
 require 'digest'
 
-input = "ugkcyxxp"
+# Part 1
 password = ""
 
 i = 0
@@ -13,9 +16,8 @@ while password.size < 8
 end
 
 puts password
-require 'digest'
 
-input = "ugkcyxxp"
+# Part 2
 password = "________"
 
 i = 0

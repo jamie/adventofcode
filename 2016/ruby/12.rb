@@ -1,4 +1,8 @@
-prog = File.readlines('input')
+require 'advent'
+input = Advent.input(2016, 10)
+
+# Part 1
+prog = input.dup
 registers = Hash.new(0)
 
 pc = 0
@@ -34,7 +38,9 @@ while prog[pc]
 end
 
 puts registers['a']
-prog = File.readlines('input')
+
+# Part 2
+prog = input.dup
 registers = Hash.new(0)
 registers['c'] = 1
 

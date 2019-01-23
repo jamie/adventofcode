@@ -1,4 +1,7 @@
-input = File.readlines('input').map{|line| line.split(' ').map(&:to_i) }
+require 'advent'
+input = Advent.input(2016, 3).map{|line| line.split(' ').map(&:to_i) }
+
+# Part 1
 triangles = input.each_slice(3).map(&:transpose).flatten(1)
 
 possible = input.select do |triangle|
@@ -7,7 +10,8 @@ possible = input.select do |triangle|
   end
 end
 puts possible.size
-input = File.readlines('input').map{|line| line.split(' ').map(&:to_i) }
+
+# Part 2
 triangles = input.each_slice(3).map(&:transpose).flatten(1)
 
 possible = triangles.select do |triangle|

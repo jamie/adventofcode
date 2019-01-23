@@ -1,5 +1,8 @@
+require 'advent'
+input = Advent.input(2016, 9)[0]
+
+# Part 1
 output = ""
-input = File.read('input').chomp
 
 i = 0
 while i < input.size do
@@ -18,8 +21,9 @@ while i < input.size do
 end
 
 puts output.size
-input = "(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN"
-input = File.read('input')
+
+# Part 2
+# input = "(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN"
 
 slices = input.scan(/[A-Z]+|\(\d+x\d+\)/)
 

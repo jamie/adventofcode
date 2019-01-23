@@ -1,3 +1,7 @@
+require 'advent'
+input = Advent.input(2016, 23)
+
+# Part 1
 class Assembunny
   attr_accessor :prog, :output, :registers
 
@@ -65,9 +69,7 @@ class Assembunny
   end
 end
 
-
-prog = File.readlines('input')
-cpu = Assembunny.new(prog)
+cpu = Assembunny.new(input)
 cpu.registers['a'] = 7
 cpu.run
 puts cpu.registers['a']

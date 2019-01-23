@@ -1,5 +1,7 @@
-input = 3014387
+require 'advent'
+input = Advent.input(2016, 19, :to_i)[0]
 
+# Part 1
 elves = input.times.to_a
 
 # adjust numbering
@@ -13,8 +15,8 @@ while elves.size > 1
 end
 
 puts elves.first
-input = 3014387
 
+# Part 2
 class Elf
   attr_reader :number, :next
 

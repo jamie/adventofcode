@@ -1,5 +1,7 @@
-input = File.readlines('input')
+require 'advent'
+input = Advent.input(2016, 20)
 
+# Part 1
 blocks = input.map do |row|
   row.chomp.split('-').map(&:to_i)
 end.sort
@@ -12,11 +14,11 @@ loop do
     allowed = max+1 if max >= allowed
   else
     puts allowed
-    exit
+    break
   end
 end
-input = File.readlines('input')
 
+# Part 2
 MAX = 4294967296
 
 blocks = input.map do |row|

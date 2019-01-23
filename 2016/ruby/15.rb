@@ -1,5 +1,9 @@
+require 'advent'
+input = Advent.input(2016, 15)
+
+# Part 1
 discs = []
-File.readlines('input').each do |line|
+input.each do |line|
   fail unless line =~ /Disc #(.*) has (.*) positions; at time=0, it is at position (.*)./
   discs << [$1, $2, $3].map(&:to_i)
   discs[-1][2] += discs.size
@@ -15,8 +19,10 @@ loop do
 end
 
 puts time
+
+# Part 2
 discs = []
-File.readlines('input').each do |line|
+input.each do |line|
   fail unless line =~ /Disc #(.*) has (.*) positions; at time=0, it is at position (.*)./
   discs << [$1, $2, $3].map(&:to_i)
   discs[-1][2] += discs.size

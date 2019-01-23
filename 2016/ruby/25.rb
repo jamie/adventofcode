@@ -1,3 +1,6 @@
+require 'advent'
+input = Advent.input(2016, 25)
+
 class Assembunny
   attr_accessor :prog, :output, :registers
 
@@ -56,13 +59,12 @@ class Assembunny
   end
 end
 
-prog = File.readlines('input')
-cpu = Assembunny.new(prog)
+cpu = Assembunny.new(input)
 10_000.times do |i|
   cpu.reset!
   cpu.set_register('a', i)
   cpu.run
-  p [i, cpu.output]
+  # p [i, cpu.output]
   if cpu.output == [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
     puts i
     exit

@@ -1,6 +1,10 @@
+require 'advent'
+input = Advent.input(2016, 4)
+
+# Part 1
 sum = 0
 
-File.readlines('input').map do |line|
+input.each do |line|
   name, sector, checksum = line.scan(/([a-z-]+)-([\d]+)\[([a-z]{5})\]/)[0]
   frequency = name.gsub('-','').split(//).sort.inject({}) {|h, c| h[c] ||= 0; h[c] += 1; h}
   expected_checksum = frequency.to_a.sort {|x, y|
@@ -17,7 +21,9 @@ File.readlines('input').map do |line|
 end
 
 puts sum
-File.readlines('input').map do |line|
+
+# Part 2
+input.each do |line|
   name_enc, sector, checksum = line.scan(/([a-z-]+)-([\d]+)\[([a-z]{5})\]/)[0]
 
   rot = sector.to_i % 26
@@ -26,4 +32,3 @@ File.readlines('input').map do |line|
   name = name_enc.tr(('a'..'z').to_a.join, (((a+rot).chr .. 'z').to_a+('a' .. (a+rot-1).chr).to_a).join )
   puts sector if name == 'northpole-object-storage'
 end
-

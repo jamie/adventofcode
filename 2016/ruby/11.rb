@@ -1,8 +1,12 @@
+require 'advent'
+# input = Advent.input(2016, 11) # Manually parsed
+
 NODES =    %w(SG SM PG PM TG TM RG RM CG CM)
 input = [0, 1, 1, 1, 1, 1, 2, 3, 2, 2, 2, 2]
 # NODES =    %w(HG HM LG LM)
 # input = [0, 1, 2, 1, 3, 1]
 
+# Part 1
 queue = {17 => [input]}
 
 def valid?(state)
@@ -84,13 +88,15 @@ while !queue.empty? do
 
   end
 end
-NODES =    %w(SG SM PG PM TG TM RG RM CG CM EG EM DG DM)
+
+# Part 2
+NODES2 =    %w(SG SM PG PM TG TM RG RM CG CM EG EM DG DM)
 input = [0, 1, 1, 1, 1, 1, 2, 3, 2, 2, 2, 2, 1, 1, 1, 1]
 
 queue = {17 => [input]}
 
 def valid?(state)
-  floors = Hash[NODES.zip(state)]
+  floors = Hash[NODES2.zip(state)]
   floors.each do |node, floor|
     # microchip
     next if node =~ /G/

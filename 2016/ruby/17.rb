@@ -1,8 +1,10 @@
-require 'digest'
+require 'advent'
+input = Advent.input(2016, 17)[0]
 
-input = 'pvhmgsws'
+require 'digest'
 OPEN = /[bcdef]/
 
+# Part 1
 queue = [[0, 0, '']]
 
 while !queue.empty?
@@ -10,7 +12,7 @@ while !queue.empty?
 
   if [x, y] == [3,3]
     puts path
-    exit
+    break
   end
 
   hash = Digest::MD5.hexdigest(input+path)
@@ -19,11 +21,8 @@ while !queue.empty?
   queue << [x, y-1, path+'L'] if y > 0 && hash[2] =~ OPEN
   queue << [x, y+1, path+'R'] if y < 3 && hash[3] =~ OPEN
 end
-require 'digest'
 
-input = 'pvhmgsws'
-OPEN = /[bcdef]/
-
+# Part 2
 queue = [[0, 0, '']]
 longest = 0
 

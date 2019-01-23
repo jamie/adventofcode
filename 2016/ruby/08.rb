@@ -1,6 +1,10 @@
-ON = '#' #:on
-OFF = '_' #:off
+require 'advent'
+input = Advent.input(2016, 8)
 
+ON = '#' #:on
+OFF = ' ' #:off
+
+# Part 1
 screen = [
   [OFF]*50,
   [OFF]*50,
@@ -10,7 +14,7 @@ screen = [
   [OFF]*50,
 ]
 
-File.readlines('input').each do |line|
+input.each do |line|
   case line
   when /rect (.*)x(.*)/
     a, b = $1.to_i, $2.to_i
@@ -31,9 +35,8 @@ File.readlines('input').each do |line|
 end
 
 p screen.flatten.count(ON)
-ON = '#' #:on
-OFF = '_' #:off
 
+# Part 2
 screen = [
   [OFF]*50,
   [OFF]*50,
@@ -43,7 +46,7 @@ screen = [
   [OFF]*50,
 ]
 
-File.readlines('input').each do |line|
+input.each do |line|
   case line
   when /rect (.*)x(.*)/
     a, b = $1.to_i, $2.to_i
@@ -64,5 +67,4 @@ File.readlines('input').each do |line|
 
 end
 
-puts
 puts screen.map(&:join)

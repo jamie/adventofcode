@@ -1,3 +1,7 @@
+require 'advent'
+input = Advent.input(2016, 1)[0]
+
+# Part 1
 facing = :north
 location = [0, 0]
 
@@ -22,12 +26,14 @@ def walk(location, facing, distance)
     [x+distance, y]
 end
 
-File.read('input').scan(/([RL])(\d+)/).each do |direction, distance|
+input.scan(/([RL])(\d+)/).each do |direction, distance|
   facing = turn(facing, direction)
   location = walk(location, facing, distance.to_i)
 end
 
 puts location.map(&:abs).inject(:+)
+
+# Part 2
 facing = :north
 location = [0, 0]
 
@@ -54,7 +60,7 @@ end
 
 history = [[0,0]]
 
-File.read('input').scan(/([RL])(\d+)/).each do |direction, distance|
+input.scan(/([RL])(\d+)/).each do |direction, distance|
   facing = turn(facing, direction)
   distance.to_i.times do
     location = walk(location, facing, 1)

@@ -1,4 +1,7 @@
-input = File.readlines('input')[2..-1]
+require 'advent'
+input = Advent.input(2016, 22)[2..-1]
+
+# Part 1
 
 # Node, Size, Used, Avail, Use%
 dfh = input.map{|line| line.chomp.split(/T? +/)}
@@ -15,8 +18,8 @@ dfh.each do |node_a, size_a, used_a, avail_a, _|
 end
 
 puts viable.uniq.size
-require 'pp'
-input = File.readlines('input')[2..-1]
+
+# Part 2
 
 # Node, Size, Used, Avail, Use%
 dfh = input.map{|line| line.chomp.split(/T? +/)}

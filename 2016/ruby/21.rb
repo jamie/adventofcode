@@ -1,6 +1,8 @@
-password = "abcdefgh"
+require 'advent'
+input = Advent.input(2016, 21)
 
-commands = File.readlines('input')
+# Part 1
+password = "abcdefgh"
 
 def rotr(password, n)
   n = n % password.length
@@ -14,7 +16,7 @@ def rotl(password, n)
   password[n..-1] + password[0...n]
 end
 
-commands.each do |command|
+input.each do |command|
   case command
   when /swap position (\d+) with position (\d+)/
     i, j = $1.to_i, $2.to_i
@@ -45,9 +47,9 @@ commands.each do |command|
 end
 
 puts password
-password = "fbgdceah"
 
-commands = File.readlines('input').reverse
+# Part 2
+password = "fbgdceah"
 
 def rotr(password, n)
   n = n % password.length
@@ -61,8 +63,8 @@ def rotl(password, n)
   password[n..-1] + password[0...n]
 end
 
-commands.each do |command|
-  p [password, command]
+input.reverse.each do |command|
+  # p [password, command]
   case command
   when /swap position (\d+) with position (\d+)/
     i, j = $1.to_i, $2.to_i

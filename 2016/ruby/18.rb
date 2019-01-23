@@ -1,5 +1,7 @@
-input = File.read('input').chomp
+require 'advent'
+input = Advent.input(2016, 18)[0]
 
+# Part 1
 row = input.split(//)
 
 safe = 0
@@ -23,8 +25,8 @@ safe = 0
 end
 
 puts safe
-input = File.read('input').chomp
 
+# Part 2
 row = input.split(//)
 
 safe = 0

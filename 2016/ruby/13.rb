@@ -1,4 +1,7 @@
-SEED = 1358
+require 'advent'
+input = Advent.input(2016, 13, :to_i)[0]
+
+SEED = input
 TARGET = [31, 39]
 
 def wall?(x, y)
@@ -7,6 +10,7 @@ def wall?(x, y)
   ones % 2 == 1
 end
 
+# Part 1
 seen = [[1,1]]
 search = [[1,1,0]]
 
@@ -21,7 +25,8 @@ while search.any? do
 
     if [xx, yy] == TARGET
       puts steps+1
-      exit
+      search.clear
+      break
     end
 
     next if xx < 0 || yy < 0
@@ -31,15 +36,8 @@ while search.any? do
     search << [xx, yy, steps+1]
   end
 end
-SEED = 1358
-TARGET = [31, 39]
 
-def wall?(x, y)
-  id = x*x + 3*x + 2*x*y + y + y*y + SEED
-  ones = id.to_s(2).split(//).select{|e|e=='1'}.size
-  ones % 2 == 1
-end
-
+# Part 2
 seen = [[1,1]]
 search = [[1,1,0]]
 

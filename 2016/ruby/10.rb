@@ -1,8 +1,12 @@
+require 'advent'
+input = Advent.input(2016, 10)
+
+# Part 1
 transitions = {}
 inputs = []
 bots = Hash.new{|h,k| h[k] = []}
 
-File.readlines('input').each do |line|
+input.each do |line|
   case line
   when /value (.*) goes to (.*)/
     inputs << [$2, $1.to_i]
@@ -32,11 +36,13 @@ inputs.each do |bot, value|
     end
   end
 end
+
+# Part 2
 transitions = {}
 inputs = []
 bots = Hash.new{|h,k| h[k] = []}
 
-File.readlines('input').each do |line|
+input.each do |line|
   case line
   when /value (.*) goes to (.*)/
     inputs << [$2, $1.to_i]

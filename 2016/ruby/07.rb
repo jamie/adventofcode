@@ -1,9 +1,15 @@
-valid = File.readlines('input').select do |line|
+require 'advent'
+input = Advent.input(2016, 7)
+
+# Part 1
+valid = input.select do |line|
   line =~ /(.)(.)\2\1/ && line !~ /\[[^\]]*(.)(.)\2\1[^\]]*\]/ && line !~ /(.)\1\1\1/
 end
 
 puts valid.size
-valid = File.readlines('input').select do |line|
+
+# Part 2
+valid = input.select do |line|
   matched = false
 
   slices = line.chomp.split(/\[|\]/).each_slice(2).to_a

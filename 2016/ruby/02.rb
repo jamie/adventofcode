@@ -1,3 +1,6 @@
+require 'advent'
+input = Advent.input(2016, 2)
+
 dir_index = {
   'U' => 0,
   'R' => 1,
@@ -5,6 +8,8 @@ dir_index = {
   'L' => 3
 }
 
+
+# Part 1
 moves = [
   [],
   [1, 2, 4, 1],
@@ -22,7 +27,7 @@ moves = [
 num = 5
 out = []
 
-File.readlines('input').each do |line|
+input.each do |line|
   line.chomp.split(//).map{|c| dir_index[c]}.each do |step|
     num = moves[num][step]
   end
@@ -30,13 +35,8 @@ File.readlines('input').each do |line|
 end
 
 puts out.join
-dir_index = {
-  'U' => 0,
-  'R' => 1,
-  'D' => 2,
-  'L' => 3
-}
 
+# Part 2
 moves = [
   [],
   [1,1,3,1],
@@ -62,7 +62,7 @@ moves = [
 num = 5
 out = []
 
-File.readlines('input').each do |line|
+input.each do |line|
   line.chomp.split(//).map{|c| dir_index[c]}.each do |step|
     num = moves[num][step]
   end
