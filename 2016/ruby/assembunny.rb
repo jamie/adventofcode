@@ -32,7 +32,6 @@ class Assembunny
     pc = 0
     while prog[pc]
       op, x, y = prog[pc]
-      pc += 1
       case op
       when 'inc'
         registers[x] += 1
@@ -46,17 +45,17 @@ class Assembunny
         yval = registers[y] || y.to_i
         pc += yval - 1 if xval != 0
       when 'tgl'
-        index = registers[x] + pc
-        next if prog[index].nil?
-        puts "Toggle #{index+pc} of #{prog.size}"
-        inst = prog[index][0]
-        case prog[index]
-        when 3
-          prog[index][0] = (inst == "jnz") ? "cpy" : "jnz"
-        when 2
-          prog[index][0] = (inst == "inc") ? "dec" : "inc"
+        index = pc + registers[x]
+        if prog[index]
+          # puts "Toggle #{index} of #{prog.size}"
+          inst = prog[index][0]
+          case prog[index].size
+          when 2
+            prog[index][0] = (inst == "inc") ? "dec" : "inc"
+          when 3
+            prog[index][0] = (inst == "jnz") ? "cpy" : "jnz"
+          end
         end
-        pp prog
       when 'out'
         output << registers[x]
         return if output.size > 10
@@ -64,6 +63,7 @@ class Assembunny
         puts "Unknown op: #{op}"
         exit
       end
+      pc += 1
     end
   end
 end
