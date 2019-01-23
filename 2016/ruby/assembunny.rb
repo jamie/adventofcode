@@ -29,6 +29,10 @@ class Assembunny
       op, x, y = prog[pc]
       pc += 1
       case op
+      when 'inc'
+        registers[x] += 1
+      when 'dec'
+        registers[x] -= 1
       when 'cpy'
         xval = if x =~ /\d/
           x.to_i
@@ -36,10 +40,6 @@ class Assembunny
           registers[x]
         end
         registers[y] = xval
-      when 'inc'
-        registers[x] += 1
-      when 'dec'
-        registers[x] -= 1
       when 'jnz'
         xval = if x =~ /\d/
           x.to_i
