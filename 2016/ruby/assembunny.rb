@@ -2,7 +2,7 @@ class Assembunny
   attr_accessor :prog, :output, :registers
 
   def initialize(prog)
-    @prog = prog
+    @prog = prog.map{|stmt| stmt.split(' ')}
     reset!
   end
 
@@ -15,50 +15,52 @@ class Assembunny
     registers[key] = value
   end
 
+  def val(x)
+    if x =~ /\d/
+      x.to_i
+    else
+      registers[x]
+    end
+  end
+
   def run
     pc = 0
     while prog[pc]
-      op = prog[pc]
+      op, x, y = prog[pc]
       pc += 1
       case op
-      when /cpy (.*) (.*)/
-        src = $1
-        dst = $2
-        if src =~ /\d/
-          src = src.to_i
+      when 'cpy'
+        xval = if x =~ /\d/
+          x.to_i
         else
-          src = registers[src]
+          registers[x]
         end
-        registers[dst] = src
-      when /inc (.*)/
-        registers[$1] += 1
-      when /dec (.*)/
-        registers[$1] -= 1
-      when /jnz (.*) (.*)/
-        src = $1
-        mov = $2.to_i
-        if src =~ /\d/
-          src = src.to_i
+        registers[y] = xval
+      when 'inc'
+        registers[x] += 1
+      when 'dec'
+        registers[x] -= 1
+      when 'jnz'
+        xval = if x =~ /\d/
+          x.to_i
         else
-          src = registers[src]
+          registers[x]
         end
-        if src != 0
-          pc += mov - 1
-        end
-      when /tgl (.*)/
-        index = registers[$1] + pc
+        pc += y.to_i - 1 if xval != 0
+      when 'tgl'
+        index = registers[x] + pc
         next if prog[index].nil?
         puts "Toggle #{index+pc} of #{prog.size}"
-        prog[index] = case prog[index]
-        when /(.*) (.*) (.*)/
-          "#{($1 == "jnz") ? "cpy" : "jnz"} #{$2} #{$3}"
-        when /(.*) (.*)/
-          "#{($1 == "inc") ? "dec" : "inc"} #{$2}"
+        inst = prog[index][0]
+        case prog[index]
+        when 3
+          prog[index][0] = (inst == "jnz") ? "cpy" : "jnz"
+        when 2
+          prog[index][0] = (inst == "inc") ? "dec" : "inc"
         end
-        require 'pp'
         pp prog
-      when /out (.*)/
-        output << registers[$1]
+      when 'out'
+        output << registers[x]
         return if output.size > 10
       else
         puts "Unknown op: #{op}"
