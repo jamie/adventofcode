@@ -34,18 +34,10 @@ class Assembunny
       when 'dec'
         registers[x] -= 1
       when 'cpy'
-        xval = if x =~ /\d/
-          x.to_i
-        else
-          registers[x]
-        end
+        xval = (x =~ /\d/ ? x.to_i : registers[x])
         registers[y] = xval
       when 'jnz'
-        xval = if x =~ /\d/
-          x.to_i
-        else
-          registers[x]
-        end
+        xval = (x =~ /\d/ ? x.to_i : registers[x])
         pc += y.to_i - 1 if xval != 0
       when 'tgl'
         index = registers[x] + pc
