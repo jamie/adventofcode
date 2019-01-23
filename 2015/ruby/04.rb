@@ -1,6 +1,5 @@
 require 'advent'
 input = Advent.input(2015, 4)[0]
-require 'digest'
 
 # Part 1
 i = 0

@@ -1,8 +1,6 @@
 require 'advent'
 input = Advent.input(2016, 14)[0]
 
-require 'digest'
-
 # Part 1
 trips = {}
 keys = []

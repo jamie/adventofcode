@@ -1,7 +1,6 @@
 require 'advent'
 input = Advent.input(2016, 17)[0]
 
-require 'digest'
 OPEN = /[bcdef]/
 
 # Part 1

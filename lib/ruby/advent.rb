@@ -1,6 +1,7 @@
 require 'pp'
 require 'time'
 require 'date'
+require 'digest'
 
 module Advent
   def self.input(year, day, format=:to_s)
