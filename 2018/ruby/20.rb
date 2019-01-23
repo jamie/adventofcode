@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2018, 20)[0]
+input = Advent.input(2018, 20)
 
 # Part 1
 # Attempt the third, actually building the maze

@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2015, 25)[0]
+input = Advent.input(2015, 25)
 target_row, target_col = input.match(/row (\d+), column (\d+)/).captures.map(&:to_i)
 
 row = col = 1

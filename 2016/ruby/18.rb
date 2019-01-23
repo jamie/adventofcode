@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2016, 18)[0]
+input = Advent.input(2016, 18)
 
 # Part 1
 row = input.split(//)

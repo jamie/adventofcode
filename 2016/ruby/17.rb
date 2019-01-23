@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2016, 17)[0]
+input = Advent.input(2016, 17)
 
 OPEN = /[bcdef]/
 

@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2015, 20, :to_i)[0]
+input = Advent.input(2015, 20, :to_i)
 
 # Performance cheating a _lot_ by starting iteration late
 

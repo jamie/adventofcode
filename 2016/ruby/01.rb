@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2016, 1)[0]
+input = Advent.input(2016, 1)
 
 # Part 1
 facing = :north

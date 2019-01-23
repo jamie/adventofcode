@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2015, 1)[0]
+input = Advent.input(2015, 1)
 
 # Part 1
 ups = input.gsub(/[^(]/, '')

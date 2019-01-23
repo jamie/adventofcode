@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2018, 8)[0].split(" ").map(&:to_i)
+input = Advent.input(2018, 8).split(" ").map(&:to_i)
 
 def sum_metadata(input)
   sum = 0

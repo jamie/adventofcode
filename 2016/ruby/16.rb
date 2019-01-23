@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2016, 16)[0]
+input = Advent.input(2016, 16)
 
 def stretch(input)
   input + '0' + input.reverse.tr('01','10')

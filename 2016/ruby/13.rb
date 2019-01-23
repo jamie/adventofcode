@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2016, 13, :to_i)[0]
+input = Advent.input(2016, 13, :to_i)
 
 SEED = input
 TARGET = [31, 39]

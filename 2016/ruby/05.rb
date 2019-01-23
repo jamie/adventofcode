@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2016, 5)[0]
+input = Advent.input(2016, 5)
 
 # Part 1
 password = ""

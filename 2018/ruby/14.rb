@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2018, 14)[0].to_i
+input = Advent.input(2018, 14, :to_i)
 
 recipes = [3, 7]
 elf1 = 0

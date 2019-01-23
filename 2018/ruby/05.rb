@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2018, 5)[0]
+input = Advent.input(2018, 5)
 
 def squeeze!(input)
   ('a'..'z').each do |unit|

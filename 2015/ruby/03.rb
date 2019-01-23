@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2015, 3)[0]
+input = Advent.input(2015, 3)
 
 # Part 1
 world = []

@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2017, 14)[0]
+input = Advent.input(2017, 14)
 
 require 'knothash'
 

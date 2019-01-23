@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2016, 14)[0]
+input = Advent.input(2016, 14)
 
 # Part 1
 trips = {}

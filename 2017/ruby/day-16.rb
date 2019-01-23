@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2017, 16)[0]
+input = Advent.input(2017, 16)
 programs = 'abcdefghijklmnop'
 
 moves = input.split(",")
