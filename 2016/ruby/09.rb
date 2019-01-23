@@ -31,7 +31,7 @@ def count_all(slices)
   length = 0
 
   while !slices.empty?
-    puts slices.size if rand(2000).zero?
+    # puts slices.size if rand(2000).zero?
 
     slice = slices.shift
     if slice =~ /^\((\d+)x(\d+)\)/

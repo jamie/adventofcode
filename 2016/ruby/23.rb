@@ -1,6 +1,8 @@
 require 'advent'
 input = Advent.input(2016, 23)
 
+exit # WIP
+
 # Part 1
 class Assembunny
   attr_accessor :prog, :output, :registers

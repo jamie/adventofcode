@@ -89,6 +89,8 @@ while !queue.empty? do
   end
 end
 
+exit # Part 2 currently slow/broken
+
 # Part 2
 NODES2 =    %w(SG SM PG PM TG TM RG RM CG CM EG EM DG DM)
 input = [0, 1, 1, 1, 1, 1, 2, 3, 2, 2, 2, 2, 1, 1, 1, 1]

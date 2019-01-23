@@ -139,7 +139,7 @@ dates.each do |year, day|
   solution = solutions.first
 
   puts [date, runs.map(&:duration_s), nil, solution[0]].flatten.join(' ')
-  solution[1..-1].each{|line| puts " "*(11*(runs.size+1)+1) + line }
+  (solution[1..-1] || []).each{|line| puts " "*(11*(runs.size+1)+1) + line }
 end
 if dates.size > 1
   puts
