@@ -1,12 +1,13 @@
 class Assembunny
-  attr_accessor :prog, :output, :registers
+  attr_accessor :prog, :output, :registers, :usage
 
   def initialize(prog)
-    @prog = prog.map{|stmt| stmt.split(' ')}
+    @prog = prog.map{|stmt| stmt.strip.split(' ')}
     reset!
   end
 
   def reset!
+    @usage = [0] * @prog.size
     @output = []
     @registers = {
       'a' => 0,
@@ -31,6 +32,7 @@ class Assembunny
   def run
     pc = 0
     while prog[pc]
+      @usage[pc] += 1
       op, x, y = prog[pc]
       case op
       when 'inc'
@@ -44,6 +46,10 @@ class Assembunny
         xval = registers[x] || x.to_i
         yval = registers[y] || y.to_i
         pc += yval - 1 if xval != 0
+      when 'mul'
+        xval = registers[x] || x.to_i
+        yval = registers[y] || y.to_i
+        registers[x] = xval * yval
       when 'tgl'
         index = pc + registers[x]
         if prog[index]
@@ -59,6 +65,8 @@ class Assembunny
       when 'out'
         output << registers[x]
         return if output.size > 10
+      when nil
+        # skip empty lines
       else
         puts "Unknown op: #{op}"
         exit
