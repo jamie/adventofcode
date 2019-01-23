@@ -1,5 +1,5 @@
 require 'advent'
-input = Advent.input(2016, 10)
+input = Advent.input(2016, 12)
 
 # Part 1
 prog = input.dup
