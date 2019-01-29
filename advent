@@ -1,5 +1,12 @@
 #!/usr/bin/env ruby
 
+begin
+  require 'concurrent'
+  require 'concurrent-edge' # for Throttle
+rescue
+  puts 'Please install the concurrent-ruby and concurrent-ruby-edge gems.'
+end
+
 if ARGV[0] == 'get'
   # hack to download input
   now = Time.now.utc - 5*60*60
@@ -110,7 +117,7 @@ lang ||= '*'
 # Extract year, default latest
 year = ARGV.detect{|v| v =~ /\A2[0-9]{3}\z/}
 ARGV.delete(year)
-year ||= Dir["20*"].last
+year ||= '*' # Dir["20*"].last
 
 # Extract day, default whole-year
 day = ARGV.detect{|v| v =~ /\A\d?\d\z/}
@@ -126,11 +133,8 @@ totals = {}
 # Render table
 puts "Date       " + langs.map{|lang| "%10s" % lang}.join(' ') + "  Solutions"
 
-require 'concurrent'
-require 'concurrent-edge' # for Throttle
 thread_pool = Concurrent::Throttle.new(Concurrent.processor_count)
 results = {}
-
 # Fork all processes
 dates.each do |year, day|
   runs = langs.map do |lang|
