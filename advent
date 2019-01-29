@@ -125,10 +125,23 @@ dates = runners.map{|runner| [runner.year, runner.day]}.sort.uniq
 totals = {}
 # Render table
 puts "Date       " + langs.map{|lang| "%10s" % lang}.join(' ') + "  Solutions"
+
+require 'concurrent-ruby'
+results = {}
+
+# Fork all processes
 dates.each do |year, day|
-  date = "#{year}-#{day}".ljust(10)
   runs = langs.map do |lang|
-    Runner.find(year, day, lang).run.tap do |run|
+    results[[year, day, lang]] = Concurrent::Promises.future do
+      Runner.find(year, day, lang).run
+    end
+  end
+end
+
+# Collect values, output table
+dates.each do |year, day|
+  runs = langs.map do |lang|
+    results[[year, day, lang]].value.tap do |run|
       totals[lang] ||= 0.0
       totals[lang] += run.duration
     end
@@ -138,9 +151,12 @@ dates.each do |year, day|
   solutions = [["Discrepancy"]] if solutions.size > 1
   solution = solutions.first
 
+  date = "#{year}-#{day}".ljust(10)
   puts [date, runs.map(&:duration_s), nil, solution[0]].flatten.join(' ')
   (solution[1..-1] || []).each{|line| puts " "*(11*(runs.size+1)+1) + line }
 end
+
+
 if dates.size > 1
   puts
   # Render Summary
