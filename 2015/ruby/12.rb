@@ -2,13 +2,11 @@ require 'advent'
 input = Advent.input(2015, 12)
 
 # Part 1
-json = input[0]
-
-puts json.scan(/-?\d+/).map(&:to_i).inject(&:+)
+puts input.scan(/-?\d+/).map(&:to_i).inject(&:+)
 
 # Part 2
 require 'json'
-data = JSON.parse(json)
+data = JSON.parse(input)
 
 def score(node)
   case node
