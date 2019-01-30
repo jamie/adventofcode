@@ -80,13 +80,20 @@ class PriorityDeque
     @queue = {}
   end
 
+  def empty?
+    @queue.empty?
+  end
+
+  def priority
+    queue.keys.max
+  end
+
   def add(priority, value)
     @queue[priority] ||= []
     @queue[priority] << value
   end
 
   def pop
-    priority = @queue.keys.max
     value = @queue[priority].pop
     if @queue[priority].empty?
       @queue.delete(priority)
@@ -95,7 +102,6 @@ class PriorityDeque
   end
 
   def shift
-    priority = @queue.keys.max
     value = @queue[priority].shift
     if @queue[priority].empty?
       @queue.delete(priority)
