@@ -3,8 +3,9 @@
 begin
   require 'concurrent'
   require 'concurrent-edge' # for Throttle
-rescue
+rescue LoadError
   puts 'Please install the concurrent-ruby and concurrent-ruby-edge gems.'
+  exit
 end
 
 if ARGV[0] == 'get'
