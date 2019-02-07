@@ -149,10 +149,11 @@ end
 dates.each do |year, day|
   runs = langs.map do |lang|
     results[[year, day, lang]].value.tap do |run|
+      next if run.nil?
       totals[lang] ||= 0.0
       totals[lang] += run.duration
     end
-  end
+  end.compact
 
   solutions = runs.map(&:solutions).compact.uniq
   solutions = [["Discrepancy"]] if solutions.size > 1
