@@ -44,7 +44,7 @@ class Elevator
 private
   def pop_queue
     65.downto(1) do |i|
-      if queue[i] && !queue[i].empty?
+      if queue[i].present?
         return queue[i].shift
       end
     end

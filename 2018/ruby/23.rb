@@ -70,7 +70,8 @@ class Region < Struct.new(:xmin, :xmax, :ymin, :ymax, :zmin, :zmax)
     xmid = (xmin + xmax) / 2
     ymid = (ymin + ymax) / 2
     zmid = (zmin + zmax) / 2
-    [ Region.new(xmin,   xmid, ymin,   ymid, zmin,   zmid),
+    [
+      Region.new(xmin, xmid, ymin, ymid, zmin, zmid),
       Region.new(xmid+1, xmax, ymin,   ymid, zmin,   zmid),
       Region.new(xmin,   xmid, ymid+1, ymax, zmin,   zmid),
       Region.new(xmid+1, xmax, ymid+1, ymax, zmin,   zmid),

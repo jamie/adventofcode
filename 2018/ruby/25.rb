@@ -3,10 +3,11 @@ input = Advent.input(2018, 25)
 
 Point = Struct.new(:x, :y, :z, :t) do
   def distance(other)
-    [ x - other.x,
+    [
+      x - other.x,
       y - other.y,
       z - other.z,
-      t - other.t
+      t - other.t,
     ].sum(&:abs)
   end
 end

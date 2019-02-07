@@ -7,7 +7,8 @@ $len = board[0].size
 $step = 100
 
 def neighbours(board, i, j)
-  [ [i+1, j+1],
+  [
+    [i+1, j+1],
     [i+1, j  ],
     [i+1, j-1],
     [i  , j+1],
@@ -45,7 +46,8 @@ $len = board[0].size
 $step = 100
 
 def neighbours(board, i, j)
-  [ [i+1, j+1],
+  [
+    [i+1, j+1],
     [i+1, j  ],
     [i+1, j-1],
     [i  , j+1],

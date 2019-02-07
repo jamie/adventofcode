@@ -36,11 +36,13 @@ private
   def rotate(i, pattern)
     i.times do
       pattern = if pattern.size == 2
-        [ [ pattern[0][1], pattern[1][1] ],
+        [
+          [ pattern[0][1], pattern[1][1] ],
           [ pattern[0][0], pattern[1][0] ],
         ]
       else
-        [ [ pattern[0][2], pattern[1][2], pattern[2][2] ],
+        [
+          [ pattern[0][2], pattern[1][2], pattern[2][2] ],
           [ pattern[0][1], pattern[1][1], pattern[2][1] ],
           [ pattern[0][0], pattern[1][0], pattern[2][0] ],
         ]

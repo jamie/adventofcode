@@ -6,19 +6,19 @@ Virus = Struct.new(:x, :y, :dir) do
     up: :right,
     right: :down,
     down: :left,
-    left: :up
+    left: :up,
   }
   TURN_LEFT = {
     up: :left,
     left: :down,
     down: :right,
-    right: :up
+    right: :up,
   }
   TURN_AROUND = {
     up: :down,
     down: :up,
     left: :right,
-    right: :left
+    right: :left,
   }
 
   def turn_right!

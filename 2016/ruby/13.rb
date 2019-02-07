@@ -16,10 +16,11 @@ search = [[1,1,0]]
 
 while search.any? do
   x, y, steps = search.shift
-  [ [0,1],
+  [
+    [0,1],
     [1,0],
     [0,-1],
-    [-1,0]
+    [-1,0],
   ].each do |dx, dy|
     xx, yy = x+dx, y+dy
 
@@ -44,10 +45,11 @@ search = [[1,1,0]]
 while search.any? do
   x, y, steps = search.shift
   next if steps == 50
-  [ [0,1],
+  [
+    [0,1],
     [1,0],
     [0,-1],
-    [-1,0]
+    [-1,0],
   ].each do |dx, dy|
     xx, yy = x+dx, y+dy
 
