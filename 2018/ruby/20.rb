@@ -36,7 +36,7 @@ class Room < Struct.new(:x, :y, :dist)
   end
 
   def to_s
-    return '╋' if x.zero? && y.zero?
+    return '╋' if [x, y] == [0, 0]
 
     case [!!east, !!west, !!north, !!south]
     when [false, false, false, false]; fail "Empty Room!"

@@ -56,7 +56,9 @@ program = input[1..-1].map{|line|
 
 cpu = CPU.new([0, 0, 0, 0, 0, 0])
 cpu.bind(input[0].split(' ').last.to_i)
-while (opcode = program[cpu.ip])
+
+opcode = program[cpu.ip]
+while opcode
   cpu.run(opcode)
   # By inspection, we check for halt on line 28, so grab the first
   # value checked, that's our shortest halting program
@@ -64,6 +66,7 @@ while (opcode = program[cpu.ip])
     puts cpu.registers[5]
     break
   end
+  opcode = program[cpu.ip]
 end
 
 # Part 2

@@ -11,8 +11,10 @@ program = input[1..-1].map{|line|
 # Part 1
 cpu = CPU.new([0, 0, 0, 0, 0, 0])
 cpu.bind(input[0].split(' ').last.to_i)
-while (opcode = program[cpu.ip])
+opcode = program[cpu.ip]
+while opcode
   cpu.run(opcode)
+  opcode = program[cpu.ip]
 end
 puts cpu.registers[0]
 

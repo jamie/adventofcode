@@ -89,7 +89,7 @@ end
 
 # Calculation
 
-def fight(immune_system, infection, boost=0)
+def fight(immune_system, infection, boost: 0)
   immune_system = immune_system.map(&:dup)
   infection = infection.map(&:dup)
   immune_system.each {|group|
@@ -163,7 +163,7 @@ puts (s+i).sum(&:units)
 
 50.times do |b|
   boost = b+1
-  s, i = fight(immune_system, infection, boost)
+  s, i = fight(immune_system, infection, boost: boost)
   if i.empty?
     puts s.sum(&:units)
     exit

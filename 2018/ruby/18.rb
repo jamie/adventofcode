@@ -15,7 +15,7 @@ def step(yard)
         next unless (0...SIZE).include?(y+dy)
         (-1..1).each do |dx|
           next unless (0...SIZE).include?(x+dx)
-          next if dy == 0 && dx == 0
+          next if [dx, dy] == [0, 0]
           case yard[y+dy][x+dx]
           when '.'; ground += 1
           when '|'; trees += 1
@@ -48,7 +48,9 @@ yard = input.map{|line| line.split(//)}
 1_000_000_000.times {|n|
   yard = step(yard)
   # Dunno why it's finding a cycle around n=10... Ignore that one
-  break if n > 100 && yards.include?(yard)
+  if n > 100 && yards.include?(yard)
+    break
+  end
   yards << yard
 }
 yards << yard

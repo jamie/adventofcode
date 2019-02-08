@@ -69,8 +69,10 @@ class Cave
         [time-1, gear, x,   y+1],
         [time-7, other_gear, x, y],
       ].each do |newtime, newgear, newx, newy|
-        next if newx < 0 || newy < 0
-        next if newx > 50 # heuristic, actual path for my input goes to 48
+        if newx < 0 || newy < 0
+          next
+        end
+        next if newx > 50 # optimization heuristic, actual path for my input goes to 48
         next unless available_gear(newx, newy).include?(newgear)
         next if shortest_time_to[[newx, newy, newgear]]
         queue.add(newtime, [newtime, newgear, newx, newy])

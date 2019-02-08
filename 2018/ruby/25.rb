@@ -1,3 +1,8 @@
+if RUBY_VERSION < "2.6.0"
+  puts "Requires Array#union from ruby 2.6+"
+  exit
+end
+
 require 'advent'
 input = Advent.input(2018, 25)
 

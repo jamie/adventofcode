@@ -34,7 +34,7 @@ end
 class Map
   attr_reader :rounds
 
-  def initialize(input, elf_power=3)
+  def initialize(input, elf_power: 3)
     @board = input.map.with_index do |line, y|
       line.split(//).map.with_index do |char, x|
         case char
@@ -45,7 +45,7 @@ class Map
         when 'G'
           Goblin.new(x, y)
         when 'E'
-          Elf.new(x, y, elf_power)
+          Elf.new(x, y, power: elf_power)
         else
           fail "Unknown input: #{char}"
         end
@@ -72,14 +72,14 @@ class Map
   end
 
   def outcome
-    @rounds * units.sum(&:hp)
+    @rounds * units(Unit).sum(&:hp)
   end
 
   def at(x, y)
     @board[y][x]
   end
 
-  def adjacent_to(x, y, type=nil)
+  def adjacent_to(x, y, type: nil)
     adjacent = [
       at(x, y-1),
       at(x-1, y),
@@ -108,12 +108,12 @@ class Map
     distances
   end
 
-  def units(type=Unit)
+  def units(type)
     @board.flatten.select{|e| e.kind_of? type }
   end
 
   def step!
-    units.each do |unit|
+    units(Unit).each do |unit|
       begin
         unit.act!(self)
       rescue NoTarget
@@ -138,7 +138,7 @@ end
 class Unit
   attr_accessor :x, :y, :hp
 
-  def initialize(x, y, power=3)
+  def initialize(x, y, power: 3)
     @x, @y = x, y
     @hp = 200
     @attack_power = power
@@ -173,13 +173,13 @@ class Unit
 
   def move(map)
     # return if already adjacent to an enemy
-    return if map.adjacent_to(x, y, enemy_class).any?
+    return if map.adjacent_to(x, y, type: enemy_class).any?
 
     distances = map.distances_from(x, y) # calculate once
 
     targets = map.units(enemy_class)
     open_squares = targets.
-      map{|e| map.adjacent_to(e.x, e.y, EmptyCell)}.
+      map{|e| map.adjacent_to(e.x, e.y, type: EmptyCell)}.
       flatten.
       uniq.
       map{|s| [distances[[s.x,s.y]], s.y, s.x, s] }. # sort by distance, reading order
@@ -190,7 +190,7 @@ class Unit
     return unless destination
 
     target_distances = map.distances_from(destination.x, destination.y)
-    destination = map.adjacent_to(x, y, EmptyCell).
+    destination = map.adjacent_to(x, y, type: EmptyCell).
       select{|e|
         target_distances[[e.x, e.y]]
       }.
@@ -204,7 +204,7 @@ class Unit
 
   def attack(map)
     target = map.
-      adjacent_to(x, y, enemy_class).
+      adjacent_to(x, y, type: enemy_class).
       sort_by(&:target_sort).
       first
     if target
@@ -271,7 +271,7 @@ puts combat.outcome
 
 # Part 2
 (4..1000).each do |elf_power|
-  combat = Map.new(input, elf_power)
+  combat = Map.new(input, elf_power: elf_power)
   starting_elves = combat.units(Elf).size
 
   combat.step! while combat.active?
