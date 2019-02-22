@@ -1,11 +1,12 @@
-require 'forwardable'
-require 'node'
+require "forwardable"
+require "node"
+
 class LinkedList
   extend Forwardable
   def_delegators :@cursor, :value, :left, :right
   attr_reader :cursor
 
-  def initialize(initial_node=nil)
+  def initialize(initial_node = nil)
     @cursor = initial_node
   end
 

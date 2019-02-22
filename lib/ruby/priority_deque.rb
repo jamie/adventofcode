@@ -1,5 +1,6 @@
 class PriorityDeque
   attr_reader :queue
+
   def initialize
     @queue = {}
   end
