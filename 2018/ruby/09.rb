@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2018, 9)
 
 # 470 players; last marble is worth 72170 points
@@ -44,7 +44,7 @@ player = 0
 board = Node.new(0)
 current = board
 
-(PNT*100).times do |i|
+(PNT * 100).times do |i|
   marble = i + 1
 
   if marble % 23 == 0

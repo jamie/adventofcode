@@ -1,16 +1,16 @@
-require 'advent'
+require "advent"
 input = Advent.input(2018, 6)
 
-points = input.map{|line| line.split(', ').map(&:to_i)}
+points = input.map { |line| line.split(", ").map(&:to_i) }
 
-xs = points.map(&:first).min .. points.map(&:first).max
-ys = points.map(&:last).min .. points.map(&:last).max
+xs = points.map(&:first).min..points.map(&:first).max
+ys = points.map(&:last).min..points.map(&:last).max
 
 # Part 1
 
-grid = xs.map {|i|
-  ys.map {|j|
-    distances = points.map{|x, y| [(x-i).abs + (y-j).abs] }
+grid = xs.map { |i|
+  ys.map { |j|
+    distances = points.map { |x, y| [(x - i).abs + (y - j).abs] }
     if distances.count(distances.min) > 1
       -1
     else
@@ -19,22 +19,22 @@ grid = xs.map {|i|
   }
 }
 
-counts = grid.flatten.inject(Hash.new(0)) { |h, e| h[e] += 1 ; h }
+counts = grid.flatten.inject(Hash.new(0)) { |h, e| h[e] += 1; h }
 
 # Remove anything touching an edge
-grid.first.uniq.each {|i| counts.delete(i) }
-grid.last.uniq.each {|i| counts.delete(i) }
-grid.map(&:first).uniq.each {|i| counts.delete(i) }
-grid.map(&:last).uniq.each {|i| counts.delete(i) }
+grid.first.uniq.each { |i| counts.delete(i) }
+grid.last.uniq.each { |i| counts.delete(i) }
+grid.map(&:first).uniq.each { |i| counts.delete(i) }
+grid.map(&:last).uniq.each { |i| counts.delete(i) }
 
 puts counts.values.max
 
 # Part 2
 
-grid = xs.map {|i|
-  ys.map {|j|
-    points.map{|x, y| [(x-i).abs + (y-j).abs] }.inject(&:+).inject(&:+)
+grid = xs.map { |i|
+  ys.map { |j|
+    points.map { |x, y| [(x - i).abs + (y - j).abs] }.inject(&:+).inject(&:+)
   }
 }
 
-puts grid.flatten.select{|e| e < 10_000}.count
+puts grid.flatten.select { |e| e < 10_000 }.count

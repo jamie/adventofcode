@@ -1,15 +1,15 @@
-require 'advent'
+require "advent"
 input = Advent.input(2018, 23)
 
 class Point < Struct.new(:x, :y, :z)
   def distance_to(other)
-    [x-other.x, y-other.y, z-other.z].map(&:abs).sum
+    [x - other.x, y - other.y, z - other.z].map(&:abs).sum
   end
 end
 
 class Nanobot < Struct.new(:x, :y, :z, :r)
   def distance_to(other)
-    [x-other.x, y-other.y, z-other.z].map(&:abs).sum
+    [x - other.x, y - other.y, z - other.z].map(&:abs).sum
   end
 
   def in_range?(other)
@@ -23,7 +23,7 @@ end
 
 # Part 1
 strongest = bots.sort_by(&:r).last
-puts bots.select{|bot| strongest.in_range?(bot) }.size
+puts bots.select { |bot| strongest.in_range?(bot) }.size
 
 # Part 2
 PStack = PriorityDeque
@@ -36,19 +36,19 @@ class Region < Struct.new(:xmin, :xmax, :ymin, :ymax, :zmin, :zmax)
   def reachable?(bot)
     distance = 0
     if bot.x < xmin
-      distance += (xmin-bot.x)
+      distance += (xmin - bot.x)
     elsif bot.x > xmax
-      distance += (bot.x-xmax)
+      distance += (bot.x - xmax)
     end
     if bot.y < ymin
-      distance += (ymin-bot.y)
+      distance += (ymin - bot.y)
     elsif bot.y > ymax
-      distance += (bot.y-ymax)
+      distance += (bot.y - ymax)
     end
     if bot.z < zmin
-      distance += (zmin-bot.z)
+      distance += (zmin - bot.z)
     elsif bot.z > zmax
-      distance += (bot.z-zmax)
+      distance += (bot.z - zmax)
     end
     distance <= bot.r
   end
@@ -72,20 +72,20 @@ class Region < Struct.new(:xmin, :xmax, :ymin, :ymax, :zmin, :zmax)
     zmid = (zmin + zmax) / 2
     [
       Region.new(xmin, xmid, ymin, ymid, zmin, zmid),
-      Region.new(xmid+1, xmax, ymin,   ymid, zmin,   zmid),
-      Region.new(xmin,   xmid, ymid+1, ymax, zmin,   zmid),
-      Region.new(xmid+1, xmax, ymid+1, ymax, zmin,   zmid),
-      Region.new(xmin,   xmid, ymin,   ymid, zmid+1, zmax),
-      Region.new(xmid+1, xmax, ymin,   ymid, zmid+1, zmax),
-      Region.new(xmin,   xmid, ymid+1, ymax, zmid+1, zmax),
-      Region.new(xmid+1, xmax, ymid+1, ymax, zmid+1, zmax),
+      Region.new(xmid + 1, xmax, ymin, ymid, zmin, zmid),
+      Region.new(xmin, xmid, ymid + 1, ymax, zmin, zmid),
+      Region.new(xmid + 1, xmax, ymid + 1, ymax, zmin, zmid),
+      Region.new(xmin, xmid, ymin, ymid, zmid + 1, zmax),
+      Region.new(xmid + 1, xmax, ymin, ymid, zmid + 1, zmax),
+      Region.new(xmin, xmid, ymid + 1, ymax, zmid + 1, zmax),
+      Region.new(xmid + 1, xmax, ymid + 1, ymax, zmid + 1, zmax),
     ].reject(&:invalid?)
   end
 
   def volume
-    ((xmax-xmin+1) * (ymax-ymin+1) * (zmax-zmin+1))
+    ((xmax - xmin + 1) * (ymax - ymin + 1) * (zmax - zmin + 1))
   end
-  
+
   def size
     volume.to_s.size
   end
@@ -130,4 +130,4 @@ loop do
 end
 
 origin = Point.new(0, 0, 0)
-pp findings.sort_by{|region| region.midpoint.distance_to(origin)}.first.midpoint.distance_to(origin)
+pp findings.sort_by { |region| region.midpoint.distance_to(origin) }.first.midpoint.distance_to(origin)

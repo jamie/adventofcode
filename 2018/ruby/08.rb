@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2018, 8).split(" ").map(&:to_i)
 
 def sum_metadata(input)

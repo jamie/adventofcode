@@ -3,7 +3,7 @@ if RUBY_VERSION < "2.6.0"
   exit
 end
 
-require 'advent'
+require "advent"
 input = Advent.input(2018, 25)
 
 Point = Struct.new(:x, :y, :z, :t) do
@@ -16,7 +16,7 @@ Point = Struct.new(:x, :y, :z, :t) do
     ].sum(&:abs)
   end
 end
-points = input.map{|line|
+points = input.map { |line|
   Point.new(*line.split(",").map(&:to_i))
 }
 
@@ -26,7 +26,7 @@ constellations = []
 points.each do |point|
   candidates = []
   constellations.each do |cons|
-    if cons.any?{|cpoint| cpoint.distance(point) <= 3}
+    if cons.any? { |cpoint| cpoint.distance(point) <= 3 }
       candidates << cons
     end
   end

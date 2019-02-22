@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2018, 22)
 
 # depth: 5616
@@ -17,10 +17,10 @@ class Cave
     (0..@target[0]).map do |x|
       (0..@target[1]).map do |y|
         type, risk = case erosion(x, y) % 3
-        when 0; [:rocky,  0]
-        when 1; [:wet,    1]
-        when 2; [:narrow, 2]
-        end
+                     when 0; [:rocky, 0]
+                     when 1; [:wet, 1]
+                     when 2; [:narrow, 2]
+                     end
         risk(x, y)
       end
     end.flatten.sum
@@ -37,7 +37,7 @@ class Cave
     elsif x == 0
       geologic_index = y * 48271
     else
-      geologic_index = erosion(x-1, y) * erosion(x, y-1)
+      geologic_index = erosion(x - 1, y) * erosion(x, y - 1)
     end
 
     @erosion[[x, y]] = (geologic_index + @depth) % 20183
@@ -63,11 +63,11 @@ class Cave
 
       other_gear = (available_gear(x, y) - [gear]).first
       [
-        [time-1, gear, x,   y-1],
-        [time-1, gear, x-1, y],
-        [time-1, gear, x+1, y],
-        [time-1, gear, x,   y+1],
-        [time-7, other_gear, x, y],
+        [time - 1, gear, x, y - 1],
+        [time - 1, gear, x - 1, y],
+        [time - 1, gear, x + 1, y],
+        [time - 1, gear, x, y + 1],
+        [time - 7, other_gear, x, y],
       ].each do |newtime, newgear, newx, newy|
         if newx < 0 || newy < 0
           next

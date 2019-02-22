@@ -1,16 +1,16 @@
-require 'advent'
+require "advent"
 input = Advent.input(2018, 19)
 
-require 'device_cpu'
+require "device_cpu"
 
-program = input[1..-1].map{|line|
+program = input[1..-1].map { |line|
   op, a, b, c = line.split(" ")
   [op, a.to_i, b.to_i, c.to_i]
 }
 
 # Part 1
 cpu = CPU.new([0, 0, 0, 0, 0, 0])
-cpu.bind(input[0].split(' ').last.to_i)
+cpu.bind(input[0].split(" ").last.to_i)
 opcode = program[cpu.ip]
 while opcode
   cpu.run(opcode)

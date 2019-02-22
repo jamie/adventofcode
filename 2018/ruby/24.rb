@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2018, 24)
 
 # input = <<ENDL.split("\n")
@@ -21,8 +21,8 @@ class Group < Struct.new(:faction, :id, :units, :health, :damage, :dtype, :initi
 
   def damage_to(enemy)
     damage = power
-    damage *=2 if enemy.weakness.include? dtype
-    damage *=0 if enemy.immunity.include? dtype
+    damage *= 2 if enemy.weakness.include? dtype
+    damage *= 0 if enemy.immunity.include? dtype
     damage
   end
 
@@ -43,20 +43,19 @@ class Group < Struct.new(:faction, :id, :units, :health, :damage, :dtype, :initi
   end
 end
 
-
 immune_system = []
 def immune_system.name
-  'System'
+  "System"
 end
 infection = []
 def infection.name
-  'Infect'
+  "Infect"
 end
 
 def parse(line, faction, i, enemies)
   values = line.match(/(\d+) units each with (\d+) hit points (\(((immune|weak) to ([^;]*))?(; )?((immune|weak) to ([^;]*))?\) )?with an attack that does (\d+) ([^ ]+) damage at initiative (\d+)/).captures
-  immunity = ((values[4] == 'immune' ? values[5] : values[9]) || "").split(", ")
-  weakness = ((values[4] == 'weak' ? values[5] : values[9]) || "").split(", ")
+  immunity = ((values[4] == "immune" ? values[5] : values[9]) || "").split(", ")
+  weakness = ((values[4] == "weak" ? values[5] : values[9]) || "").split(", ")
   group = Group.new(
     faction,
     i,
@@ -75,7 +74,7 @@ end
 input.shift # label
 i = 1
 while !input.first.empty?
-  immune_system << parse(input.shift, 'System', i, infection)
+  immune_system << parse(input.shift, "System", i, infection)
   i += 1
 end
 input.shift # blank
@@ -83,7 +82,7 @@ input.shift # blank
 input.shift # label
 i = 1
 while !input.empty?
-  infection << parse(input.shift, 'Infect', i, immune_system)
+  infection << parse(input.shift, "Infect", i, immune_system)
   i += 1
 end
 
@@ -92,11 +91,11 @@ end
 def fight(immune_system, infection, boost: 0)
   immune_system = immune_system.map(&:dup)
   infection = infection.map(&:dup)
-  immune_system.each {|group|
+  immune_system.each { |group|
     group.damage += boost
     group.enemies = infection
   }
-  infection.each {|group|
+  infection.each { |group|
     group.enemies = immune_system
   }
 
@@ -146,8 +145,8 @@ def fight(immune_system, infection, boost: 0)
     end.compact.sum
 
     break if kills.zero?
-    infection.reject!{|group| group.units.zero? }
-    immune_system.reject!{|group| group.units.zero? }
+    infection.reject! { |group| group.units.zero? }
+    immune_system.reject! { |group| group.units.zero? }
   end
 
   [immune_system, infection]
@@ -156,13 +155,12 @@ end
 # Part 1
 
 s, i = fight(immune_system, infection)
-puts (s+i).sum(&:units)
-
+puts (s + i).sum(&:units)
 
 # Part 2
 
 50.times do |b|
-  boost = b+1
+  boost = b + 1
   s, i = fight(immune_system, infection, boost: boost)
   if i.empty?
     puts s.sum(&:units)

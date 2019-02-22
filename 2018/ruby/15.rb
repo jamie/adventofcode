@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2018, 15)
 
 class NoTarget < StandardError; end
@@ -8,24 +8,24 @@ module ShellText
     reset = "\e[0m"
     style = {
       default: "\e[39m",
-      black:   "\e[30m",
-      red:     "\e[31m",
-      green:   "\e[32m",
-      yellow:  "\e[33m",
-      blue:    "\e[34m",
+      black: "\e[30m",
+      red: "\e[31m",
+      green: "\e[32m",
+      yellow: "\e[33m",
+      blue: "\e[34m",
       magenta: "\e[35m",
-      cyan:    "\e[36m",
-      lgray:   "\e[37m",
-      dgray:   "\e[90m",
-      lred:    "\e[91m",
-      lgreen:  "\e[92m",
+      cyan: "\e[36m",
+      lgray: "\e[37m",
+      dgray: "\e[90m",
+      lred: "\e[91m",
+      lgreen: "\e[92m",
       lyellow: "\e[93m",
-      lblue:   "\e[94m",
-      lmagenta:"\e[95m",
-      lcyan:   "\e[96m",
-      white:   "\e[97m",
-      
-      bold:  "\e[1m",
+      lblue: "\e[94m",
+      lmagenta: "\e[95m",
+      lcyan: "\e[96m",
+      white: "\e[97m",
+
+      bold: "\e[1m",
     }.slice(*styles).values.join
     "#{style}#{string}#{reset}"
   end
@@ -38,13 +38,13 @@ class Map
     @board = input.map.with_index do |line, y|
       line.split(//).map.with_index do |char, x|
         case char
-        when '#'
+        when "#"
           :wall
-        when '.'
+        when "."
           EmptyCell.new(x, y)
-        when 'G'
+        when "G"
           Goblin.new(x, y)
-        when 'E'
+        when "E"
           Elf.new(x, y, power: elf_power)
         else
           fail "Unknown input: #{char}"
@@ -59,11 +59,11 @@ class Map
       line.map do |cell|
         case cell
         when :wall
-          '#'
+          "#"
         when Unit, EmptyCell
           cell.sigil
         end
-      end.join + "  " + line.select{|e| e.kind_of? Unit}.map(&:to_s).join(', ')
+      end.join + "  " + line.select { |e| e.kind_of? Unit }.map(&:to_s).join(", ")
     end.join("\n") + "\n\n"
   end
 
@@ -81,12 +81,12 @@ class Map
 
   def adjacent_to(x, y, type: nil)
     adjacent = [
-      at(x, y-1),
-      at(x-1, y),
-      at(x+1, y),
-      at(x, y+1),
+      at(x, y - 1),
+      at(x - 1, y),
+      at(x + 1, y),
+      at(x, y + 1),
     ]
-    adjacent.select!{|e| e.kind_of?(type) } if type
+    adjacent.select! { |e| e.kind_of?(type) } if type
     adjacent
   end
 
@@ -97,7 +97,7 @@ class Map
 
     while queue.any?
       dx, dy = queue.shift
-      [[dx, dy-1], [dx-1, dy], [dx+1, dy], [dx, dy+1]].each do |nx, ny|
+      [[dx, dy - 1], [dx - 1, dy], [dx + 1, dy], [dx, dy + 1]].each do |nx, ny|
         next if distances[[nx, ny]]
         next unless at(nx, ny).empty?
         distances[[nx, ny]] = distances[[dx, dy]] + 1
@@ -109,7 +109,7 @@ class Map
   end
 
   def units(type)
-    @board.flatten.select{|e| e.kind_of? type }
+    @board.flatten.select { |e| e.kind_of? type }
   end
 
   def step!
@@ -153,7 +153,7 @@ class Unit
   end
 
   def adjacent?(other)
-    [x-other.x, y-other.y].map(&:abs).sort == [0, 1]
+    [x - other.x, y - other.y].map(&:abs).sort == [0, 1]
   end
 
   def to_s
@@ -179,11 +179,11 @@ class Unit
 
     targets = map.units(enemy_class)
     open_squares = targets.
-      map{|e| map.adjacent_to(e.x, e.y, type: EmptyCell)}.
+      map { |e| map.adjacent_to(e.x, e.y, type: EmptyCell) }.
       flatten.
       uniq.
-      map{|s| [distances[[s.x,s.y]], s.y, s.x, s] }. # sort by distance, reading order
-      select{|d, y, x, s| d }. # reject unpathable destinations
+      map { |s| [distances[[s.x, s.y]], s.y, s.x, s] }. # sort by distance, reading order
+      select { |d, y, x, s| d }. # reject unpathable destinations
       sort.
       map(&:last)
     destination = open_squares.first
@@ -191,12 +191,8 @@ class Unit
 
     target_distances = map.distances_from(destination.x, destination.y)
     destination = map.adjacent_to(x, y, type: EmptyCell).
-      select{|e|
-        target_distances[[e.x, e.y]]
-      }.
-      sort_by{|e|
-        [target_distances[[e.x, e.y]], e.y, e.x]
-      }.
+      select { |e| target_distances[[e.x, e.y]] }.
+      sort_by { |e| [target_distances[[e.x, e.y]], e.y, e.x] }.
       first
 
     map.move!(self, destination)
@@ -216,7 +212,7 @@ end
 
 class Elf < Unit
   def sigil
-    ShellText.style('E', :green, :bold)
+    ShellText.style("E", :green, :bold)
   end
 
   def enemy_class
@@ -226,7 +222,7 @@ end
 
 class Goblin < Unit
   def sigil
-    ShellText.style('G', :red, :bold)
+    ShellText.style("G", :red, :bold)
   end
 
   def enemy_class
@@ -236,7 +232,7 @@ end
 
 class EmptyCell < Struct.new(:x, :y)
   def sigil
-    ShellText.style('.', :dgray)
+    ShellText.style(".", :dgray)
   end
 
   def target_sort
@@ -247,7 +243,6 @@ class EmptyCell < Struct.new(:x, :y)
     true
   end
 end
-
 
 # Sample combat, outcome 27730
 # input = [

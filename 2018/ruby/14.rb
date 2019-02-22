@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2018, 14, :to_i)
 
 recipes = [3, 7]
@@ -7,7 +7,7 @@ elf2 = 1
 
 # Part 1
 
-while recipes.size < input+10
+while recipes.size < input + 10
   score = recipes[elf1] + recipes[elf2]
   recipes << 1 if score > 9
   recipes << score % 10
@@ -15,7 +15,7 @@ while recipes.size < input+10
   elf2 = (elf2 + 1 + recipes[elf2]) % recipes.size
 end
 
-puts recipes[input...(input+10)].join
+puts recipes[input...(input + 10)].join
 
 # Part 2
 

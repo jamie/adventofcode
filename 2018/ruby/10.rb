@@ -1,35 +1,35 @@
-require 'advent'
+require "advent"
 input = Advent.input(2018, 10)
 
 # position=< 9,  1> velocity=< 0,  2>
 # position=< 7,  0> velocity=<-1,  0>
 
-stars = input.map{|line|
+stars = input.map { |line|
   line.match(/position=<(.*),(.*)> velocity=<(.*),(.*)/).captures.map(&:to_i)
 }
 
 def area(stars)
-  x_min = stars.map{|x,y,dx,dy| x}.min
-  x_max = stars.map{|x,y,dx,dy| x}.max
-  y_min = stars.map{|x,y,dx,dy| y}.min
-  y_max = stars.map{|x,y,dx,dy| y}.max
+  x_min = stars.map { |x, y, dx, dy| x }.min
+  x_max = stars.map { |x, y, dx, dy| x }.max
+  y_min = stars.map { |x, y, dx, dy| y }.min
+  y_max = stars.map { |x, y, dx, dy| y }.max
 end
 
 def render(stars)
-  x_min = stars.map{|x,y,dx,dy| x}.min
-  x_max = stars.map{|x,y,dx,dy| x}.max
-  y_min = stars.map{|x,y,dx,dy| y}.min
-  y_max = stars.map{|x,y,dx,dy| y}.max
+  x_min = stars.map { |x, y, dx, dy| x }.min
+  x_max = stars.map { |x, y, dx, dy| x }.max
+  y_min = stars.map { |x, y, dx, dy| y }.min
+  y_max = stars.map { |x, y, dx, dy| y }.max
 
   (y_min..y_max).each do |y|
     line = (x_min..x_max).map do |x|
-      if stars.any?{|sx,sy,dx,dy| x == sx && y == sy}
-        '#'
+      if stars.any? { |sx, sy, dx, dy| x == sx && y == sy }
+        "#"
       else
-        ' '
+        " "
       end
     end
-    puts line.join if line.include?('#')
+    puts line.join if line.include?("#")
   end
 end
 
@@ -48,7 +48,7 @@ loop do
   else
     min_area = new_area
   end
-  
+
   # drift
   stars.each do |star|
     star[0] += star[2]
