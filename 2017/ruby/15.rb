@@ -1,6 +1,6 @@
-require 'advent'
+require "advent"
 input = Advent.input(2017, 15)
-a, b = input.map{|line| line.split(/\s/).last.to_i }
+a, b = input.map { |line| line.split(/\s/).last.to_i }
 # a, b = 65, 8921
 
 a_factor = 16807
@@ -21,7 +21,7 @@ count = 0
 end
 puts count
 
-def genx(value, factor, modulus, multiple=1)
+def genx(value, factor, modulus, multiple = 1)
   loop do
     value = (value * factor) % modulus
     return value if value % multiple == 0

@@ -1,7 +1,7 @@
-require 'advent'
+require "advent"
 input = Advent.input(2017, 18)
 
-require 'bytecode-interpreter'
+require "bytecode-interpreter"
 
 prog = Program.new(input)
 prog.run
@@ -9,7 +9,8 @@ puts prog.output
 
 # Part 2, redefine some opcodes
 class Program
-private
+  private
+
   def snd(reg)
     self.send_count += 1
     other.receive registers[reg]
@@ -37,4 +38,3 @@ loop do
   p1.step
 end
 puts p1.send_count
-

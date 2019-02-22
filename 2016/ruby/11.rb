@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 # input = Advent.input(2016, 11) # Manually parsed
 
 class Elevator
@@ -8,11 +8,11 @@ class Elevator
     @nodes = nodes
     @input = input
     @seen = { input[1..-1] => 0 }
-    @queue = {17 => [input]}
+    @queue = { 17 => [input] }
   end
 
   def run
-    while !queue.empty? do
+    while !queue.empty?
       steps, elevator, *state = pop_queue
 
       next unless valid?(state)
@@ -20,7 +20,7 @@ class Elevator
       # End State
       return steps if state.uniq == [4]
 
-      [elevator+1, elevator-1].each do |new_elevator|
+      [elevator + 1, elevator - 1].each do |new_elevator|
         next unless (1..4).include?(new_elevator)
 
         state.each_with_index do |f, i|
@@ -41,7 +41,8 @@ class Elevator
     end
   end
 
-private
+  private
+
   def pop_queue
     65.downto(1) do |i|
       if queue[i].present?
@@ -55,7 +56,7 @@ private
     floors.each do |node, floor|
       # microchip
       next if node =~ /G/
-      next if floor == floors[node.tr('M','G')] # same floor as own generator, safe
+      next if floor == floors[node.tr("M", "G")] # same floor as own generator, safe
       floors.each do |gen_node, gen_floor|
         # generator
         next if gen_node =~ /M/
@@ -67,16 +68,16 @@ private
   end
 
   def score(steps, state)
-    state.inject(&:+) - steps/2
+    state.inject(&:+) - steps / 2
   end
 
-  def enqueue_move(state, steps, new_elevator, i, j=nil)
+  def enqueue_move(state, steps, new_elevator, i, j = nil)
     new_state = state.dup
     new_state[i] = new_elevator
     new_state[j] = new_elevator if j
 
     return if seen[[new_elevator] + new_state]
-    enqueue(steps+1, new_elevator, new_state)
+    enqueue(steps + 1, new_elevator, new_state)
     seen[[new_elevator] + new_state] = steps
   end
 
@@ -85,7 +86,6 @@ private
     queue[score(steps, state)] << [steps, elevator] + state
   end
 end
-
 
 # Example
 puts Elevator.new(

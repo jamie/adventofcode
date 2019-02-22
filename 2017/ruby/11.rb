@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2017, 11)
 steps = input.split(",")
 
@@ -10,18 +10,19 @@ class C < Struct.new(:x, :y, :z)
     self.z += other.z
     self
   end
+
   def magnitude
     [x, y, z].map(&:abs).max
   end
 end
 
 tr = {
-  'n'  => C.new( 0,  1, -1),
-  'ne' => C.new( 1,  0, -1),
-  'se' => C.new( 1, -1,  0),
-  's'  => C.new( 0, -1,  1),
-  'sw' => C.new(-1,  0,  1),
-  'nw' => C.new(-1,  1,  0),
+  "n" => C.new(0, 1, -1),
+  "ne" => C.new(1, 0, -1),
+  "se" => C.new(1, -1, 0),
+  "s" => C.new(0, -1, 1),
+  "sw" => C.new(-1, 0, 1),
+  "nw" => C.new(-1, 1, 0),
 }
 
 pos = C.new(0, 0, 0)

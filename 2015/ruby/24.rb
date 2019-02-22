@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2015, 24)
 boxes = input.map(&:to_i)
 
@@ -13,9 +13,9 @@ solutions = []
 loop do
   boxes.combination(num_boxes).each do |group1|
     next unless group1.sum == target_weight
-    
-    left = (boxes-group1)
-    next unless (start_num_boxes..(left.size-start_num_boxes)).any? do |num|
+
+    left = (boxes - group1)
+    next unless (start_num_boxes..(left.size - start_num_boxes)).any? do |num|
       left.combination(num).any? { |group2| group2.sum == target_weight }
     end
     solutions << group1
@@ -24,8 +24,7 @@ loop do
   num_boxes += 1
 end
 
-puts solutions.map{|group| group.inject(&:*) }.min
-
+puts solutions.map { |group| group.inject(&:*) }.min
 
 # Part 2
 target_weight = boxes.sum / 4
@@ -38,13 +37,13 @@ solutions = []
 loop do
   boxes.combination(num_boxes).each do |group1|
     next unless group1.sum == target_weight
-    
+
     left = boxes - group1
-    next unless (start_num_boxes..(left.size-start_num_boxes)).any? do |num|
+    next unless (start_num_boxes..(left.size - start_num_boxes)).any? do |num|
       left.combination(num).any? { |group2|
         last = left - group2
         group2.sum == target_weight &&
-        (start_num_boxes..(last.size-start_num_boxes)).any? do |num3|
+        (start_num_boxes..(last.size - start_num_boxes)).any? do |num3|
           last.combination(num).any? { |group3| group3.sum == target_weight }
         end
       }
@@ -55,4 +54,4 @@ loop do
   num_boxes += 1
 end
 
-puts solutions.map{|group| group.inject(&:*) }.min
+puts solutions.map { |group| group.inject(&:*) }.min

@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2016, 1)
 
 # Part 1
@@ -8,13 +8,13 @@ location = [0, 0]
 def turn(facing, direction)
   case facing
   when :north
-    direction == 'R' ? :east : :west
+    direction == "R" ? :east : :west
   when :east
-    direction == 'R' ? :south : :north
+    direction == "R" ? :south : :north
   when :south
-    direction == 'R' ? :west : :east
+    direction == "R" ? :west : :east
   when :west
-    direction == 'R' ? :north : :south
+    direction == "R" ? :north : :south
   end
 end
 
@@ -22,8 +22,8 @@ def walk(location, facing, distance)
   x, y = location
   distance = -distance if facing == :south or facing == :west
   (facing == :north || facing == :south) ?
-    [x, y+distance] :
-    [x+distance, y]
+    [x, y + distance] :
+    [x + distance, y]
 end
 
 input.scan(/([RL])(\d+)/).each do |direction, distance|
@@ -40,13 +40,13 @@ location = [0, 0]
 def turn(facing, direction)
   case facing
   when :north
-    direction == 'R' ? :east : :west
+    direction == "R" ? :east : :west
   when :east
-    direction == 'R' ? :south : :north
+    direction == "R" ? :south : :north
   when :south
-    direction == 'R' ? :west : :east
+    direction == "R" ? :west : :east
   when :west
-    direction == 'R' ? :north : :south
+    direction == "R" ? :north : :south
   end
 end
 
@@ -54,11 +54,11 @@ def walk(location, facing, distance)
   x, y = location
   distance = -distance if facing == :south or facing == :west
   (facing == :north || facing == :south) ?
-    [x, y+distance] :
-    [x+distance, y]
+    [x, y + distance] :
+    [x + distance, y]
 end
 
-history = [[0,0]]
+history = [[0, 0]]
 
 input.scan(/([RL])(\d+)/).each do |direction, distance|
   facing = turn(facing, direction)

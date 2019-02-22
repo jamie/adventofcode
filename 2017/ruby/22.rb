@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2017, 22)
 
 Virus = Struct.new(:x, :y, :dir) do
@@ -45,14 +45,14 @@ end
 
 def puts_grid(virus, infections)
   return # this is just debug output
-  (-5 .. 30).each do |y|
-    (-5 .. 30).each do |x|
+  (-5..30).each do |y|
+    (-5..30).each do |x|
       if virus.x == x && virus.y == y
-        print '['
-      elsif virus.x == x-1 && virus.y == y
-        print ']'
+        print "["
+      elsif virus.x == x - 1 && virus.y == y
+        print "]"
       else
-        print ' '
+        print " "
       end
       print infections[y][x]
     end
@@ -61,9 +61,9 @@ def puts_grid(virus, infections)
 end
 
 # Part 1, two step
-virus = Virus.new((input.size)/2, (input.size)/2, :up)
+virus = Virus.new((input.size) / 2, (input.size) / 2, :up)
 
-infections = Hash.new{|h,k| h[k] = Hash.new{'.'}}
+infections = Hash.new { |h, k| h[k] = Hash.new { "." } }
 input.each_with_index do |row, y|
   row.split(//).each_with_index do |cell, x|
     infections[y][x] = cell.chomp
@@ -73,13 +73,13 @@ end
 infect_count = 0
 10_000.times do
   case infections[virus.y][virus.x]
-  when '.'
+  when "."
     virus.turn_left!
-    infections[virus.y][virus.x] = '#'
+    infections[virus.y][virus.x] = "#"
     infect_count += 1
-  when '#'
+  when "#"
     virus.turn_right!
-    infections[virus.y][virus.x] = '.'
+    infections[virus.y][virus.x] = "."
   end
   virus.step!
 end
@@ -88,9 +88,9 @@ puts_grid(virus, infections)
 puts infect_count
 
 # Part 2, four step
-virus = Virus.new((input.size)/2, (input.size)/2, :up)
+virus = Virus.new((input.size) / 2, (input.size) / 2, :up)
 
-infections = Hash.new{|h,k| h[k] = Hash.new{'.'}}
+infections = Hash.new { |h, k| h[k] = Hash.new { "." } }
 input.each_with_index do |row, y|
   row.split(//).each_with_index do |cell, x|
     infections[y][x] = cell
@@ -101,18 +101,18 @@ puts_grid(virus, infections)
 infect_count = 0
 10_000_000.times do
   case infections[virus.y][virus.x]
-  when '.'
+  when "."
     virus.turn_left!
-    infections[virus.y][virus.x] = 'W'
-  when 'W'
+    infections[virus.y][virus.x] = "W"
+  when "W"
     infect_count += 1
-    infections[virus.y][virus.x] = '#'
-  when '#'
+    infections[virus.y][virus.x] = "#"
+  when "#"
     virus.turn_right!
-    infections[virus.y][virus.x] = 'F'
-  when 'F'
+    infections[virus.y][virus.x] = "F"
+  when "F"
     virus.turn_around!
-    infections[virus.y][virus.x] = '.'
+    infections[virus.y][virus.x] = "."
   end
   virus.step!
 end

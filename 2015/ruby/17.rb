@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2015, 17, :to_i)
 
 # Part 1
@@ -23,4 +23,3 @@ total = 0
   break if total > 0
 end
 puts total
-

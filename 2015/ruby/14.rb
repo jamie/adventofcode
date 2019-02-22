@@ -1,10 +1,11 @@
-require 'advent'
+require "advent"
 input = Advent.input(2015, 14)
 
 TIME = 2503
 
 Reindeer = Struct.new(:name, :speed, :endurance, :recovery, :location, :points) do
   attr_accessor :activity
+
   def initialize(*)
     super
     self.activity = [:fly] * endurance + [:rest] * recovery
@@ -28,7 +29,7 @@ end
 TIME.times do
   reindeer.each(&:travel!)
   scoring_location = reindeer.map(&:location).max
-  reindeer.select{|deer| deer.location == scoring_location}.each(&:score!)
+  reindeer.select { |deer| deer.location == scoring_location }.each(&:score!)
 end
 
 # Part 1

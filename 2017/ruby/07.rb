@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2017, 7)
 
 NTreeNode = Struct.new(:parent, :name, :weight, :children)
@@ -25,7 +25,7 @@ nodes.each do |_, node|
 end
 
 # Find root (Part One)
-root_candidates = nodes.values.select{|node| node.parent.nil?}
+root_candidates = nodes.values.select { |node| node.parent.nil? }
 fail "Multiple Roots" if root_candidates.size > 1 # sanity
 root = root_candidates[0]
 puts root.name
@@ -34,7 +34,7 @@ puts root.name
 def check_weight(node)
   return node.weight if node.children.nil?
 
-  weights = node.children.map{|c| check_weight(c)}
+  weights = node.children.map { |c| check_weight(c) }
   if weights.uniq.size == 1
     return node.weight + weights.inject(&:+)
   else
@@ -44,4 +44,5 @@ def check_weight(node)
     exit
   end
 end
+
 check_weight(root)

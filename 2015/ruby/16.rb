@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2015, 16)
 
 # Part 1
@@ -7,7 +7,7 @@ sues = input.map do |line|
   name, options = line.split(": ", 2)
   {
     number: name.split(" ").last,
-    remembered: eval("{#{options}}")
+    remembered: eval("{#{options}}"),
   }
 end
 
@@ -38,21 +38,21 @@ sues = input.map do |line|
   name, options = line.split(": ", 2)
   {
     number: name.split(" ").last,
-    remembered: eval("{#{options}}")
+    remembered: eval("{#{options}}"),
   }
 end
 
 detected = {
-  children:    [:==, 3],
-  cats:        [:> , 7],
-  samoyeds:    [:==, 2],
-  pomeranians: [:< , 3],
-  akitas:      [:==, 0],
-  vizslas:     [:==, 0],
-  goldfish:    [:< , 5],
-  trees:       [:> , 3],
-  cars:        [:==, 2],
-  perfumes:    [:==, 1],
+  children: [:==, 3],
+  cats: [:>, 7],
+  samoyeds: [:==, 2],
+  pomeranians: [:<, 3],
+  akitas: [:==, 0],
+  vizslas: [:==, 0],
+  goldfish: [:<, 5],
+  trees: [:>, 3],
+  cars: [:==, 2],
+  perfumes: [:==, 1],
 }
 
 match = sues.detect do |sue|

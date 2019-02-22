@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2016, 18)
 
 # Part 1
@@ -6,20 +6,18 @@ row = input.split(//)
 
 safe = 0
 40.times do
-  safe += row.count('.')
+  safe += row.count(".")
 
-  row = row.size.times.map{|i|
+  row = row.size.times.map { |i|
     if i == 0
       row[1]
-    elsif i == row.size-1
+    elsif i == row.size - 1
       row[-2]
-    elsif (
-      (row[i-1] == '^' && row[i+1] == '.') ||
-      (row[i-1] == '.' && row[i+1] == '^')
-    )
-      '^'
+    elsif ((row[i - 1] == "^" && row[i + 1] == ".") ||
+           (row[i - 1] == "." && row[i + 1] == "^"))
+      "^"
     else
-      '.'
+      "."
     end
   }
 end
@@ -31,20 +29,18 @@ row = input.split(//)
 
 safe = 0
 400000.times do
-  safe += row.count('.')
+  safe += row.count(".")
 
-  row = row.size.times.map{|i|
+  row = row.size.times.map { |i|
     if i == 0
       row[1]
-    elsif i == row.size-1
+    elsif i == row.size - 1
       row[-2]
-    elsif (
-      (row[i-1] == '^' && row[i+1] == '.') ||
-      (row[i-1] == '.' && row[i+1] == '^')
-    )
-      '^'
+    elsif ((row[i - 1] == "^" && row[i + 1] == ".") ||
+           (row[i - 1] == "." && row[i + 1] == "^"))
+      "^"
     else
-      '.'
+      "."
     end
   }
 end

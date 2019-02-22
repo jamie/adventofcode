@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2015, 8)
 
 # Part 1

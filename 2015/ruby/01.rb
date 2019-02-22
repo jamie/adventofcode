@@ -1,9 +1,9 @@
-require 'advent'
+require "advent"
 input = Advent.input(2015, 1)
 
 # Part 1
-ups = input.gsub(/[^(]/, '')
-downs = input.gsub(/[^)]/, '')
+ups = input.gsub(/[^(]/, "")
+downs = input.gsub(/[^)]/, "")
 puts ups.size - downs.size
 
 # Part 2
@@ -12,9 +12,9 @@ pos = 0
 input.split(//).each do |char|
   pos += 1
   case char
-  when '('
+  when "("
     floor += 1
-  when ')'
+  when ")"
     floor -= 1
   end
   if floor < 0

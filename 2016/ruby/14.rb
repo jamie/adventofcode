@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2016, 14)
 
 # Part 1
@@ -10,7 +10,7 @@ loop do
   hash = Digest::MD5.hexdigest(input + i.to_s)
   if hash =~ /((.)\2\2\2\2)/
     trips[$2] ||= []
-    keys += trips[$2].select{|j| ((i-1000)...i).include? j}
+    keys += trips[$2].select { |j| ((i - 1000)...i).include? j }
     if keys.uniq.size > 64
       puts keys.uniq.sort[63]
       break
@@ -33,7 +33,7 @@ loop do
   2016.times { hash = Digest::MD5.hexdigest(hash) }
   if hash =~ /((.)\2\2\2\2)/
     trips[$2] ||= []
-    keys += trips[$2].select{|j| ((i-1000)...i).include? j}
+    keys += trips[$2].select { |j| ((i - 1000)...i).include? j }
     if keys.uniq.size > 80
       puts keys.uniq.sort[63]
       break

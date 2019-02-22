@@ -1,8 +1,8 @@
-require 'advent'
+require "advent"
 input = Advent.input(2015, 9)
 
 # Part 1
-map = Hash.new{|h,k| h[k] = {}}
+map = Hash.new { |h, k| h[k] = {} }
 
 input.each do |line|
   line =~ /(.*) to (.*) = (.*)/
@@ -11,17 +11,17 @@ input.each do |line|
 end
 
 cities = map.keys
-length = cities.permutation.to_a.map{|path|
+length = cities.permutation.to_a.map { |path|
   dist = 0
-  (path.length-1).times do |i|
-    dist += map[path[i]][path[i+1]]
+  (path.length - 1).times do |i|
+    dist += map[path[i]][path[i + 1]]
   end
   dist
 }.min
 puts length
 
 # Part 2
-map = Hash.new{|h,k| h[k] = {}}
+map = Hash.new { |h, k| h[k] = {} }
 
 input.each do |line|
   line =~ /(.*) to (.*) = (.*)/
@@ -30,10 +30,10 @@ input.each do |line|
 end
 
 cities = map.keys
-length = cities.permutation.to_a.map{|path|
+length = cities.permutation.to_a.map { |path|
   dist = 0
-  (path.length-1).times do |i|
-    dist += map[path[i]][path[i+1]]
+  (path.length - 1).times do |i|
+    dist += map[path[i]][path[i + 1]]
   end
   dist
 }.max

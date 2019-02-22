@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2015, 22)
 # Manually solved, parts 1 and 2:
 # 953: prspmmmmm
@@ -15,16 +15,16 @@ mob = {
 }
 
 player = {
-  hp:  50,
+  hp: 50,
   mp: 500,
 }
 
 spells = {
-  m: {mp:  53, immediate: ->(c,t){ t[:hp]  -= 4  }},
-  d: {mp:  73, immediate: ->(c,t){ t[:hp]  -= 2; c[:hp] += 2 }},
-  s: {mp: 113, ongoing: [:shield, 6]},
-  p: {mp: 173, ongoing: [:poison, 6]},
-  r: {mp: 229, ongoing: [:charge, 5]},
+  m: { mp: 53, immediate: -> (c, t) { t[:hp] -= 4 } },
+  d: { mp: 73, immediate: -> (c, t) { t[:hp] -= 2; c[:hp] += 2 } },
+  s: { mp: 113, ongoing: [:shield, 6] },
+  p: { mp: 173, ongoing: [:poison, 6] },
+  r: { mp: 229, ongoing: [:charge, 5] },
 }
 
 def win?(hero, boss, spells, actions)
@@ -41,8 +41,8 @@ def win?(hero, boss, spells, actions)
       when :charge; hero[:mp] += 101
       end
     end
-    effects.map! {|effect, duration|
-      [effect, duration-1] if duration > 1
+    effects.map! { |effect, duration|
+      [effect, duration - 1] if duration > 1
     }.compact!
 
     hero[:mp] -= spells[action][:mp]
@@ -58,13 +58,13 @@ def win?(hero, boss, spells, actions)
       when :charge; hero[:mp] += 101
       end
     end
-    effects.map! {|effect, duration|
-      [effect, duration-1] if duration > 1
+    effects.map! { |effect, duration|
+      [effect, duration - 1] if duration > 1
     }.compact!
     return true if boss[:hp] <= 0
 
-    if effects.any?{|effect, duration| effect == :shield}
-      hero[:hp] -= boss[:atk]-7
+    if effects.any? { |effect, duration| effect == :shield }
+      hero[:hp] -= boss[:atk] - 7
     else
       hero[:hp] -= boss[:atk]
     end
@@ -74,14 +74,13 @@ def win?(hero, boss, spells, actions)
 end
 
 def cost(spells, actions)
-  actions.map{|a| spells[a][:mp]}.inject(&:+)
+  actions.map { |a| spells[a][:mp] }.inject(&:+)
 end
-
 
 # Manual simulation gave me a win at 1250, server said too high so cap it there.
 min = 1250
 
-action_list = spells.keys.map{|e| [e] }
+action_list = spells.keys.map { |e| [e] }
 loop do
   actions = action_list.pop
   break if action_list.empty?
@@ -91,7 +90,7 @@ loop do
 
   if win?(player, mob, spells, actions)
     p [cost, actions]
-    min = [min, cost].min 
+    min = [min, cost].min
   end
 
   [actions].product(spells.keys).map(&:flatten).each do |new_actions|
@@ -101,7 +100,6 @@ end
 
 puts min
 
-
 # Part 2
 mob = {
   hp: 55,
@@ -109,16 +107,16 @@ mob = {
 }
 
 player = {
-  hp:  50,
+  hp: 50,
   mp: 500,
 }
 
 spells = {
-  m: {mp:  53, immediate: ->(c,t){ t[:hp]  -= 4  }},
-  d: {mp:  73, immediate: ->(c,t){ t[:hp]  -= 2; c[:hp] += 2 }},
-  s: {mp: 113, ongoing: [:shield, 6]},
-  r: {mp: 229, ongoing: [:charge, 5]},
-  p: {mp: 173, ongoing: [:poison, 6]},
+  m: { mp: 53, immediate: -> (c, t) { t[:hp] -= 4 } },
+  d: { mp: 73, immediate: -> (c, t) { t[:hp] -= 2; c[:hp] += 2 } },
+  s: { mp: 113, ongoing: [:shield, 6] },
+  r: { mp: 229, ongoing: [:charge, 5] },
+  p: { mp: 173, ongoing: [:poison, 6] },
 }
 
 def win?(hero, boss, spells, actions)
@@ -138,8 +136,8 @@ def win?(hero, boss, spells, actions)
       when :charge; hero[:mp] += 101
       end
     end
-    effects.map! {|effect, duration|
-      [effect, duration-1] if duration > 1
+    effects.map! { |effect, duration|
+      [effect, duration - 1] if duration > 1
     }.compact!
 
     hero[:mp] -= spells[action][:mp]
@@ -155,13 +153,13 @@ def win?(hero, boss, spells, actions)
       when :charge; hero[:mp] += 101
       end
     end
-    effects.map! {|effect, duration|
-      [effect, duration-1] if duration > 1
+    effects.map! { |effect, duration|
+      [effect, duration - 1] if duration > 1
     }.compact!
     return true if boss[:hp] <= 0
 
-    if effects.any?{|effect, duration| effect == :shield}
-      hero[:hp] -= boss[:atk]-7
+    if effects.any? { |effect, duration| effect == :shield }
+      hero[:hp] -= boss[:atk] - 7
     else
       hero[:hp] -= boss[:atk]
     end
@@ -171,13 +169,13 @@ def win?(hero, boss, spells, actions)
 end
 
 def cost(spells, actions)
-  actions.map{|a| spells[a][:mp]}.inject(&:+)
+  actions.map { |a| spells[a][:mp] }.inject(&:+)
 end
 
 # Manual simulation gave me a win at 1382, server said too high so cap it there.
 min = 1382
 
-action_list = spells.keys.map{|e| [e] }
+action_list = spells.keys.map { |e| [e] }
 loop do
   actions = action_list.pop
   break if action_list.empty?
@@ -187,7 +185,7 @@ loop do
 
   if win?(player, mob, spells, actions)
     p [cost, actions]
-    min = [min, cost].min 
+    min = [min, cost].min
   end
 
   [actions].product(spells.keys).map(&:flatten).each do |new_actions|

@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2016, 7)
 
 # Part 1
@@ -14,7 +14,7 @@ valid = input.select do |line|
 
   slices = line.chomp.split(/\[|\]/).each_slice(2).to_a
   slices.last << "" # fix parity, for transpose
-  supernet, hypernet = slices.transpose.map{|slice| slice.join(' ')}
+  supernet, hypernet = slices.transpose.map { |slice| slice.join(" ") }
   (supernet.size - 2).times do |offset|
     aba = supernet[offset, 3]
     next unless aba =~ /([a-z])([a-z])\1/

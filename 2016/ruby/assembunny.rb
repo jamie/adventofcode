@@ -2,7 +2,7 @@ class Assembunny
   attr_accessor :prog, :output, :registers, :usage
 
   def initialize(prog)
-    @prog = prog.map{|stmt| stmt.strip.split(' ')}
+    @prog = prog.map { |stmt| stmt.strip.split(" ") }
     reset!
   end
 
@@ -10,10 +10,10 @@ class Assembunny
     @usage = [0] * @prog.size
     @output = []
     @registers = {
-      'a' => 0,
-      'b' => 0,
-      'c' => 0,
-      'd' => 0,
+      "a" => 0,
+      "b" => 0,
+      "c" => 0,
+      "d" => 0,
     }
   end
 
@@ -35,22 +35,22 @@ class Assembunny
       @usage[pc] += 1
       op, x, y = prog[pc]
       case op
-      when 'inc'
+      when "inc"
         registers[x] += 1
-      when 'dec'
+      when "dec"
         registers[x] -= 1
-      when 'cpy'
+      when "cpy"
         xval = registers[x] || x.to_i
         registers[y] = xval
-      when 'jnz'
+      when "jnz"
         xval = registers[x] || x.to_i
         yval = registers[y] || y.to_i
         pc += yval - 1 if xval != 0
-      when 'mul'
+      when "mul"
         xval = registers[x] || x.to_i
         yval = registers[y] || y.to_i
         registers[x] = xval * yval
-      when 'tgl'
+      when "tgl"
         index = pc + registers[x]
         if prog[index]
           # puts "Toggle #{index} of #{prog.size}"
@@ -62,7 +62,7 @@ class Assembunny
             prog[index][0] = (inst == "jnz") ? "cpy" : "jnz"
           end
         end
-      when 'out'
+      when "out"
         output << registers[x]
         return if output.size > 10
       when nil

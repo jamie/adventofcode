@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2015, 20, :to_i)
 
 # Performance cheating a _lot_ by starting iteration late
@@ -13,7 +13,7 @@ loop do
   (1..sqrt).each do |elf|
     if house % elf == 0
       value += elf
-      value += (house/elf) unless elf==sqrt
+      value += (house / elf) unless elf == sqrt
     end
   end
 
@@ -34,10 +34,10 @@ loop do
   sqrt = Math.sqrt(house)
   (1..sqrt).each do |elf|
     if house % elf == 0
-      recip = house/elf
+      recip = house / elf
 
       value += elf if recip < 51
-      unless elf==sqrt
+      unless elf == sqrt
         value += recip if elf < 51
       end
     end

@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2015, 6)
 
 # Part 1
@@ -31,9 +31,9 @@ lights = Array.new(1000) {
 }
 
 input.each do |line|
-# turn on 606,361 through 892,600
-# turn off 448,208 through 645,684
-# toggle 50,472 through 452,788
+  # turn on 606,361 through 892,600
+  # turn off 448,208 through 645,684
+  # toggle 50,472 through 452,788
   command = line.match(/([a-z]+) (\d+),(\d+) through (\d+),(\d+)/)
   x = [command[2].to_i, command[4].to_i].sort
   y = [command[3].to_i, command[5].to_i].sort
@@ -45,7 +45,7 @@ input.each do |line|
   end
 end
 
-puts lights.flatten.select{|light| light.on?}.size
+puts lights.flatten.select { |light| light.on? }.size
 
 # Part 2
 class Light
@@ -79,9 +79,9 @@ lights = Array.new(1000) {
 }
 
 input.each do |line|
-# turn on 606,361 through 892,600
-# turn off 448,208 through 645,684
-# toggle 50,472 through 452,788
+  # turn on 606,361 through 892,600
+  # turn off 448,208 through 645,684
+  # toggle 50,472 through 452,788
   command = line.match(/([a-z]+) (\d+),(\d+) through (\d+),(\d+)/)
   x = [command[2].to_i, command[4].to_i].sort
   y = [command[3].to_i, command[5].to_i].sort
@@ -93,4 +93,4 @@ input.each do |line|
   end
 end
 
-puts lights.flatten.map{|light| light.bright }.inject(&:+)
+puts lights.flatten.map { |light| light.bright }.inject(&:+)

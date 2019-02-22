@@ -1,8 +1,8 @@
-require 'advent'
+require "advent"
 input = Advent.input(2015, 13)
 
 # Part 1
-happiness = Hash.new{|h,k|h[k] = {} }
+happiness = Hash.new { |h, k| h[k] = {} }
 
 input.each do |line|
   line =~ /(.*) would (.*) (.*) happiness units by sitting next to (.*)\./
@@ -11,13 +11,13 @@ input.each do |line|
   happiness[person][other] = amount
 end
 
-seatings = happiness.keys.permutation.to_a.map{|order|
+seatings = happiness.keys.permutation.to_a.map { |order|
   happy = 0
-  happy += happiness[order[ 0]][order[-1]]
-  happy += happiness[order[-1]][order[ 0]]
-  (order.size-1).times do |i|
-    happy += happiness[order[i  ]][order[i+1]]
-    happy += happiness[order[i+1]][order[i  ]]
+  happy += happiness[order[0]][order[-1]]
+  happy += happiness[order[-1]][order[0]]
+  (order.size - 1).times do |i|
+    happy += happiness[order[i]][order[i + 1]]
+    happy += happiness[order[i + 1]][order[i]]
   end
   happy
 }
@@ -25,7 +25,7 @@ seatings = happiness.keys.permutation.to_a.map{|order|
 puts seatings.max
 
 # Part 2
-happiness = Hash.new{|h,k|h[k] = {} }
+happiness = Hash.new { |h, k| h[k] = {} }
 
 input.each do |line|
   line =~ /(.*) would (.*) (.*) happiness units by sitting next to (.*)\./
@@ -39,13 +39,13 @@ happiness.keys.each do |other|
   happiness[other]["Me!"] = 0
 end
 
-seatings = happiness.keys.permutation.to_a.map{|order|
+seatings = happiness.keys.permutation.to_a.map { |order|
   happy = 0
-  happy += happiness[order[ 0]][order[-1]]
-  happy += happiness[order[-1]][order[ 0]]
-  (order.size-1).times do |i|
-    happy += happiness[order[i  ]][order[i+1]]
-    happy += happiness[order[i+1]][order[i  ]]
+  happy += happiness[order[0]][order[-1]]
+  happy += happiness[order[-1]][order[0]]
+  (order.size - 1).times do |i|
+    happy += happiness[order[i]][order[i + 1]]
+    happy += happiness[order[i + 1]][order[i]]
   end
   happy
 }

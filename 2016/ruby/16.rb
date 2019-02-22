@@ -1,20 +1,20 @@
-require 'advent'
+require "advent"
 input = Advent.input(2016, 16)
 
 def stretch(input)
-  input + '0' + input.reverse.tr('01','10')
+  input + "0" + input.reverse.tr("01", "10")
 end
 
 SUM = {
-  '11' => '1',
-  '00' => '1',
-  '10' => '0',
-  '01' => '0',
+  "11" => "1",
+  "00" => "1",
+  "10" => "0",
+  "01" => "0",
 }
 
 def sum(input)
   pairs = input.scan(/[01]{2}/)
-  checksum = pairs.map{|i| SUM[i]}.join
+  checksum = pairs.map { |i| SUM[i] }.join
   case checksum.size % 2
   when 0; sum(checksum)
   when 1; checksum

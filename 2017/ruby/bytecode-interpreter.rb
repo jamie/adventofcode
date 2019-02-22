@@ -1,10 +1,10 @@
 class Program
   attr_accessor :registers, :input, :index, :other, :queue, :send_count, :output
 
-  def initialize(input, id=0)
+  def initialize(input, id = 0)
     self.input = input
-    self.registers = Hash.new{0}
-    registers['p'] = id
+    self.registers = Hash.new { 0 }
+    registers["p"] = id
     self.index = 0
     self.queue = []
     self.send_count = 0
@@ -31,13 +31,13 @@ class Program
     self.index += 1
 
     case statement
-    when /snd (.)/     ; snd($1)
+    when /snd (.)/; snd($1)
     when /set (.) (.+)/; set($1, $2)
     when /add (.) (.+)/; add($1, $2)
     when /sub (.) (.+)/; sub($1, $2)
     when /mul (.) (.+)/; mul($1, $2)
     when /mod (.) (.+)/; mod($1, $2)
-    when /rcv (.)/     ; rcv($1)
+    when /rcv (.)/; rcv($1)
     when /jgz (.) (.+)/; jgz($1, $2)
     when /jnz (.) (.+)/; jnz($1, $2)
     when nil; return
@@ -47,11 +47,11 @@ class Program
     end
   end
 
-private
+  private
+
   def value(val, registers)
     (val =~ /[0-9]/ ? val.to_i : registers[val])
   end
-
 
   def set(reg, val)
     registers[reg] = value(val, registers)
@@ -60,7 +60,7 @@ private
   def add(reg, val)
     registers[reg] += value(val, registers)
   end
-  
+
   def sub(reg, val)
     registers[reg] -= value(val, registers)
   end

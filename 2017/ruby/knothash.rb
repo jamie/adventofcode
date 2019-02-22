@@ -1,7 +1,7 @@
 class KnotHash
   attr_reader :list, :lengths, :pos, :skip
 
-  def initialize(lengths, salt=[17, 31, 73, 47, 23])
+  def initialize(lengths, salt = [17, 31, 73, 47, 23])
     @pos = 0
     @skip = 0
     @list = (0..255).to_a
@@ -13,7 +13,7 @@ class KnotHash
   def digest
     if @digest.nil?
       run
-      @digest = (0..15).map {|i| list[(i*16)..(i*16+15)].inject(&:^) }
+      @digest = (0..15).map { |i| list[(i * 16)..(i * 16 + 15)].inject(&:^) }
     end
     @digest
   end
@@ -24,9 +24,9 @@ class KnotHash
 
   def run_round
     lengths.each do |length|
-      i, j = pos, pos+length-1
+      i, j = pos, pos + length - 1
       while i < j
-        list[i%list.size], list[j%list.size] = list[j%list.size], list[i%list.size]
+        list[i % list.size], list[j % list.size] = list[j % list.size], list[i % list.size]
         i += 1
         j -= 1
       end
@@ -42,6 +42,6 @@ class KnotHash
   end
 
   def hexdigest
-    digest.pack('C*').unpack('H*')[0] # <- voodoo
+    digest.pack("C*").unpack("H*")[0] # <- voodoo
   end
 end

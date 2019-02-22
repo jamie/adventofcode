@@ -1,11 +1,11 @@
-require 'advent'
+require "advent"
 input = Advent.input(2017, 12)
 
-index = Hash[input.map{|line|
-  line =~ /(\d+) <-> ([0-9, ]+)/
-  room, neighbours = $1, $2.split(', ')
-  [room, neighbours]
-}]
+index = Hash[input.map { |line|
+               line =~ /(\d+) <-> ([0-9, ]+)/
+               room, neighbours = $1, $2.split(", ")
+               [room, neighbours]
+             }]
 
 groups = 0
 

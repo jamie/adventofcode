@@ -1,17 +1,17 @@
-require 'advent'
+require "advent"
 input = Advent.input(2016, 9)
 
 # Part 1
 output = ""
 
 i = 0
-while i < input.size do
+while i < input.size
   chr = input[i]
-  if chr == '('
-    input[i..(i+20)] =~ /^(\((\d+)x(\d+)\))/
+  if chr == "("
+    input[i..(i + 20)] =~ /^(\((\d+)x(\d+)\))/
     skip = $1.size
     c, r = $2.to_i, $3.to_i
-    substr = input[(i+skip)...(i+skip+c)]
+    substr = input[(i + skip)...(i + skip + c)]
     r.times { output << substr }
     i += skip + c
   else

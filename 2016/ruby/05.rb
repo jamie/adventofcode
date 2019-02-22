@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2016, 5)
 
 # Parts 1 and 2 require ~1m and 2.5m iterations,
@@ -11,7 +11,7 @@ i = 0
 while password.size < 8 || password2_chars < 8
   digest = Digest::MD5.new.hexdigest(input + i.to_s)
   if digest =~ /^00000(.)/
-  	password << $1
+    password << $1
   end
   if digest =~ /^00000([0-7])(.)/ && password2[$1.to_i].nil?
     password2[$1.to_i] = $2

@@ -1,13 +1,12 @@
-require 'advent'
+require "advent"
 input = Advent.input(2017, 16)
-programs = 'abcdefghijklmnop'
+programs = "abcdefghijklmnop"
 
 moves = input.split(",")
 
 cycle_size = 60 # By inspection, sigh.
 
 (1_000_000_000 % cycle_size).times do |ii|
-
   moves.each do |move|
     case move
     when /s(\d+)/

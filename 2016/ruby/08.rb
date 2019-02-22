@@ -1,17 +1,17 @@
-require 'advent'
+require "advent"
 input = Advent.input(2016, 8)
 
-ON = '#' #:on
-OFF = ' ' #:off
+ON = "#" #:on
+OFF = " " #:off
 
 # Part 1
 screen = [
-  [OFF]*50,
-  [OFF]*50,
-  [OFF]*50,
-  [OFF]*50,
-  [OFF]*50,
-  [OFF]*50,
+  [OFF] * 50,
+  [OFF] * 50,
+  [OFF] * 50,
+  [OFF] * 50,
+  [OFF] * 50,
+  [OFF] * 50,
 ]
 
 input.each do |line|
@@ -28,9 +28,9 @@ input.each do |line|
     screen[y] = screen[y].rotate(-b)
   when /rotate column x=(.*) by (.*)/
     x, b = $1.to_i, $2.to_i
-    col = screen.map{|row| row[x]}
+    col = screen.map { |row| row[x] }
     colr = col.rotate(-b)
-    6.times {|yy| screen[yy][x] = colr[yy]}
+    6.times { |yy| screen[yy][x] = colr[yy] }
   end
 end
 
@@ -38,12 +38,12 @@ p screen.flatten.count(ON)
 
 # Part 2
 screen = [
-  [OFF]*50,
-  [OFF]*50,
-  [OFF]*50,
-  [OFF]*50,
-  [OFF]*50,
-  [OFF]*50,
+  [OFF] * 50,
+  [OFF] * 50,
+  [OFF] * 50,
+  [OFF] * 50,
+  [OFF] * 50,
+  [OFF] * 50,
 ]
 
 input.each do |line|
@@ -60,11 +60,10 @@ input.each do |line|
     screen[y] = screen[y].rotate(-b)
   when /rotate column x=(.*) by (.*)/
     x, b = $1.to_i, $2.to_i
-    col = screen.map{|row| row[x]}
+    col = screen.map { |row| row[x] }
     colr = col.rotate(-b)
-    6.times {|yy| screen[yy][x] = colr[yy]}
+    6.times { |yy| screen[yy][x] = colr[yy] }
   end
-
 end
 
 puts screen.map(&:join)

@@ -1,6 +1,6 @@
-require 'advent'
+require "advent"
 # input = Advent.input(2016, 11) # Manually parsed
-require 'set'
+require "set"
 
 class Elevator
   attr_reader :queue, :input, :seen
@@ -34,7 +34,7 @@ class Elevator
 
     [elevator + 1, elevator - 1].each do |new_elevator|
       next unless (1..4).cover?(new_elevator)
-      next if (1..new_elevator).all? { |floor| ((gens+micros) & [floor]).empty? }
+      next if (1..new_elevator).all? { |floor| ((gens + micros) & [floor]).empty? }
 
       state = [steps + 1, new_elevator, gens, micros]
 

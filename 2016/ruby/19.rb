@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2016, 19, :to_i)
 
 # Part 1
@@ -9,8 +9,8 @@ elves << elves.size
 elves.shift
 
 while elves.size > 1
-  shift = elves.size%2 == 1
-  elves = elves.map.with_index(0){|e, i| e if i%2 == 0}.compact
+  shift = elves.size % 2 == 1
+  elves = elves.map.with_index(0) { |e, i| e if i % 2 == 0 }.compact
   elves.shift if elves.size > 1 && shift
 end
 
@@ -41,7 +41,7 @@ head = cursor = Elf.new(1)
 end
 cursor.append(head)
 
-(input/2).floor.times { cursor = cursor.next }
+(input / 2).floor.times { cursor = cursor.next }
 step = true
 while cursor.next != cursor
   cursor.delete_next

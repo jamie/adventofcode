@@ -1,7 +1,7 @@
-require 'advent'
+require "advent"
 input = Advent.input(2017, 23)
 
-require 'bytecode-interpreter'
+require "bytecode-interpreter"
 
 class MulCountingProgram < Program
   attr_reader :mul_count
@@ -23,6 +23,6 @@ puts prog.mul_count
 
 # part 2: Manually convert assembly to ruby, and then hand-optimize a lot
 
-puts 109_900.step(126_900, 17).select{|b|
-  2.upto(Math.sqrt(b)).any?{|d| b % d == 0}
+puts 109_900.step(126_900, 17).select { |b|
+  2.upto(Math.sqrt(b)).any? { |d| b % d == 0 }
 }.count

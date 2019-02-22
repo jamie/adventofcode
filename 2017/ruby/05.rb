@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2017, 5, :to_i)
 
 def run(jumps, lo, hi)

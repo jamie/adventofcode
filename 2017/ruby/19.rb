@@ -1,7 +1,7 @@
-require 'advent'
+require "advent"
 input = Advent.input(2017, 19)
 
-pos = [0, input[0].index('|')]
+pos = [0, input[0].index("|")]
 dir = :d
 message = ""
 steps = 0
@@ -9,17 +9,17 @@ steps = 0
 loop do
   cur = input[pos[0]][pos[1]]
   case cur
-  when '+'
+  when "+"
     case dir
     when :d, :u
-      dir = (input[pos[0]][pos[1]-1] == '-') ? :l : :r
+      dir = (input[pos[0]][pos[1] - 1] == "-") ? :l : :r
     when :r, :l
-      dir = (input[pos[0]-1][pos[1]] == '|') ? :u : :d
+      dir = (input[pos[0] - 1][pos[1]] == "|") ? :u : :d
     end
   when /[A-Z]/
     message << cur
     print cur
-  when '|', '-'
+  when "|", "-"
     # go straight I guess
   else
     break

@@ -1,7 +1,7 @@
-require 'advent'
+require "advent"
 input = Advent.input(2017, 8)
 
-registers = Hash.new{0}
+registers = Hash.new { 0 }
 all_values = []
 
 input.each do |instruction|
@@ -10,7 +10,7 @@ input.each do |instruction|
 
   # Thanks, AoC, for choosing operators that match Ruby semantics
   if registers[cond_reg].send(cond, cond_val)
-    val *= -1 if op == 'dec'
+    val *= -1 if op == "dec"
     registers[reg] += val
     all_values << registers[reg]
   end

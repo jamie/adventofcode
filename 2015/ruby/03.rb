@@ -1,4 +1,4 @@
-require 'advent'
+require "advent"
 input = Advent.input(2015, 3)
 
 # Part 1
@@ -7,22 +7,22 @@ x = 0
 y = 0
 
 def gift!(world, x, y)
-  world[x+1000] ||= []
-  world[x+1000][y+1000] ||= 0
-  world[x+1000][y+1000] += 1
+  world[x + 1000] ||= []
+  world[x + 1000][y + 1000] ||= 0
+  world[x + 1000][y + 1000] += 1
 end
 
 gift!(world, x, y)
 
 input.split(//).each do |cmd|
   case cmd
-  when '>'
+  when ">"
     x += 1
-  when '<'
+  when "<"
     x -= 1
-  when 'v'
+  when "v"
     y -= 1
-  when '^'
+  when "^"
     y += 1
   end
   gift!(world, x, y)
@@ -34,13 +34,13 @@ puts world.flatten.compact.size
 world = []
 
 Actor = Struct.new(:x, :y)
-santa = Actor.new(0,0)
-robot = Actor.new(0,0)
+santa = Actor.new(0, 0)
+robot = Actor.new(0, 0)
 
 def gift!(world, actor)
-  world[actor.x+1000] ||= []
-  world[actor.x+1000][actor.y+1000] ||= 0
-  world[actor.x+1000][actor.y+1000] += 1
+  world[actor.x + 1000] ||= []
+  world[actor.x + 1000][actor.y + 1000] ||= 0
+  world[actor.x + 1000][actor.y + 1000] += 1
 end
 
 gift!(world, santa)
@@ -50,13 +50,13 @@ santas = [santa, robot]
 input.split(//).each do |cmd|
   actor = santas.shift
   case cmd
-  when '>'
+  when ">"
     actor.x += 1
-  when '<'
+  when "<"
     actor.x -= 1
-  when 'v'
+  when "v"
     actor.y -= 1
-  when '^'
+  when "^"
     actor.y += 1
   end
   gift!(world, actor)

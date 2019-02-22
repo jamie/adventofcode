@@ -1,10 +1,10 @@
-require 'advent'
+require "advent"
 input = Advent.input(2016, 10)
 
 # Part 1
 transitions = {}
 inputs = []
-bots = Hash.new{|h,k| h[k] = []}
+bots = Hash.new { |h, k| h[k] = [] }
 
 input.each do |line|
   case line
@@ -15,7 +15,6 @@ input.each do |line|
   end
 end
 
-
 inputs.each do |bot, value|
   bots[bot] << value
 
@@ -24,7 +23,6 @@ inputs.each do |bot, value|
     restart = false
     bots.dup.each do |bbot, chips|
       if chips.size > 1
-
         puts bbot if chips.sort == [17, 61]
 
         low_to, high_to = transitions[bbot]
@@ -40,7 +38,7 @@ end
 # Part 2
 transitions = {}
 inputs = []
-bots = Hash.new{|h,k| h[k] = []}
+bots = Hash.new { |h, k| h[k] = [] }
 
 input.each do |line|
   case line
@@ -50,7 +48,6 @@ input.each do |line|
     transitions[$1] = [$2, $3]
   end
 end
-
 
 inputs.each do |bot, value|
   bots[bot] << value
