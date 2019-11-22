@@ -15,7 +15,7 @@ import sets
 
 const INPUT_LEN = INPUT.len()
 var
-  freqs = initSet[int](65536)
+  freqs = initHashSet[int](65536)
   freq: int = 0
   i: int = 0
 
