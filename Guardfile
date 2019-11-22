@@ -16,6 +16,10 @@ end
 
 require './lib/runner'
 
+watch %r{lib/[^/]*\.rb} do
+  Guard.reload
+end
+
 guard :shell do
   watch(AdventMatcher.new(/.*\.rb/)) do |match|
     path = match[:script]
