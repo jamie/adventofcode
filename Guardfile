@@ -1,20 +1,6 @@
 # guard
 
 class AdventMatcher
-  class Match
-    def initialize(result)
-      @result = result
-    end
-
-    def to_a
-      @result.values
-    end
-
-    def [](name)
-      @result[name]
-    end
-  end
-
   def initialize(glob)
     @glob = glob
   end
@@ -23,12 +9,12 @@ class AdventMatcher
     path = path.to_s
     return nil unless path =~ @glob
     year, lang, _file = path.split('/')
-    Match.new(
+    {
       year: year,
       lang: lang,
       script: path,
       binary: path.split('.')[0]
-    )
+    }
   end
 end
 
