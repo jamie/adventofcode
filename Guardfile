@@ -1,5 +1,3 @@
-# guard
-
 class AdventMatcher
   def initialize(glob)
     @glob = glob

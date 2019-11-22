@@ -4,3 +4,4 @@ gem 'rubocop'
 gem 'rubocop-airbnb'
 
 gem 'guard'
+gem 'guard-shell'
