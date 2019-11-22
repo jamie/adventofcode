@@ -1,16 +1,46 @@
-# A sample Guardfile
-# More info at https://github.com/guard/guard#readme
+# guard
 
-## Uncomment and set this to only include directories you want to watch
-# directories %w(app lib config test spec features) \
-#  .select{|d| Dir.exist?(d) ? d : UI.warning("Directory #{d} does not exist")}
+class AdventMatcher
+  class Match
+    def initialize(result)
+      @result = result
+    end
 
-## Note: if you are using the `directories` clause above and you are not
-## watching the project directory ('.'), then you will want to move
-## the Guardfile to a watched dir and symlink it back, e.g.
-#
-#  $ mkdir config
-#  $ mv Guardfile config/
-#  $ ln -s config/Guardfile .
-#
-# and, you'll have to watch "config/Guardfile" instead of "Guardfile"
+    def to_a
+      @result.values
+    end
+
+    def [](name)
+      @result[name]
+    end
+  end
+
+  def initialize(glob)
+    @glob = glob
+  end
+
+  def match(path)
+    path = path.to_s
+    return nil unless path =~ @glob
+    year, lang, _file = path.split('/')
+    Match.new(
+      year: year,
+      lang: lang,
+      script: path,
+      binary: path.split('.')[0]
+    )
+  end
+end
+
+watch(AdventMatcher.new(/.*\.rb/)) do |match|
+  puts ">> #{match[:script]}"
+  puts `ruby -Ilib/ruby -I#{match[:year]}/#{match[:lang]} #{match[:script]}`
+  puts
+end
+
+watch(AdventMatcher.new(/.*\.nim/)) do |match|
+  puts ">> #{match[:script]}"
+  `nim c --hints=off -p=lib/nim -d=release #{match[:script]}`
+  puts `#{match[:binary]}`
+  puts
+end
