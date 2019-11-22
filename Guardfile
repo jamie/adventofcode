@@ -7,24 +7,27 @@ class AdventMatcher
     path = path.to_s
     return nil unless path =~ @glob
     year, lang, _file = path.split('/')
+    return nil unless year =~ /\d{4}/
     {
-      year: year,
-      lang: lang,
       script: path,
-      binary: path.split('.')[0]
     }
   end
 end
 
-watch(AdventMatcher.new(/.*\.rb/)) do |match|
-  puts ">> #{match[:script]}"
-  puts `ruby -Ilib/ruby -I#{match[:year]}/#{match[:lang]} #{match[:script]}`
-  puts
-end
+require './lib/runner'
 
-watch(AdventMatcher.new(/.*\.nim/)) do |match|
-  puts ">> #{match[:script]}"
-  `nim c --hints=off -p=lib/nim -d=release #{match[:script]}`
-  puts `#{match[:binary]}`
-  puts
+guard :shell do
+  watch(AdventMatcher.new(/.*\.rb/)) do |match|
+    path = match[:script]
+    puts ">> #{path}"
+    puts ::Runner::Ruby.new(path).build.execute
+    puts
+  end
+
+  watch(AdventMatcher.new(/.*\.nim/)) do |match|
+    path = match[:script]
+    puts ">> #{path}"
+    puts ::Runner::Nim.new(path).build.execute
+    puts
+  end
 end
