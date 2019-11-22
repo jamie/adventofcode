@@ -17,8 +17,8 @@ def neighbours(board, i, j)
     [i - 1, j],
     [i - 1, j - 1],
   ].select do |x, y|
-    next if x < 0 or x >= $len
-    next if y < 0 or y >= $len
+    next if (x < 0) || (x >= $len)
+    next if (y < 0) || (y >= $len)
     board[x][y] == "#"
   end.size
 end
@@ -56,8 +56,8 @@ def neighbours(board, i, j)
     [i - 1, j],
     [i - 1, j - 1],
   ].select do |x, y|
-    next if x < 0 or x >= $len
-    next if y < 0 or y >= $len
+    next if (x < 0) || (x >= $len)
+    next if (y < 0) || (y >= $len)
     board[x][y] == "#"
   end.size
 end

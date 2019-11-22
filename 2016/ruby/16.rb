@@ -10,7 +10,7 @@ SUM = {
   "00" => "1",
   "10" => "0",
   "01" => "0",
-}
+}.freeze
 
 def sum(input)
   pairs = input.scan(/[01]{2}/)

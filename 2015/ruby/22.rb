@@ -41,9 +41,9 @@ def win?(hero, boss, spells, actions)
       when :charge; hero[:mp] += 101
       end
     end
-    effects.map! { |effect, duration|
+    effects.map! do |effect, duration|
       [effect, duration - 1] if duration > 1
-    }.compact!
+    end.compact!
 
     hero[:mp] -= spells[action][:mp]
     return false if hero[:mp] < 0
@@ -58,9 +58,9 @@ def win?(hero, boss, spells, actions)
       when :charge; hero[:mp] += 101
       end
     end
-    effects.map! { |effect, duration|
+    effects.map! do |effect, duration|
       [effect, duration - 1] if duration > 1
-    }.compact!
+    end.compact!
     return true if boss[:hp] <= 0
 
     if effects.any? { |effect, duration| effect == :shield }
@@ -136,9 +136,9 @@ def win?(hero, boss, spells, actions)
       when :charge; hero[:mp] += 101
       end
     end
-    effects.map! { |effect, duration|
+    effects.map! do |effect, duration|
       [effect, duration - 1] if duration > 1
-    }.compact!
+    end.compact!
 
     hero[:mp] -= spells[action][:mp]
     return false if hero[:mp] < 0
@@ -153,9 +153,9 @@ def win?(hero, boss, spells, actions)
       when :charge; hero[:mp] += 101
       end
     end
-    effects.map! { |effect, duration|
+    effects.map! do |effect, duration|
       [effect, duration - 1] if duration > 1
-    }.compact!
+    end.compact!
     return true if boss[:hp] <= 0
 
     if effects.any? { |effect, duration| effect == :shield }

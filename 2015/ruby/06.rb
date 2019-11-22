@@ -24,11 +24,11 @@ class Light
   end
 end
 
-lights = Array.new(1000) {
-  Array.new(1000) {
+lights = Array.new(1000) do
+  Array.new(1000) do
     Light.new
-  }
-}
+  end
+end
 
 input.each do |line|
   # turn on 606,361 through 892,600
@@ -72,11 +72,11 @@ class Light
   end
 end
 
-lights = Array.new(1000) {
-  Array.new(1000) {
+lights = Array.new(1000) do
+  Array.new(1000) do
     Light.new
-  }
-}
+  end
+end
 
 input.each do |line|
   # turn on 606,361 through 892,600

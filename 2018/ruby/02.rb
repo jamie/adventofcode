@@ -15,7 +15,7 @@ input.each do |code|
 end
 puts c2 * c3
 
-(input.product(input)).each do |a, b|
+input.product(input).each do |a, b|
   next if a == b
   a_c = a.split(//)
   b_c = b.split(//)

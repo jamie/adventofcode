@@ -6,7 +6,7 @@ kit = {}
 
 input.each do |line|
   line =~ /(.*) -> (.*)/
-  gate, wire = $1, $2
+  gate, wire = Regexp.last_match(1), Regexp.last_match(2)
   kit[wire] = gate
 end
 
@@ -17,17 +17,17 @@ def eval(kit, gate)
           when Numeric
             gate
           when /^(\d+)$/
-            $1.to_i
+            Regexp.last_match(1).to_i
           when /^NOT (.+)$/
-            MASK ^ eval(kit, $1)
+            MASK ^ eval(kit, Regexp.last_match(1))
           when /^(.+) AND (.+)$/
-            eval(kit, $1) & eval(kit, $2)
+            eval(kit, Regexp.last_match(1)) & eval(kit, Regexp.last_match(2))
           when /^(.+) OR (.+)$/
-            eval(kit, $1) | eval(kit, $2)
+            eval(kit, Regexp.last_match(1)) | eval(kit, Regexp.last_match(2))
           when /^(.+) LSHIFT (.+)$/
-            (eval(kit, $1) << eval(kit, $2)) & MASK
+            (eval(kit, Regexp.last_match(1)) << eval(kit, Regexp.last_match(2))) & MASK
           when /^(.+) RSHIFT (.+)$/
-            (eval(kit, $1) >> eval(kit, $2)) & MASK
+            (eval(kit, Regexp.last_match(1)) >> eval(kit, Regexp.last_match(2))) & MASK
           else
             kit[gate] = eval(kit, kit[gate])
           end
@@ -40,7 +40,7 @@ puts eval(kit, "a")
 kit = {}
 input.each do |line|
   line =~ /(.*) -> (.*)/
-  gate, wire = $1, $2
+  gate, wire = Regexp.last_match(1), Regexp.last_match(2)
   kit[wire] = gate
 end
 kit["b"] = 3176

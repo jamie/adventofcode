@@ -8,16 +8,16 @@ ys = points.map(&:last).min..points.map(&:last).max
 
 # Part 1
 
-grid = xs.map { |i|
-  ys.map { |j|
+grid = xs.map do |i|
+  ys.map do |j|
     distances = points.map { |x, y| [(x - i).abs + (y - j).abs] }
     if distances.count(distances.min) > 1
       -1
     else
       distances.index(distances.min)
     end
-  }
-}
+  end
+end
 
 counts = grid.flatten.inject(Hash.new(0)) { |h, e| h[e] += 1; h }
 
@@ -31,10 +31,10 @@ puts counts.values.max
 
 # Part 2
 
-grid = xs.map { |i|
-  ys.map { |j|
+grid = xs.map do |i|
+  ys.map do |j|
     points.map { |x, y| [(x - i).abs + (y - j).abs] }.inject(&:+).inject(&:+)
-  }
-}
+  end
+end
 
 puts grid.flatten.select { |e| e < 10_000 }.count

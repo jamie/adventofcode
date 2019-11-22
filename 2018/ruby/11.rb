@@ -1,8 +1,8 @@
 require "advent"
 input = Advent.input(2018, 11, :to_i)
 
-grid = 300.times.map { |row|
-  300.times.map { |col|
+grid = 300.times.map do |row|
+  300.times.map do |col|
     x = row + 1
     y = col + 1
     rack = x + 10
@@ -12,15 +12,15 @@ grid = 300.times.map { |row|
     power *= rack
     power = power.to_s[-3].to_i
     power - 5
-  }
-}
+  end
+end
 
 def solve(grid, size)
   max = 0
   max_pos = []
 
-  (301 - size).times { |row|
-    (301 - size).times { |col|
+  (301 - size).times do |row|
+    (301 - size).times do |col|
       x = row
       y = col
 
@@ -29,8 +29,8 @@ def solve(grid, size)
         max = value
         max_pos = [x + 1, y + 1]
       end
-    }
-  }
+    end
+  end
   [max, max_pos, size]
 end
 

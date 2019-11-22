@@ -23,7 +23,7 @@ end
 
 reindeer = input.map do |line|
   line =~ /(.*) can fly (.*) km\/s for (.*) seconds, but then must rest for (.*) seconds./
-  Reindeer.new($1, $2.to_i, $3.to_i, $4.to_i, 0, 0)
+  Reindeer.new(Regexp.last_match(1), Regexp.last_match(2).to_i, Regexp.last_match(3).to_i, Regexp.last_match(4).to_i, 0, 0)
 end
 
 TIME.times do

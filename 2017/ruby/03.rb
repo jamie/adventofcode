@@ -28,7 +28,7 @@ puts [x, y].map(&:abs).inject(&:+)
 
 ###
 
-values = Hash.new
+values = {}
 values[[0, 0]] = 1
 
 x, y = 0, 0

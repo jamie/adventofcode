@@ -13,7 +13,7 @@ class Particle
 
   def parse(str)
     str =~ /<(.*)>/
-    $1.split(",").map(&:to_i)
+    Regexp.last_match(1).split(",").map(&:to_i)
   end
 
   def distance_0

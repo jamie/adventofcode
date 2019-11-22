@@ -4,9 +4,9 @@ input = Advent.input(2018, 10)
 # position=< 9,  1> velocity=< 0,  2>
 # position=< 7,  0> velocity=<-1,  0>
 
-stars = input.map { |line|
+stars = input.map do |line|
   line.match(/position=<(.*),(.*)> velocity=<(.*),(.*)/).captures.map(&:to_i)
-}
+end
 
 def area(stars)
   x_min = stars.map { |x, y, dx, dy| x }.min

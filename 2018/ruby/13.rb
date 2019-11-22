@@ -12,8 +12,8 @@ input = Advent.input(2018, 13)
 
 carts = []
 
-map = input.map.with_index { |row, y|
-  row.split(//).map.with_index { |cell, x|
+map = input.map.with_index do |row, y|
+  row.split(//).map.with_index do |cell, x|
     case cell
     when "v", "^"
       carts << [x, y, cell, 0]
@@ -24,12 +24,12 @@ map = input.map.with_index { |row, y|
     else
       cell
     end
-  }
-}
+  end
+end
 
 def debug(map, carts)
-  map.each.with_index { |row, y|
-    row.each.with_index { |cell, x|
+  map.each.with_index do |row, y|
+    row.each.with_index do |cell, x|
       occupied = carts.select { |cart| cart[0] == x && cart[1] == y }
       if occupied.size > 1
         print "\e[31mX\e[0m"
@@ -38,9 +38,9 @@ def debug(map, carts)
       else
         print cell
       end
-    }
+    end
     puts
-  }
+  end
 end
 
 tick = 0

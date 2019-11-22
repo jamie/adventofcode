@@ -16,9 +16,9 @@ Point = Struct.new(:x, :y, :z, :t) do
     ].sum(&:abs)
   end
 end
-points = input.map { |line|
+points = input.map do |line|
   Point.new(*line.split(",").map(&:to_i))
-}
+end
 
 # Part 1
 constellations = []

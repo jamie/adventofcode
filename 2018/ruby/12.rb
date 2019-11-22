@@ -3,14 +3,14 @@ input = Advent.input(2018, 12)
 
 initial_state = input[0].match(/state: (.*)/).captures[0]
 
-patterns = input[2..33].map { |line|
+patterns = input[2..33].map do |line|
   line.match(/(.....) => (.)/).captures
-}.inject({}) { |h, e|
+end.inject({}) do |h, e|
   k, v = e
   key = k.split(//).map { |kk| kk == "#" }
   h[key] = (v == "#")
   h
-}
+end
 
 require "set"
 

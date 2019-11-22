@@ -3,7 +3,7 @@ input = Advent.input(2015, 16)
 
 # Part 1
 sues = input.map do |line|
-  #Sue 1: children: 1, cars: 8, vizslas: 7
+  # Sue 1: children: 1, cars: 8, vizslas: 7
   name, options = line.split(": ", 2)
   {
     number: name.split(" ").last,
@@ -34,7 +34,7 @@ puts match[:number]
 
 # Part 2
 sues = input.map do |line|
-  #Sue 1: children: 1, cars: 8, vizslas: 7
+  # Sue 1: children: 1, cars: 8, vizslas: 7
   name, options = line.split(": ", 2)
   {
     number: name.split(" ").last,

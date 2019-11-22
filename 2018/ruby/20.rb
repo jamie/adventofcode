@@ -10,22 +10,22 @@ class Room < Struct.new(:x, :y, :dist)
   def add_room(direction)
     case direction
     when "E"
-      return self.east if self.east
+      return east if east
       room = Room.new(x + 1, y, dist + 1)
       self.east = room
       room.west = self
     when "W"
-      return self.west if self.west
+      return west if west
       room = Room.new(x - 1, y, dist + 1)
       self.west = room
       room.east = self
     when "N"
-      return self.north if self.north
+      return north if north
       room = Room.new(x, y - 1, dist + 1)
       self.north = room
       room.south = self
     when "S"
-      return self.south if self.south
+      return south if south
       room = Room.new(x, y + 1, dist + 1)
       self.south = room
       room.north = self

@@ -24,9 +24,7 @@ class Pattern
     @patterns.include?(input)
   end
 
-  def output
-    @output
-  end
+  attr_reader :output
 
   private
 
@@ -87,7 +85,7 @@ class Grid
     size = (@grid.split("\n").size % 2 == 0) ? 2 : 3
     size_blocks = @grid.split("\n").size / size
     @grid = blocks.each_slice(size_blocks).map do |blocks_for_rows|
-      blocks_for_rows.transpose.map { |row| row.join() }.join("\n")
+      blocks_for_rows.transpose.map { |row| row.join }.join("\n")
     end.join("\n")
   end
 end

@@ -1,11 +1,11 @@
 require "advent"
 input = Advent.input(2017, 12)
 
-index = Hash[input.map { |line|
+index = Hash[input.map do |line|
                line =~ /(\d+) <-> ([0-9, ]+)/
-               room, neighbours = $1, $2.split(", ")
+               room, neighbours = Regexp.last_match(1), Regexp.last_match(2).split(", ")
                [room, neighbours]
-             }]
+             end]
 
 groups = 0
 

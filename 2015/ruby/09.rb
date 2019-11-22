@@ -6,18 +6,18 @@ map = Hash.new { |h, k| h[k] = {} }
 
 input.each do |line|
   line =~ /(.*) to (.*) = (.*)/
-  map[$1][$2] = $3.to_i
-  map[$2][$1] = $3.to_i
+  map[Regexp.last_match(1)][Regexp.last_match(2)] = Regexp.last_match(3).to_i
+  map[Regexp.last_match(2)][Regexp.last_match(1)] = Regexp.last_match(3).to_i
 end
 
 cities = map.keys
-length = cities.permutation.to_a.map { |path|
+length = cities.permutation.to_a.map do |path|
   dist = 0
   (path.length - 1).times do |i|
     dist += map[path[i]][path[i + 1]]
   end
   dist
-}.min
+end.min
 puts length
 
 # Part 2
@@ -25,16 +25,16 @@ map = Hash.new { |h, k| h[k] = {} }
 
 input.each do |line|
   line =~ /(.*) to (.*) = (.*)/
-  map[$1][$2] = $3.to_i
-  map[$2][$1] = $3.to_i
+  map[Regexp.last_match(1)][Regexp.last_match(2)] = Regexp.last_match(3).to_i
+  map[Regexp.last_match(2)][Regexp.last_match(1)] = Regexp.last_match(3).to_i
 end
 
 cities = map.keys
-length = cities.permutation.to_a.map { |path|
+length = cities.permutation.to_a.map do |path|
   dist = 0
   (path.length - 1).times do |i|
     dist += map[path[i]][path[i + 1]]
   end
   dist
-}.max
+end.max
 puts length

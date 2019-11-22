@@ -17,7 +17,7 @@ input.each do |line|
       end
     end
 
-    guard = $1
+    guard = Regexp.last_match(1)
     sleeps[guard] ||= Hash.new { 0 }
   when /falls asleep/
     sleep_start = time

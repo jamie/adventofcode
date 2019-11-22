@@ -28,11 +28,11 @@ work = [[], [], [], [], []]
 done = []
 
 while done.size < dag.keys.size
-  workable = dag.select { |k, v|
+  workable = dag.select do |k, v|
     !done.include?(k) &&
     !work.map(&:first).include?(k) &&
     (v - done).empty?
-  }
+  end
 
   work.each do |worker|
     if worker.empty? && workable.any?

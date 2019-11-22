@@ -3,10 +3,10 @@ input = Advent.input(2018, 21)
 
 require "device_cpu"
 
-program = input[1..-1].map { |line|
+program = input[1..-1].map do |line|
   op, a, b, c = line.split(" ")
   [op, a.to_i, b.to_i, c.to_i]
-}
+end
 
 # Annotated Input
 
@@ -24,31 +24,31 @@ program = input[1..-1].map { |line|
 # 8: bani 2 255 4       # r[4] = r[2] & 255
 # 9: addr 5 4 5         # r[5] += r[4]
 
-#10: bani 5 16777215 5  # r[5] &= 16777215
-#11: muli 5 65899 5     # r[5] *= 65899
-#12: bani 5 16777215 5  # r[5] &= 16777215
-#13: gtir 256 2 4       # if 256 > r[2]; r[4] = 1
-#14: addr 4 1 1         # GOTO 28
-#15: addi 1 1 1         # else; GOTO 17; end
-#16: seti 27 1 1        # GOTO 28
-#17: seti 0 2 4         # r[4] = 0
+# 10: bani 5 16777215 5  # r[5] &= 16777215
+# 11: muli 5 65899 5     # r[5] *= 65899
+# 12: bani 5 16777215 5  # r[5] &= 16777215
+# 13: gtir 256 2 4       # if 256 > r[2]; r[4] = 1
+# 14: addr 4 1 1         # GOTO 28
+# 15: addi 1 1 1         # else; GOTO 17; end
+# 16: seti 27 1 1        # GOTO 28
+# 17: seti 0 2 4         # r[4] = 0
 
-#18: addi 4 1 3         # r[3] = r[4] + 1
-#19: muli 3 256 3       # r[3] *= 256
+# 18: addi 4 1 3         # r[3] = r[4] + 1
+# 19: muli 3 256 3       # r[3] *= 256
 
-#20: gtrr 3 2 3         # if r[3] > r[2]; r[3] = 1
-#21: addr 3 1 1         # GOTO 26
-#22: addi 1 1 1         # else; GOTO 24; end
-#23: seti 25 6 1        # GOTO 26
-#24: addi 4 1 4         # r[4] += 1
-#25: seti 17 8 1        # GOTO 18
+# 20: gtrr 3 2 3         # if r[3] > r[2]; r[3] = 1
+# 21: addr 3 1 1         # GOTO 26
+# 22: addi 1 1 1         # else; GOTO 24; end
+# 23: seti 25 6 1        # GOTO 26
+# 24: addi 4 1 4         # r[4] += 1
+# 25: seti 17 8 1        # GOTO 18
 #
-#26: setr 4 6 2         # r[2] = r[4]
-#27: seti 7 4 1         # GOTO 8
+# 26: setr 4 6 2         # r[2] = r[4]
+# 27: seti 7 4 1         # GOTO 8
 
-#28: eqrr 5 0 4
-#29: addr 4 1 1         # return if (r[5] == r[0])
-#30: seti 5 5 1         # else GOTO 6
+# 28: eqrr 5 0 4
+# 29: addr 4 1 1         # return if (r[5] == r[0])
+# 30: seti 5 5 1         # else GOTO 6
 
 # Part 1
 

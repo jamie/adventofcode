@@ -3,10 +3,10 @@ input = Advent.input(2018, 19)
 
 require "device_cpu"
 
-program = input[1..-1].map { |line|
+program = input[1..-1].map do |line|
   op, a, b, c = line.split(" ")
   [op, a.to_i, b.to_i, c.to_i]
-}
+end
 
 # Part 1
 cpu = CPU.new([0, 0, 0, 0, 0, 0])

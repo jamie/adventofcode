@@ -2,7 +2,7 @@ require "advent"
 input = Advent.input(2016, 13, :to_i)
 
 SEED = input
-TARGET = [31, 39]
+TARGET = [31, 39].freeze
 
 def wall?(x, y)
   id = x * x + 3 * x + 2 * x * y + y + y * y + SEED

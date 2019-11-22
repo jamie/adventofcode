@@ -33,7 +33,7 @@ class Group < Struct.new(:faction, :id, :units, :health, :damage, :dtype, :initi
   def take_damage!(incoming)
     casualties = [incoming / health, units].min
     self.units -= casualties
-    return casualties
+    casualties
   end
 
   def attack!
@@ -91,13 +91,13 @@ end
 def fight(immune_system, infection, boost: 0)
   immune_system = immune_system.map(&:dup)
   infection = infection.map(&:dup)
-  immune_system.each { |group|
+  immune_system.each do |group|
     group.damage += boost
     group.enemies = infection
-  }
-  infection.each { |group|
+  end
+  infection.each do |group|
     group.enemies = immune_system
-  }
+  end
 
   round = 0
   while !infection.empty? && !immune_system.empty?

@@ -5,7 +5,7 @@ input = Advent.input(2016, 15)
 discs = []
 input.each do |line|
   fail unless line =~ /Disc #(.*) has (.*) positions; at time=0, it is at position (.*)./
-  discs << [$1, $2, $3].map(&:to_i)
+  discs << [Regexp.last_match(1), Regexp.last_match(2), Regexp.last_match(3)].map(&:to_i)
   discs[-1][2] += discs.size
 end
 
@@ -24,7 +24,7 @@ puts time
 discs = []
 input.each do |line|
   fail unless line =~ /Disc #(.*) has (.*) positions; at time=0, it is at position (.*)./
-  discs << [$1, $2, $3].map(&:to_i)
+  discs << [Regexp.last_match(1), Regexp.last_match(2), Regexp.last_match(3)].map(&:to_i)
   discs[-1][2] += discs.size
 end
 discs << [7, 11, discs.size + 1]

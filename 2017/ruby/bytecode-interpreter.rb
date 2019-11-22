@@ -31,15 +31,15 @@ class Program
     self.index += 1
 
     case statement
-    when /snd (.)/; snd($1)
-    when /set (.) (.+)/; set($1, $2)
-    when /add (.) (.+)/; add($1, $2)
-    when /sub (.) (.+)/; sub($1, $2)
-    when /mul (.) (.+)/; mul($1, $2)
-    when /mod (.) (.+)/; mod($1, $2)
-    when /rcv (.)/; rcv($1)
-    when /jgz (.) (.+)/; jgz($1, $2)
-    when /jnz (.) (.+)/; jnz($1, $2)
+    when /snd (.)/; snd(Regexp.last_match(1))
+    when /set (.) (.+)/; set(Regexp.last_match(1), Regexp.last_match(2))
+    when /add (.) (.+)/; add(Regexp.last_match(1), Regexp.last_match(2))
+    when /sub (.) (.+)/; sub(Regexp.last_match(1), Regexp.last_match(2))
+    when /mul (.) (.+)/; mul(Regexp.last_match(1), Regexp.last_match(2))
+    when /mod (.) (.+)/; mod(Regexp.last_match(1), Regexp.last_match(2))
+    when /rcv (.)/; rcv(Regexp.last_match(1))
+    when /jgz (.) (.+)/; jgz(Regexp.last_match(1), Regexp.last_match(2))
+    when /jnz (.) (.+)/; jnz(Regexp.last_match(1), Regexp.last_match(2))
     when nil; return
     else
       puts "Unknown instruction: #{input[index].inspect}"

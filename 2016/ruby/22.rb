@@ -33,7 +33,7 @@ end
 map = []
 dfh.each do |node, size, used, avail, _|
   node =~ /x(\d+)-y(\d+)/
-  x, y = $1.to_i, $2.to_i
+  x, y = Regexp.last_match(1).to_i, Regexp.last_match(2).to_i
   map[y] ||= []
   map[y][x] = Cell.new(used.to_i, size.to_i)
 end

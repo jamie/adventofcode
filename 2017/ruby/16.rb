@@ -10,13 +10,13 @@ cycle_size = 60 # By inspection, sigh.
   moves.each do |move|
     case move
     when /s(\d+)/
-      x = $1.to_i
+      x = Regexp.last_match(1).to_i
       programs = programs[-x..-1] + programs[0...-x]
     when /x(\d+)\/(\d+)/
-      i, j = $1.to_i, $2.to_i
+      i, j = Regexp.last_match(1).to_i, Regexp.last_match(2).to_i
       programs[i], programs[j] = programs[j], programs[i]
     when /p(.)\/(.)/
-      a, b = $1, $2
+      a, b = Regexp.last_match(1), Regexp.last_match(2)
       i, j = programs.index(a), programs.index(b)
       programs[i], programs[j] = programs[j], programs[i]
     else

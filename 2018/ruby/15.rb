@@ -63,7 +63,7 @@ class Map
         when Unit, EmptyCell
           cell.sigil
         end
-      end.join + "  " + line.select { |e| e.kind_of? Unit }.map(&:to_s).join(", ")
+      end.join + "  " + line.select { |e| e.is_a? Unit }.map(&:to_s).join(", ")
     end.join("\n") + "\n\n"
   end
 
@@ -86,7 +86,7 @@ class Map
       at(x + 1, y),
       at(x, y + 1),
     ]
-    adjacent.select! { |e| e.kind_of?(type) } if type
+    adjacent.select! { |e| e.is_a?(type) } if type
     adjacent
   end
 
@@ -109,7 +109,7 @@ class Map
   end
 
   def units(type)
-    @board.flatten.select { |e| e.kind_of? type }
+    @board.flatten.select { |e| e.is_a? type }
   end
 
   def step!

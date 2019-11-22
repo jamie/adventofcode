@@ -40,13 +40,13 @@ loop do
 
     left = boxes - group1
     next unless (start_num_boxes..(left.size - start_num_boxes)).any? do |num|
-      left.combination(num).any? { |group2|
+      left.combination(num).any? do |group2|
         last = left - group2
         group2.sum == target_weight &&
         (start_num_boxes..(last.size - start_num_boxes)).any? do |num3|
           last.combination(num).any? { |group3| group3.sum == target_weight }
         end
-      }
+      end
     end
     solutions << group1
   end

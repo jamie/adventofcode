@@ -4,4 +4,3 @@ gem 'rubocop'
 gem 'rubocop-airbnb'
 
 gem 'guard'
-

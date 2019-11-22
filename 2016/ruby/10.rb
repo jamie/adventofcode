@@ -9,9 +9,9 @@ bots = Hash.new { |h, k| h[k] = [] }
 input.each do |line|
   case line
   when /value (.*) goes to (.*)/
-    inputs << [$2, $1.to_i]
+    inputs << [Regexp.last_match(2), Regexp.last_match(1).to_i]
   when /(.*) gives low to (.*) and high to (.*)/
-    transitions[$1] = [$2, $3]
+    transitions[Regexp.last_match(1)] = [Regexp.last_match(2), Regexp.last_match(3)]
   end
 end
 
@@ -43,9 +43,9 @@ bots = Hash.new { |h, k| h[k] = [] }
 input.each do |line|
   case line
   when /value (.*) goes to (.*)/
-    inputs << [$2, $1.to_i]
+    inputs << [Regexp.last_match(2), Regexp.last_match(1).to_i]
   when /(.*) gives low to (.*) and high to (.*)/
-    transitions[$1] = [$2, $3]
+    transitions[Regexp.last_match(1)] = [Regexp.last_match(2), Regexp.last_match(3)]
   end
 end
 

@@ -7,7 +7,7 @@ input = Advent.input(2015, 20, :to_i)
 house = 780000
 goal = input / 10
 loop do
-  #break if house == 10
+  # break if house == 10
   value = 0
   sqrt = Math.sqrt(house)
   (1..sqrt).each do |elf|
@@ -17,7 +17,7 @@ loop do
     end
   end
 
-  #p [house, value]
+  # p [house, value]
   if value >= goal
     puts house
     break
@@ -29,7 +29,7 @@ end
 house = 820000
 goal = input / 11
 loop do
-  #break if house == 10
+  # break if house == 10
   value = 0
   sqrt = Math.sqrt(house)
   (1..sqrt).each do |elf|
@@ -43,7 +43,7 @@ loop do
     end
   end
 
-  #p [house, value]
+  # p [house, value]
   if value >= goal
     puts house
     break

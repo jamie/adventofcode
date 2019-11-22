@@ -45,14 +45,14 @@ puts yard.flatten.count("|") * yard.flatten.count("#")
 old_score = 0
 yards = [yard]
 yard = input.map { |line| line.split(//) }
-1_000_000_000.times { |n|
+1_000_000_000.times do |n|
   yard = step(yard)
   # Dunno why it's finding a cycle around n=10... Ignore that one
   if n > 100 && yards.include?(yard)
     break
   end
   yards << yard
-}
+end
 yards << yard
 
 cycle_first = yards.index(yard)

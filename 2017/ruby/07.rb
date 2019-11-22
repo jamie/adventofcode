@@ -7,7 +7,7 @@ nodes = {}
 # Parse input
 input.each do |entry|
   entry =~ /(.*) \((\d+)\)( -> (.*))?/
-  name, weight, children = $1, $2.to_i, $4
+  name, weight, children = Regexp.last_match(1), Regexp.last_match(2).to_i, Regexp.last_match(4)
   children = children.split(", ") if children
 
   node = NTreeNode.new(nil, name, weight, children)

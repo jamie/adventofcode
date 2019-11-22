@@ -10,7 +10,7 @@ end
 
 if ARGV[0] == 'get'
   # hack to download input
-  now = Time.now.utc - 5*60*60
+  now = Time.now.utc - 5 * 60 * 60
   year, day = now.year, (ARGV[1] || now.day)
   out = "%4d/input/%02d" % [year, day]
 
@@ -23,7 +23,6 @@ if ARGV[0] == 'get'
 
   exit
 end
-
 
 class Runner
   attr_reader :script, :duration, :solutions
@@ -59,7 +58,7 @@ class Runner
     output = execute
     stop = Time.now
 
-    @duration = stop-start
+    @duration = stop - start
     @solutions = output.chomp.split("\n")
     self
   end
@@ -107,32 +106,31 @@ class Runner
   end
 end
 
-
 ## ARGV can be provided in any order, [year, day, lang] being distinct.
 
 # Extract language, default all
-lang = ARGV.detect{|v| v =~ /[a-z]+/}
+lang = ARGV.detect { |v| v =~ /[a-z]+/ }
 ARGV.delete(lang)
 lang ||= '*'
 
 # Extract year, default latest
-year = ARGV.detect{|v| v =~ /\A2[0-9]{3}\z/}
+year = ARGV.detect { |v| v =~ /\A2[0-9]{3}\z/ }
 ARGV.delete(year)
 year ||= '*' # Dir["20*"].last
 
 # Extract day, default whole-year
-day = ARGV.detect{|v| v =~ /\A\d?\d\z/}
+day = ARGV.detect { |v| v =~ /\A\d?\d\z/ }
 day = "0#{day}" if day && day.to_i < 10
 day = "*" if day.nil?
 
 # Scan all relevant files to assemble row/column headers
-runners = Dir["#{year}/#{lang}/*#{day}*.*"].map{|script| Runner.for(script) }.compact
+runners = Dir["#{year}/#{lang}/*#{day}*.*"].map { |script| Runner.for(script) }.compact
 langs = runners.map(&:lang).sort.uniq
-dates = runners.map{|runner| [runner.year, runner.day]}.sort.uniq
+dates = runners.map { |runner| [runner.year, runner.day] }.sort.uniq
 
 totals = {}
 # Render table
-puts "Date       " + langs.map{|lang| "%10s" % lang}.join(' ') + "  Solutions"
+puts "Date       " + langs.map { |lang| "%10s" % lang }.join(' ') + "  Solutions"
 
 thread_pool = Concurrent::Throttle.new(Concurrent.processor_count)
 results = {}
@@ -161,13 +159,12 @@ dates.each do |year, day|
 
   date = "#{year}-#{day}".ljust(10)
   puts [date, runs.map(&:duration_s), nil, solution[0]].flatten.join(' ')
-  (solution[1..-1] || []).each{|line| puts " "*(11*(runs.size+1)+1) + line }
+  (solution[1..-1] || []).each { |line| puts " " * (11 * (runs.size + 1) + 1) + line }
 end
-
 
 if dates.size > 1
   puts
   # Render Summary
-  puts "           " + langs.map{|lang| "%10s" % lang}.join(' ')
-  puts "Total Time:" + langs.map{|lang| "%9.2fs" % totals[lang] }.join(' ')
+  puts "           " + langs.map { |lang| "%10s" % lang }.join(' ')
+  puts "Total Time:" + langs.map { |lang| "%9.2fs" % totals[lang] }.join(' ')
 end

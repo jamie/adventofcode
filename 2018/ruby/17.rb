@@ -32,12 +32,15 @@ xmax += 1
 def grid.wall?(y, x)
   %w(#).include?(self[y][x])
 end
+
 def grid.support?(y, x)
   %w(# ~).include?(self[y][x])
 end
+
 def grid.empty?(y, x)
   %w(.).include?(self[y][x])
 end
+
 def grid.set(y, x, val)
   self[y][x] = val
 end
@@ -91,11 +94,11 @@ end
 # puts grid.map.with_index{|row, i| row[xmin..xmax] + " #{i}"}[(ymin+1)..(ymax-1)]
 
 # Part 1
-puts grid[ymin..ymax].map { |line|
+puts grid[ymin..ymax].map do |line|
   line[xmin..xmax]
-}.flatten.select { |e| %w(| ~).include? e }.size
+end.flatten.select { |e| %w(| ~).include? e }.size
 
 # Part 2
-puts grid[ymin..ymax].map { |line|
+puts grid[ymin..ymax].map do |line|
   line[xmin..xmax]
-}.flatten.select { |e| %w(~).include? e }.size
+end.flatten.select { |e| %w(~).include? e }.size

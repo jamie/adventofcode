@@ -108,7 +108,7 @@ weap.each do |w|
 
         if boss[:hp] > 0
           max = cost
-          #p [cost, boss, hero, equip]
+          # p [cost, boss, hero, equip]
         end
       end
     end

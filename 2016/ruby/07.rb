@@ -18,7 +18,7 @@ valid = input.select do |line|
   (supernet.size - 2).times do |offset|
     aba = supernet[offset, 3]
     next unless aba =~ /([a-z])([a-z])\1/
-    a, b = $1, $2
+    a, b = Regexp.last_match(1), Regexp.last_match(2)
     next if a == b
     bab = "#{b}#{a}#{b}"
 

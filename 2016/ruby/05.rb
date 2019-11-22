@@ -11,10 +11,10 @@ i = 0
 while password.size < 8 || password2_chars < 8
   digest = Digest::MD5.new.hexdigest(input + i.to_s)
   if digest =~ /^00000(.)/
-    password << $1
+    password << Regexp.last_match(1)
   end
-  if digest =~ /^00000([0-7])(.)/ && password2[$1.to_i].nil?
-    password2[$1.to_i] = $2
+  if digest =~ /^00000([0-7])(.)/ && password2[Regexp.last_match(1).to_i].nil?
+    password2[Regexp.last_match(1).to_i] = Regexp.last_match(2)
     password2_chars += 1
   end
   i += 1

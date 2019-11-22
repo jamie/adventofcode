@@ -9,9 +9,9 @@ input = Advent.input(2016, 24)
 # ###########
 # STR
 
-PATH = "."
-PATHRENDER = "#"
-WALL = "#"
+PATH = ".".freeze
+PATHRENDER = "#".freeze
+WALL = "#".freeze
 
 Loc = Struct.new(:x, :y, :s, :neighbours) do
   def inspect

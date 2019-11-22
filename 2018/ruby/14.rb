@@ -20,7 +20,7 @@ puts recipes[input...(input + 10)].join
 # Part 2
 
 goal = input.to_s.split(//).map(&:to_i)
-recent = recipes[-(goal.size)..-1]
+recent = recipes[-goal.size..-1]
 loop do
   score = recipes[elf1] + recipes[elf2]
 
