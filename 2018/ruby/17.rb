@@ -94,11 +94,11 @@ end
 # puts grid.map.with_index{|row, i| row[xmin..xmax] + " #{i}"}[(ymin+1)..(ymax-1)]
 
 # Part 1
-puts grid[ymin..ymax].map do |line|
+grid[ymin..ymax].map do |line|
   line[xmin..xmax]
-end.flatten.select { |e| %w(| ~).include? e }.size
+end.flatten.select { |e| %w(| ~).include? e }.size.tap{|e| puts e }
 
 # Part 2
-puts grid[ymin..ymax].map do |line|
+grid[ymin..ymax].map do |line|
   line[xmin..xmax]
-end.flatten.select { |e| %w(~).include? e }.size
+end.flatten.select { |e| %w(~).include? e }.size.tap{|e| puts e }
