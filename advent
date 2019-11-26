@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require 'fileutils'
 
 begin
   require 'concurrent'
@@ -11,8 +12,9 @@ end
 if ARGV[0] == 'get'
   # hack to download input
   now = Time.now.utc - 5 * 60 * 60
-  year, day = now.year, (ARGV[1] || now.day)
+  year, day = (ARGV[2] || now.year), (ARGV[1] || now.day)
   out = "%4d/input/%02d" % [year, day]
+  FileUtils.mkdir_p("%4d/input" % [year])
 
   unless File.exist?(out)
     url = "https://adventofcode.com/%d/day/%d/input" % [year, day]
