@@ -99,8 +99,8 @@ class Runner
   end
 
   def write!
-    if !File.exist?('%4d/%s/output' % [year, day])
-      File.open('%4d/%s/output' % [year, day], 'w') do |file|
+    if !File.exist?('%4d/%02d/output' % [year, day])
+      File.open('%4d/%02d/output' % [year, day], 'w') do |file|
         file.puts run.output
       end
     end

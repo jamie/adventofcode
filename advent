@@ -31,7 +31,7 @@ require './lib/runner'
 ## ARGV can be provided in any order, [year, day, lang] being distinct.
 
 # Extract language, default all
-lang = ARGV.detect { |v| v =~ /[a-z]+/ }
+lang = ARGV.detect { |v| v =~ /^[a-z]+/ }
 ARGV.delete(lang)
 ext = lang ? Runner::LANG_EXTENSION[lang] : '*'
 
