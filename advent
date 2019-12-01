@@ -54,12 +54,12 @@ totals = {}
 # Render table
 puts "Date       " + langs.map { |lang| "%10s" % lang }.join(' ')
 
-thread_pool = Concurrent::Throttle.new(Concurrent.processor_count)
+thread_pool = Concurrent::Throttle.new(Concurrent.processor_count-1)
 results = {}
 # Fork all processes
 dates.each do |year, day|
   runs = langs.map do |lang|
-    results[[year, day, lang]] = thread_pool.throttled_future do
+    results[[year, day, lang]] = thread_pool.future do
       Runner.find(year, day, lang).run
     end
   end
