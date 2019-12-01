@@ -100,15 +100,24 @@ class Runner
       'nim'
     end
 
+    def tmpdir
+      "tmp/nim/#{script.split('.')[0]}"
+    end
+
+    def executable
+      "#{tmpdir}/a.out"
+    end
+
     def build
+      FileUtils.mkdir_p tmpdir
       # Building in release mode for performance
-      `nim c --hints=off --warning[UnusedImport]=off -p=lib/nim -d=release #{script}`
+      `nim c --hints=off --warning[UnusedImport]=off --out=#{executable} --nimcache=#{tmpdir} -p=lib/nim -d=release #{script}`
       self
     end
 
     def execute
       # Redirecting stderr to strip build debug output
-      `#{script.split('.')[0]}`
+      `#{executable}`
     end
   end
 
