@@ -96,9 +96,9 @@ end
 # Part 1
 grid[ymin..ymax].map do |line|
   line[xmin..xmax]
-end.flatten.select { |e| %w(| ~).include? e }.size.tap{|e| puts e }
+end.flatten.select { |e| %w(| ~).include? e }.size.tap { |e| puts e }
 
 # Part 2
 grid[ymin..ymax].map do |line|
   line[xmin..xmax]
-end.flatten.select { |e| %w(~).include? e }.size.tap{|e| puts e }
+end.flatten.select { |e| %w(~).include? e }.size.tap { |e| puts e }

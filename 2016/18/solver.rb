@@ -14,7 +14,7 @@ safe = 0
     elsif i == row.size - 1
       row[-2]
     elsif (row[i - 1] == "^" && row[i + 1] == ".") ||
-           (row[i - 1] == "." && row[i + 1] == "^")
+          (row[i - 1] == "." && row[i + 1] == "^")
       "^"
     else
       "."
@@ -37,7 +37,7 @@ safe = 0
     elsif i == row.size - 1
       row[-2]
     elsif (row[i - 1] == "^" && row[i + 1] == ".") ||
-           (row[i - 1] == "." && row[i + 1] == "^")
+          (row[i - 1] == "." && row[i + 1] == "^")
       "^"
     else
       "."

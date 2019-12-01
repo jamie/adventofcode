@@ -20,8 +20,8 @@ player = {
 }
 
 spells = {
-  m: { mp: 53, immediate: -> (c, t) { t[:hp] -= 4 } },
-  d: { mp: 73, immediate: -> (c, t) { t[:hp] -= 2; c[:hp] += 2 } },
+  m: { mp: 53, immediate: ->(c, t) { t[:hp] -= 4 } },
+  d: { mp: 73, immediate: ->(c, t) { t[:hp] -= 2; c[:hp] += 2 } },
   s: { mp: 113, ongoing: [:shield, 6] },
   p: { mp: 173, ongoing: [:poison, 6] },
   r: { mp: 229, ongoing: [:charge, 5] },
@@ -112,8 +112,8 @@ player = {
 }
 
 spells = {
-  m: { mp: 53, immediate: -> (c, t) { t[:hp] -= 4 } },
-  d: { mp: 73, immediate: -> (c, t) { t[:hp] -= 2; c[:hp] += 2 } },
+  m: { mp: 53, immediate: ->(c, t) { t[:hp] -= 4 } },
+  d: { mp: 73, immediate: ->(c, t) { t[:hp] -= 2; c[:hp] += 2 } },
   s: { mp: 113, ongoing: [:shield, 6] },
   r: { mp: 229, ongoing: [:charge, 5] },
   p: { mp: 173, ongoing: [:poison, 6] },

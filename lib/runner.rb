@@ -6,17 +6,17 @@ rescue LoadError => e
   exit
 end
 
-AOC_TIMEZONE = TZInfo::Timezone.get('US/Eastern')
-AOC_OFFSET = AOC_TIMEZONE.current_period.utc_total_offset/60/60
-
 class Runner
+  AOC_TIMEZONE = TZInfo::Timezone.get("US/Eastern")
+  AOC_OFFSET = AOC_TIMEZONE.current_period.utc_total_offset / 60 / 60
+
   attr_reader :script, :duration, :solutions, :output
   attr_reader :year, :day
 
   LANG_EXTENSION = {
-    'ruby' => 'rb',
-    'nim' => 'nim',
-  }
+    "ruby" => "rb",
+    "nim" => "nim",
+  }.freeze
 
   def self.find(year, day, lang)
     ext = LANG_EXTENSION[lang]
@@ -30,7 +30,7 @@ class Runner
   end
 
   def self.for(script)
-    _basename, extension = script.split('.')
+    _basename, extension = script.split(".")
     lang = LANG_EXTENSION.key(extension)
     if lang && script =~ /solve/
       const_get("Runner::#{lang.capitalize}").new(script)
@@ -41,7 +41,7 @@ class Runner
 
   def initialize(script)
     @script = script
-    @year, @day, _file = script.split('/')
+    @year, @day, _file = script.split("/")
     @day = @day.to_i
   end
 
@@ -49,8 +49,8 @@ class Runner
     infile = "%4d/%02d/input" % [year, day]
     if !File.exist?(infile)
       date = "%4d-12-%02d" % [year, day]
-      now = Time.now.getlocal('%+.2d:00' % AOC_OFFSET)
-      if now.strftime('%Y-%m-%d') == date
+      now = Time.now.getlocal("%+.2d:00" % AOC_OFFSET)
+      if now.strftime("%Y-%m-%d") == date
         `./advent get`
       else
         puts "Date is not #{date}, at #{now}"
@@ -81,7 +81,7 @@ class Runner
   end
 
   def success?
-    has_input? && output == File.read('%4d/%02d/output' % [year, day])
+    has_input? && output == File.read("%4d/%02d/output" % [year, day])
   rescue Errno::ENOENT
     true
   end
@@ -94,13 +94,13 @@ class Runner
     if success?
       duration_s
     else
-      'FAIL'.rjust(10)
+      "FAIL".rjust(10)
     end
   end
 
   def write!
-    if !File.exist?('%4d/%02d/output' % [year, day])
-      File.open('%4d/%02d/output' % [year, day], 'w') do |file|
+    if !File.exist?("%4d/%02d/output" % [year, day])
+      File.open("%4d/%02d/output" % [year, day], "w") do |file|
         file.puts run.output
       end
     end
@@ -134,11 +134,11 @@ class Runner
 
   class Nim < Runner
     def lang
-      'nim'
+      "nim"
     end
 
     def tmpdir
-      "tmp/nim/#{script.split('.')[0]}"
+      "tmp/nim/#{script.split(".")[0]}"
     end
 
     def executable
@@ -160,7 +160,7 @@ class Runner
 
   class Ruby < Runner
     def lang
-      'ruby'
+      "ruby"
     end
 
     def local_execute
