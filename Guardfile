@@ -24,14 +24,14 @@ guard :shell do
   watch(AdventMatcher.new(/.*\.rb/)) do |match|
     path = match[:script]
     puts ">> #{path}"
-    puts ::Runner::Ruby.new(path).build.execute
+    puts ::Runner::Ruby.new(path).build.execute!
     puts
   end
 
   watch(AdventMatcher.new(/.*\.nim/)) do |match|
     path = match[:script]
     puts ">> #{path}"
-    puts ::Runner::Nim.new(path).build.execute
+    puts ::Runner::Nim.new(path).build.execute!
     puts
   end
 end

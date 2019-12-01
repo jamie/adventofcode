@@ -8,7 +8,12 @@ require "priority_deque"
 
 module Advent
   def self.input(year, day, format = :to_s)
-    out = File.readlines("%4d/%02d/input" % [year, day]).map(&:chomp).map(&format)
+    infile = "%4d/%02d/input" % [year, day]
+    if !File.exist?(infile)
+      puts "No input file #{infile}"
+      exit
+    end
+    out = File.readlines(infile).map(&:chomp).map(&format)
     return out[0] if out.size == 1
     out
   end

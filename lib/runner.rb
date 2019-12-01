@@ -1,3 +1,14 @@
+begin
+  require "tzinfo"
+rescue LoadError => e
+  puts "Errors with gems:"
+  puts e.message
+  exit
+end
+
+AOC_TIMEZONE = TZInfo::Timezone.get('US/Eastern')
+AOC_OFFSET = AOC_TIMEZONE.current_period.utc_total_offset/60/60
+
 class Runner
   attr_reader :script, :duration, :solutions, :output
   attr_reader :year, :day
@@ -34,6 +45,21 @@ class Runner
     @day = @day.to_i
   end
 
+  def has_input?
+    infile = "%4d/%02d/input" % [year, day]
+    if !File.exist?(infile)
+      date = "%4d-12-%02d" % [year, day]
+      now = Time.now.getlocal('%+.2d:00' % AOC_OFFSET)
+      if now.strftime('%Y-%m-%d') == date
+        `./advent get`
+      else
+        puts "Date is not #{date}, at #{now}"
+        return false
+      end
+    end
+    true
+  end
+
   def run
     build
     start = Time.now
@@ -45,8 +71,19 @@ class Runner
     self
   end
 
+  def execute!
+    has_input?
+    execute
+  end
+
+  def execute
+    local_execute
+  end
+
   def success?
-    output == File.read('%4d/%02d/output' % [year, day])
+    has_input? && output == File.read('%4d/%02d/output' % [year, day])
+  rescue Errno::ENOENT
+    true
   end
 
   def duration_s
@@ -115,7 +152,7 @@ class Runner
       self
     end
 
-    def execute
+    def local_execute
       # Redirecting stderr to strip build debug output
       `#{executable}`
     end
@@ -126,7 +163,7 @@ class Runner
       'ruby'
     end
 
-    def execute
+    def local_execute
       `ruby -Ilib/ruby -I#{year}/#{lang} #{script}`
     end
   end
