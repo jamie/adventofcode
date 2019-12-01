@@ -1,22 +1,12 @@
 require "advent"
 input = Advent.input(2019, 1, :to_i)
 
-# Part 1
-def fuel(mass)
-  mass / 3 - 2
+def fuel(mass, recurse: false)
+  return 0 if mass < 7
+  f_mass = mass / 3 - 2
+  f_mass += fuel(f_mass, recurse: recurse) if recurse
+  f_mass
 end
 
-puts input.map { |m| fuel(m) }.inject(&:+)
-
-# Part 2
-def fuel2(mass)
-  t_mass = f_mass = mass / 3 - 2
-  loop do
-    f_mass = f_mass / 3 - 2
-    break if f_mass < 0
-    t_mass += f_mass
-  end
-  t_mass
-end
-
-puts input.map { |m| fuel2(m) }.inject(&:+)
+puts input.map { |m| fuel(m) }.sum
+puts input.map { |m| fuel(m, true) }.sum
