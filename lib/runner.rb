@@ -2,8 +2,15 @@ class Runner
   attr_reader :script, :duration, :solutions, :output
   attr_reader :year, :day, :lang
 
+  LANG_EXTENSION = {
+    'ruby' => 'rb',
+    'nim' => 'nim',
+  }
+
   def self.find(year, day, lang)
     day = day.to_s.gsub(/^0/, '').to_i
+    # ext = LANG_EXTENSION[lang]
+    # path = "%4d/*%02d*.%s" % [year, day, ext]
     path = "%4d/%s/*%02d*.*" % [year, lang, day]
     script = Dir[path].first
     if script
@@ -40,7 +47,7 @@ class Runner
   end
 
   def success?
-    output == File.read('%4d/output/%02d' % [year, day])
+    output == File.read('%4d/%02d/output' % [year, day])
   end
 
   def duration_s
@@ -56,9 +63,8 @@ class Runner
   end
 
   def write!
-    if !File.exist?('%4d/output/%s' % [year, day])
-      FileUtils.mkdir_p('%4d/output' % year)
-      File.open('%4d/output/%s' % [year, day], 'w') do |file|
+    if !File.exist?('%4d/%s/output' % [year, day])
+      File.open('%4d/%s/output' % [year, day], 'w') do |file|
         file.puts run.output
       end
     end
