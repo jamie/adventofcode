@@ -1,6 +1,6 @@
 class Runner
   attr_reader :script, :duration, :solutions, :output
-  attr_reader :year, :day, :lang
+  attr_reader :year, :day
 
   LANG_EXTENSION = {
     'ruby' => 'rb',
@@ -8,10 +8,8 @@ class Runner
   }
 
   def self.find(year, day, lang)
-    day = day.to_s.gsub(/^0/, '').to_i
-    # ext = LANG_EXTENSION[lang]
-    # path = "%4d/*%02d*.%s" % [year, day, ext]
-    path = "%4d/%s/*%02d*.*" % [year, lang, day]
+    ext = LANG_EXTENSION[lang]
+    path = "%4d/%02d/*.%s" % [year, day, ext]
     script = Dir[path].first
     if script
       self.for(script)
@@ -21,8 +19,9 @@ class Runner
   end
 
   def self.for(script)
-    _year, lang, file = script.split('/')
-    if file =~ /\d+/
+    _basename, extension = script.split('.')
+    lang = LANG_EXTENSION.key(extension)
+    if lang && script =~ /solve/
       const_get("Runner::#{lang.capitalize}").new(script)
     else
       nil
@@ -31,8 +30,8 @@ class Runner
 
   def initialize(script)
     @script = script
-    @year, @lang, file = script.split('/')
-    @day = file.match(/([1-9]?[0-9]+)/).captures[0].to_i
+    @year, @day, _file = script.split('/')
+    @day = @day.to_i
   end
 
   def run
@@ -97,6 +96,10 @@ class Runner
   end
 
   class Nim < Runner
+    def lang
+      'nim'
+    end
+
     def build
       # Building in release mode for performance
       `nim c --hints=off --warning[UnusedImport]=off -p=lib/nim -d=release #{script}`
@@ -110,6 +113,10 @@ class Runner
   end
 
   class Ruby < Runner
+    def lang
+      'ruby'
+    end
+
     def execute
       `ruby -Ilib/ruby -I#{year}/#{lang} #{script}`
     end

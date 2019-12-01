@@ -46,7 +46,7 @@ day = "0#{day}" if day && day.to_i < 10
 day = "*" if day.nil?
 
 # Scan all relevant files to assemble row/column headers
-runners = Dir["#{year}/#{lang}/*#{day}*.*"].map { |script| Runner.for(script) }.compact
+runners = Dir["#{year}/#{day}/*.*"].map { |script| Runner.for(script) }.compact
 langs = runners.map(&:lang).sort.uniq
 dates = runners.map { |runner| [runner.year, runner.day] }.sort.uniq
 
