@@ -33,7 +33,7 @@ require './lib/runner'
 # Extract language, default all
 lang = ARGV.detect { |v| v =~ /[a-z]+/ }
 ARGV.delete(lang)
-lang ||= '*'
+ext = lang ? Runner::LANG_EXTENSION[lang] : '*'
 
 # Extract year, default latest
 year = ARGV.detect { |v| v =~ /\A2[0-9]{3}\z/ }
@@ -46,7 +46,7 @@ day = "0#{day}" if day && day.to_i < 10
 day = "*" if day.nil?
 
 # Scan all relevant files to assemble row/column headers
-runners = Dir["#{year}/#{day}/*.*"].map { |script| Runner.for(script) }.compact
+runners = Dir["#{year}/#{day}/*.#{ext}"].map { |script| Runner.for(script) }.compact
 langs = runners.map(&:lang).sort.uniq
 dates = runners.map { |runner| [runner.year, runner.day] }.sort.uniq
 
