@@ -164,6 +164,7 @@ class Runner
     end
 
     def local_execute
+      # puts "ruby -Ilib/ruby -I#{year}/#{lang} #{script}"
       `ruby -Ilib/ruby -I#{year}/#{lang} #{script}`
     end
   end
