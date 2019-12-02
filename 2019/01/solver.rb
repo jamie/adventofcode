@@ -9,4 +9,4 @@ def fuel(mass, recurse: false)
 end
 
 puts input.map { |m| fuel(m) }.sum
-puts input.map { |m| fuel(m, true) }.sum
+puts input.map { |m| fuel(m, recurse: true) }.sum
