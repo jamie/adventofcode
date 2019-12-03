@@ -1,7 +1,7 @@
 require "advent"
 input = Advent.input(2019, 2)
 
-require 'intcode'
+require "intcode"
 intcode = Intcode.new(input)
 
 # Part 1

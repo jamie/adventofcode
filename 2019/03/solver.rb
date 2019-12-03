@@ -5,16 +5,16 @@ def points(line)
   x = y = t = 0
   wire = []
   times = {}
-  line.split(',').each do |dir|
+  line.split(",").each do |dir|
     dist = dir[1..-1].to_i
     case dir[0]
-    when 'R'
+    when "R"
       dist.times { x += 1; t += 1; wire << [x, y]; times[[x, y]] ||= t }
-    when 'L'
+    when "L"
       dist.times { x -= 1; t += 1; wire << [x, y]; times[[x, y]] ||= t }
-    when 'U'
+    when "U"
       dist.times { y -= 1; t += 1; wire << [x, y]; times[[x, y]] ||= t }
-    when 'D'
+    when "D"
       dist.times { y += 1; t += 1; wire << [x, y]; times[[x, y]] ||= t }
     end
   end
