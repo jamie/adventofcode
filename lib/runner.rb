@@ -164,7 +164,7 @@ class Runner
     end
 
     def local_execute
-      # puts "ruby -Ilib/ruby -I#{year}/#{lang} #{script}"
+      puts "ruby -Ilib/ruby -I#{year}/#{lang} #{script}" if ENV['VERBOSE']
       `ruby -Ilib/ruby -I#{year}/#{lang} #{script}`
     end
   end
