@@ -5,12 +5,12 @@ require "intcode"
 intcode = Intcode.new(input)
 
 # Part 1
-puts intcode.execute(12, 2)
+puts intcode.reset(12, 2).execute
 
 # Part 2
 (0..99).each do |noun|
   (0..99).each do |verb|
-    value = intcode.execute(noun, verb)
+    value = intcode.reset(noun, verb).execute
     if value == 19690720
       puts noun * 100 + verb
       exit
