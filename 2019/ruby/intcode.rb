@@ -1,5 +1,5 @@
 class Intcode
-  attr_reader :ip, :memory
+  attr_reader :ip, :memory, :halted, :memory
 
   def initialize(prog)
     @memory_base = prog.split(",").map(&:to_i)
@@ -10,13 +10,14 @@ class Intcode
     @memory = @memory_base.dup
     memory[1] = noun if noun
     memory[2] = verb if verb
+    @ip = 0
+    @halted = false
     self
   end
 
-  def execute(data=[])
-    @data = data.dup
+  def execute(input=[])
+    return if halted
 
-    @ip = 0
     loop do
       @modes, opcode = memory[ip].divmod(100)
       words = case opcode
@@ -25,9 +26,11 @@ class Intcode
               when 2 # mul
                 write(memory[ip + 3], val1 * val2); 4
               when 3 # input
-                write(memory[ip + 1], @data.shift); 2
+                write(memory[ip + 1], input.shift); 2
               when 4 # output
-                puts val1; 2
+                out = val1
+                @ip += 2
+                return out
               when 5 # jump if nonzero
                 jump(val2, val1 != 0, 3)
               when 6 # jump if zero
@@ -37,14 +40,14 @@ class Intcode
               when 8 # equals
                 write(memory[ip + 3], val1 == val2 ? 1 : 0); 4
               when 99 # halt
+                @halted = true
                 break
               else
-                puts "Unknown opcode: #{memory[ip]}"
-                break
+                fail "Unknown opcode: #{memory[ip]}"
               end
       @ip += words
     end
-    memory[0]
+    input.shift
   end
 
   private
