@@ -5,55 +5,36 @@ require 'intcode'
 
 amps = (1..5).map { Intcode.new(input) }
 
+# Part 1
 max = 0
-(0..4).each do |a|
-  (0..4).each do |b|
-    (0..4).each do |c|
-      (0..4).each do |d|
-        (0..4).each do |e|
-          phase = [a, b, c, d, e]
-          next unless phase.uniq == phase
-          out = amps.inject(0) do |inval, amp|
-            amp.reset.execute([phase.shift, inval])
-          end
-          max = [max, out].max
-        end
-      end
-    end
+(0..4).to_a.permutation(5) do |phase|
+  next unless phase.uniq == phase
+  out = amps.inject(0) do |inval, amp|
+    amp.reset.execute([phase.shift, inval])
   end
+  max = [max, out].max
 end
 puts max
 
+# Part 2
 max = 0
-(5..9).each do |a|
-  (5..9).each do |b|
-    (5..9).each do |c|
-      (5..9).each do |d|
-        (5..9).each do |e|
-          phases = [a, b, c, d, e]
-          next unless phases.uniq == phases
-          amps.each(&:reset)
+(5..9).to_a.permutation(5) do |phases|
+  next unless phases.uniq == phases
 
-          input = [0]
-          output = nil
+  amps.each(&:reset)
+  input = 0
 
-          i = 0
-          loop do; i += 1
-            amp = amps.shift
-            phase = phases.shift
-            input.unshift(phase) if phase
+  loop do
+    amp = amps.shift
+    phase = phases.shift
 
-            output = amp.execute(input)
+    input = amp.execute([phase, input].compact)
 
-            input = [output]
-            amps << amp
+    amps << amp
 
-            break if amps.all?(&:halted)
-          end
-
-          max = [max, output].max
-        end
-      end
+    if amps.all?(&:halted)
+      max = [max, input].max
+      break
     end
   end
 end
