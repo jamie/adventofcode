@@ -7,28 +7,32 @@ amps = (1..5).map { Intcode.new(input) }
 
 # Part 1
 max = 0
-(0..4).to_a.permutation(5) do |phase|
-  next unless phase.uniq == phase
-  out = amps.inject(0) do |inval, amp|
-    amp.reset.execute([phase.shift, inval])
+(0..4).to_a.permutation(5) do |phases|
+  [amps, phases].transpose.each do |amp, phase|
+    amp.reset.input!([phase])
   end
-  max = [max, out].max
+  amps[0].input << 0
+  amps[0].chain!(*amps[1..4])
+
+  out = amps.map do |amp|
+    amp.execute
+  end
+  max = [max, out.last].max
 end
 puts max
 
 # Part 2
 max = 0
 (5..9).to_a.permutation(5) do |phases|
-  next unless phases.uniq == phases
-
-  amps.each(&:reset)
-  input = 0
+  [amps, phases].transpose.each do |amp, phase|
+    amp.reset.input!([phase])
+  end
+  amps[0].input << 0
+  amps[0].chain!(*amps[1..4], amps[0])
 
   loop do
     amp = amps.shift
-    phase = phases.shift
-
-    input = amp.execute([phase, input].compact)
+    input = amp.execute
 
     amps << amp
 

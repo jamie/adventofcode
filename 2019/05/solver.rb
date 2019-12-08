@@ -6,8 +6,8 @@ require 'intcode'
 intcode = Intcode.new(input)
 
 intcode.reset
-out = intcode.execute([1])
+out = intcode.input!([1]).execute
 out = intcode.execute while out == 0
 puts out
 
-puts intcode.reset.execute([5])
+puts intcode.reset.input!([5]).execute
