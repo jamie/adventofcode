@@ -80,14 +80,14 @@ class Intcode
   def val1
     i = ip + 1
     val = memory[i]
-    val = memory[val] unless memory[ip].to_s.reverse[2] == '1'
+    val = memory[val] unless memory[ip] % 1000 / 100 == 1
     val
   end
 
   def val2
     i = ip + 2
     val = memory[i]
-    val = memory[val] unless memory[ip].to_s.reverse[3] == '1'
+    val = memory[val] unless memory[ip] % 10000 / 1000 == 1
     val
   end
 
