@@ -6,12 +6,19 @@ class Intcode
     @memory = @memory_base.dup
   end
 
-  def reset(noun=nil, verb=nil)
+  def reset
     @memory = @memory_base.dup
-    memory[1] = noun if noun
-    memory[2] = verb if verb
     @ip = 0
     @halted = false
+    self
+  end
+
+  def peek(addr)
+    memory[addr]
+  end
+
+  def poke(addr, value)
+    memory[addr] = value
     self
   end
 
