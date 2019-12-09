@@ -4,6 +4,7 @@ class Intcode
   def initialize(prog)
     @memory_base = prog.split(",").map(&:to_i)
     @memory = @memory_base.dup
+    reset
   end
 
   def reset
@@ -13,6 +14,7 @@ class Intcode
     @input = []
     @output = []
     @input_ptr = 0
+    @relative_base = 0
     self
   end
 
@@ -47,23 +49,27 @@ class Intcode
       @modes, opcode = memory[ip].divmod(100)
       words = case opcode
               when 1 # add
-                write(memory[ip + 3], val1 + val2); 4
+                write(3, val1 + val2); 4
               when 2 # mul
-                write(memory[ip + 3], val1 * val2); 4
+                write(3, val1 * val2); 4
               when 3 # input
-                write(memory[ip + 1], next_input); 2
+                unless next_input?
+                  # print 'waiting for input'
+                  return
+                end
+                write(1, next_input); 2
               when 4 # output
-                @output << val1
-                @ip += 2
-                break
+                @output << val1; 2
               when 5 # jump if nonzero
                 jump(val2, val1 != 0, 3)
               when 6 # jump if zero
                 jump(val2, val1 == 0, 3)
               when 7 # less than
-                write(memory[ip + 3], val1 < val2 ? 1 : 0); 4
+                write(3, val1 < val2 ? 1 : 0); 4
               when 8 # equals
-                write(memory[ip + 3], val1 == val2 ? 1 : 0); 4
+                write(3, val1 == val2 ? 1 : 0); 4
+              when 9 # relative
+                @relative_base += val1; 2
               when 99 # halt
                 @halted = true
                 break
@@ -79,16 +85,24 @@ class Intcode
 
   def val1
     i = ip + 1
-    val = memory[i]
-    val = memory[val] unless memory[ip] % 1000 / 100 == 1
+    mode = @modes % 10
+    val = memory[i] || 0
+    val += @relative_base if mode == 2
+    val = memory[val] || 0 unless mode == 1
     val
   end
 
   def val2
     i = ip + 2
-    val = memory[i]
-    val = memory[val] unless memory[ip] % 10000 / 1000 == 1
+    mode = @modes / 10 % 10
+    i += @relative_base if mode == 2
+    val = memory[i] || 0
+    val = memory[val] || 0 unless mode == 1
     val
+  end
+
+  def next_input?
+    input[@input_ptr]
   end
 
   def next_input
@@ -97,7 +111,16 @@ class Intcode
     end
   end
 
-  def write(index, value)
+  def write(i, value)
+    index = memory[ip + i]
+    if i == 1
+      mode = @modes % 10
+    elsif i == 3
+      mode = @modes / 100 % 10
+    else
+      fail 'Unknown arg offset for write'
+    end
+    index += @relative_base if mode == 2
     memory[index] = value
   end
 
