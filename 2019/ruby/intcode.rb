@@ -83,24 +83,6 @@ class Intcode
 
   private
 
-  def val1
-    i = ip + 1
-    mode = @modes % 10
-    val = memory[i] || 0
-    val += @relative_base if mode == 2
-    val = memory[val] || 0 unless mode == 1
-    val
-  end
-
-  def val2
-    i = ip + 2
-    mode = @modes / 10 % 10
-    i += @relative_base if mode == 2
-    val = memory[i] || 0
-    val = memory[val] || 0 unless mode == 1
-    val
-  end
-
   def next_input?
     input[@input_ptr]
   end
@@ -109,6 +91,23 @@ class Intcode
     input[@input_ptr].tap do |val|
       @input_ptr += 1
     end
+  end
+
+  def val1
+    read(1)
+  end
+
+  def val2
+    read(2)
+  end
+
+  def read(i)
+    ii = ip + i
+    mode = @modes / (10**(i - 1)) % 10
+    val = memory[ii] || 0
+    val += @relative_base if mode == 2
+    val = memory[val] || 0 unless mode == 1
+    val
   end
 
   def write(i, value)
