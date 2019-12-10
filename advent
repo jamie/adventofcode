@@ -19,6 +19,11 @@ if ARGV[0] == "get"
   now = Time.now.getlocal("%+.2d:00" % AOC_OFFSET)
   year, day = (ARGV[2] || now.year), (ARGV[1] || now.day)
   out = "%4d/%02d/input" % [year, day]
+
+  if File.exist?(out)
+    day += 1
+    out = "%4d/%02d/input" % [year, day]
+  end
   FileUtils.mkdir_p("%4d/%02d" % [year, day])
 
   unless File.exist?(out)
