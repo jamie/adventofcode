@@ -10,7 +10,7 @@ rescue LoadError
 end
 
 if ARGV[0] == "get"
-  require 'tzinfo'
+  require "tzinfo"
 
   AOC_TIMEZONE = TZInfo::Timezone.get("US/Eastern")
   AOC_OFFSET = AOC_TIMEZONE.current_period.utc_total_offset / 60 / 60
