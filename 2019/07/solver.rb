@@ -1,7 +1,7 @@
 require "advent"
 input = Advent.input(2019, 7)
 
-require 'intcode'
+require "intcode"
 
 amps = (1..5).map { Intcode.new(input) }
 

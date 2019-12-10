@@ -103,7 +103,7 @@ class Intcode
 
   def read(i)
     ii = ip + i
-    mode = @modes / (10**(i - 1)) % 10
+    mode = @modes / (10 ** (i - 1)) % 10
     val = memory[ii] || 0
     val += @relative_base if mode == 2
     val = memory[val] || 0 unless mode == 1
@@ -117,7 +117,7 @@ class Intcode
     elsif i == 3
       mode = @modes / 100 % 10
     else
-      fail 'Unknown arg offset for write'
+      fail "Unknown arg offset for write"
     end
     index += @relative_base if mode == 2
     memory[index] = value
