@@ -21,14 +21,14 @@ watch %r{lib/[^/]*\.rb} do
 end
 
 guard :shell do
-  watch(AdventMatcher.new(/.*\.rb/)) do |match|
+  watch(AdventMatcher.new(%r{\d+/[^/]+\.rb})) do |match|
     path = match[:script]
     puts ">> #{path}"
     puts ::Runner::Ruby.new(path).build.execute!
     puts
   end
 
-  watch(AdventMatcher.new(/.*\.nim/)) do |match|
+  watch(AdventMatcher.new(%r{\d+/[^/]+\.nim})) do |match|
     path = match[:script]
     puts ">> #{path}"
     puts ::Runner::Nim.new(path).build.execute!
