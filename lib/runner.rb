@@ -1,15 +1,4 @@
-begin
-  require "tzinfo"
-rescue LoadError => e
-  puts "Errors with gems:"
-  puts e.message
-  exit
-end
-
 class Runner
-  AOC_TIMEZONE = TZInfo::Timezone.get("US/Eastern")
-  AOC_OFFSET = AOC_TIMEZONE.current_period.utc_total_offset / 60 / 60
-
   attr_reader :script, :duration, :solutions, :output
   attr_reader :year, :day
 
@@ -47,17 +36,7 @@ class Runner
 
   def has_input?
     infile = "%4d/%02d/input" % [year, day]
-    if !File.exist?(infile)
-      date = "%4d-12-%02d" % [year, day]
-      now = Time.now.getlocal("%+.2d:00" % AOC_OFFSET)
-      if now.strftime("%Y-%m-%d") == date
-        `./advent get`
-      else
-        puts "Date is not #{date}, at #{now}"
-        return false
-      end
-    end
-    true
+    File.exist?(infile)
   end
 
   def run
@@ -72,7 +51,6 @@ class Runner
   end
 
   def execute!
-    has_input?
     execute
   end
 
