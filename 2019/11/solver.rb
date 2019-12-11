@@ -1,7 +1,8 @@
 require "advent"
-input = Advent.input(2019, 11)
+prog = Advent.input(2019, 11)
 
 require "intcode"
+require "gridwalker"
 
 def debug(paint)
   x1 = paint.keys.map(&:first).min
@@ -10,72 +11,50 @@ def debug(paint)
   y2 = paint.keys.map(&:last).max
   y1.upto(y2) do |y|
     x1.upto(x2) do |x|
-      print (paint[[x,y]] == 1 ? '#' : ' ')
+      print (paint[[x, y]] == 1 ? "#" : " ")
     end
     puts
   end
 end
 
 # Part 1
-robot = Intcode.new(input)
-
-dir = :n
-turns = {
-  :n => [:w, :e],
-  :e => [:n, :s],
-  :s => [:e, :w],
-  :w => [:s, :n],
-}
-x = y = 0
-paint = {}
 input = []
 output = []
-robot.input!(input).output!(output)
+robot = Intcode.new(prog).input!(input).output!(output)
+
+painter = GridWalker.new
+paint = {}
 loop do
   break if robot.halted
 
-  input << (paint[[x, y]] || 0)
+  input << (paint[painter.pos] || 0)
   robot.execute
-  paint[[x, y]] = output.shift
-  dir = turns[dir][output.shift]
-  case dir
-  when :n; y -= 1
-  when :s; y += 1
-  when :e; x += 1
-  when :w; x -= 1
+  paint[painter.pos] = output.shift
+  if output.shift == 0
+    painter.left!.forward!
+  else
+    painter.right!.forward!
   end
 end
 puts paint.size
 
 # Part 2
-robot.reset
-
-dir = :n
-turns = {
-  :n => [:w, :e],
-  :e => [:n, :s],
-  :s => [:e, :w],
-  :w => [:s, :n]
-}
-x = y = 0
-paint = {[x, y] => 1}
 input = []
 output = []
-robot.input!(input).output!(output)
+robot.reset.input!(input).output!(output)
+
+painter = GridWalker.new
+paint = { painter.pos => 1 }
 loop do
   break if robot.halted
 
-  input << (paint[[x, y]] || 0)
+  input << (paint[painter.pos] || 0)
   robot.execute
-  paint[[x, y]] = output.shift
-  dir = turns[dir][output.shift]
-  case dir
-  when :n; y -= 1
-  when :s; y += 1
-  when :e; x += 1
-  when :w; x -= 1
+  paint[painter.pos] = output.shift
+  if output.shift == 0
+    painter.left!.forward!
+  else
+    painter.right!.forward!
   end
 end
-
 debug(paint)
-
