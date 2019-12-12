@@ -32,6 +32,7 @@ if ARGV[0] == "get"
     date = "%4d-12-%02d" % [year, day]
     print "Waiting for #{date}" if now.strftime("%Y-%m-%d") < date
     loop do
+      now = Time.now.getlocal("%+.2d:00" % AOC_OFFSET)
       break if now.strftime("%Y-%m-%d") >= date
       print "."
       sleep 1
