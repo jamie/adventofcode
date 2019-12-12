@@ -54,8 +54,6 @@ loops = [nil, nil, nil]
 
 3.times do |axis|
   # Run each axis independently
-  initial = (points + velocity).map { |e| e[axis] }.join(",")
-
   1_000_000.times do |n|
     # update velocity
     pairs.each do |i, j|
@@ -69,10 +67,9 @@ loops = [nil, nil, nil]
       points[i][axis] += velocity[i][axis]
     end
 
-    # check if returned to origin
-    state = (points + velocity).map { |e| e[axis] }.join(",")
-    if state == initial
-      loops[axis] = n + 1
+    # velocity all 0 is halfway through pendulum motion
+    if velocity.all? { |v| v[axis] == 0 }
+      loops[axis] = (n + 1) * 2
       break
     end
   end
