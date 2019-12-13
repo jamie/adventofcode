@@ -20,8 +20,8 @@ def render(screen)
 end
 
 # Part 1
-output = []
 input = []
+output = []
 arcade = Intcode.new(prog).output!(output)
 
 arcade.execute
@@ -37,3 +37,34 @@ loop do
 end
 
 puts screen.flatten.count(2)
+
+# Part 2
+input = []
+output = []
+arcade = Intcode.new(prog).output!(output).input!(input)
+arcade.poke(0, 2)
+
+screen = []
+score = 0
+ball_pos = paddle_pos = 0
+loop do
+  arcade.execute
+  loop do
+    break if output.empty?
+    x = output.shift
+    y = output.shift
+    tile = output.shift
+    if x == -1
+      score = tile
+    else
+      screen[y] ||= []
+      screen[y][x] = tile
+      paddle_pos = x if tile == 3
+      ball_pos = x if tile == 4
+    end
+  end
+  input << (ball_pos <=> paddle_pos)
+  break if arcade.halted
+end
+
+puts score
