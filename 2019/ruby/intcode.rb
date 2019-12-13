@@ -1,5 +1,5 @@
 class Intcode
-  attr_reader :ip, :memory, :halted, :memory, :input, :output
+  attr_reader :ip, :memory, :halted, :memory, :input, :output, :input_ptr
 
   def initialize(prog)
     @memory_base = prog.split(",").map(&:to_i)
