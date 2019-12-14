@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2015, 6)
+input = Advent.input()
 
 # Part 1
 class Light

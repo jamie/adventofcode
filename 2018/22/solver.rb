@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2018, 22)
+input = Advent.input()
 
 # depth: 5616
 # target: 10,785

@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2018, 16)
+input = Advent.input()
 
 require "device_cpu"
 

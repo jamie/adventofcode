@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2019, 6)
+input = Advent.input()
 
 orbits = {}
 input.each do |e|

@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2017, 22)
+input = Advent.input()
 
 Virus = Struct.new(:x, :y, :dir) do
   TURN_RIGHT = {

@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2019, 4)
+input = Advent.input()
 
 min, max = input.split("-").map(&:to_i)
 

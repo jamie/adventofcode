@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2018, 6)
+input = Advent.input()
 
 points = input.map { |line| line.split(", ").map(&:to_i) }
 

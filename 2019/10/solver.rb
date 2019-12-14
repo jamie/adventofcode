@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2019, 10)
+input = Advent.input()
 
 # Part 1
 asteroids = []

@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2017, 23)
+input = Advent.input()
 
 require "bytecode-interpreter"
 

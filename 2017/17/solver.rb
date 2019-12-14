@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2017, 17, :to_i)
+input = Advent.input(:to_i)
 
 buffer = [0]
 index = 0

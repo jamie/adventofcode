@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2016, 10)
+input = Advent.input()
 
 # Part 1
 transitions = {}

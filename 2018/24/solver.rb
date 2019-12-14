@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2018, 24)
+input = Advent.input()
 
 # input = <<ENDL.split("\n")
 # Immune System:

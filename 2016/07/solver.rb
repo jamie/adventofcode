@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2016, 7)
+input = Advent.input()
 
 # Part 1
 valid = input.select do |line|

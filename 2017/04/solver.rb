@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2017, 4)
+input = Advent.input()
 
 input.select do |line|
   words = line.split(/ +/)

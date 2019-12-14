@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2016, 5)
+input = Advent.input()
 
 # Parts 1 and 2 require ~1m and 2.5m iterations,
 # calculations merged to avoid a bunch of duplicate work

@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2016, 2)
+input = Advent.input()
 
 dir_index = {
   "U" => 0,

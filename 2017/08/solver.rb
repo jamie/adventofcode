@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2017, 8)
+input = Advent.input()
 
 registers = Hash.new { 0 }
 all_values = []

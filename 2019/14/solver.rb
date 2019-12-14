@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2019, 14)
+input = Advent.input()
 
 def convert(str)
   str =~ /(\d+) ([A-Z]+)/

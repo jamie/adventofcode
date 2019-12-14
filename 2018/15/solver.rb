@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2018, 15)
+input = Advent.input()
 
 class NoTarget < StandardError; end
 

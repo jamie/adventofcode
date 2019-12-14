@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2016, 19, :to_i)
+input = Advent.input(:to_i)
 
 # Part 1
 elves = input.times.to_a

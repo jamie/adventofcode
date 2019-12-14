@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2015, 8)
+input = Advent.input()
 
 # Part 1
 diff = 0

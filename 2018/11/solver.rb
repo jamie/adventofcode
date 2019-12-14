@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2018, 11, :to_i)
+input = Advent.input(:to_i)
 
 grid = 300.times.map do |row|
   300.times.map do |col|

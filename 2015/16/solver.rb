@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2015, 16)
+input = Advent.input()
 
 # Part 1
 sues = input.map do |line|

@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2018, 18)
+input = Advent.input()
 
 SIZE = input.size
 yard = input.map { |line| line.split(//) }

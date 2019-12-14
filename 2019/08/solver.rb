@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2019, 8)
+input = Advent.input()
 
 layers = input.scan(/.{150}/)
 

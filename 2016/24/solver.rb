@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2016, 24)
+input = Advent.input()
 
 # input = <<STR.split("\n")
 # ###########

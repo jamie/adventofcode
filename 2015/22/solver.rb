@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2015, 22)
+input = Advent.input()
 # Manually solved, parts 1 and 2:
 # 953: prspmmmmm
 puts 953

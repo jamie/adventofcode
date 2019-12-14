@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2017, 20)
+input = Advent.input()
 
 class Particle
   attr_reader :pos

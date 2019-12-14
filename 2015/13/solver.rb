@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2015, 13)
+input = Advent.input()
 
 # Part 1
 happiness = Hash.new { |h, k| h[k] = {} }

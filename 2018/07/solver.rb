@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2018, 7)
+input = Advent.input()
 
 dag = {}
 input.each do |line|

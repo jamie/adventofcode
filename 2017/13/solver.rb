@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2017, 13)
+input = Advent.input()
 
 scanners = input.map do |line|
   line =~ /(\d+): (\d+)/

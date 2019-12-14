@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2016, 8)
+input = Advent.input()
 
 ON = "#".freeze #:on
 OFF = " ".freeze #:off

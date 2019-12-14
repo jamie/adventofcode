@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2019, 1, :to_i)
+input = Advent.input(:to_i)
 
 def fuel(mass, recurse: false)
   return 0 if mass < 7

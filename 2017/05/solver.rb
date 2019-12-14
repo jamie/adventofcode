@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2017, 5, :to_i)
+input = Advent.input(:to_i)
 
 def run(jumps, lo, hi)
   i = 0

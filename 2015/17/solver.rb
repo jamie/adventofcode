@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2015, 17, :to_i)
+input = Advent.input(:to_i)
 
 # Part 1
 containers = input.sort.reverse

@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2015, 12)
+input = Advent.input()
 
 # Part 1
 puts input.scan(/-?\d+/).map(&:to_i).inject(&:+)

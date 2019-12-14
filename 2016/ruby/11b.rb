@@ -1,5 +1,5 @@
 require "advent"
-# input = Advent.input(2016, 11) # Manually parsed
+# input = Advent.input() # Manually parsed
 require "set"
 
 class Elevator

@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2017, 24)
+input = Advent.input()
 components = input.map { |line| line.split("/").map(&:to_i).sort }.sort
 
 # Pre-attach edges with only 2 instances, reduce combinatorics slightly

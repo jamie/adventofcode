@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2017, 7)
+input = Advent.input()
 
 NTreeNode = Struct.new(:parent, :name, :weight, :children)
 nodes = {}

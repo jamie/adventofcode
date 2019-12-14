@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2018, 17)
+input = Advent.input()
 
 grid = ([["."] * 2000] * 2000).map(&:dup)
 

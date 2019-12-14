@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2019, 3)
+input = Advent.input()
 
 def points(line)
   x = y = t = 0

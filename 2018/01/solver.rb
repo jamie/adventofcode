@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2018, 1, :to_i)
+input = Advent.input(:to_i)
 
 # Part 1
 puts input.inject(0) { |memo, e| memo + e }

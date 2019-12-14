@@ -4,7 +4,7 @@ if RUBY_VERSION < "2.6.0"
 end
 
 require "advent"
-input = Advent.input(2018, 25)
+input = Advent.input()
 
 Point = Struct.new(:x, :y, :z, :t) do
   def distance(other)

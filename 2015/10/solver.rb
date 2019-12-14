@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2015, 10)
+input = Advent.input()
 
 phrase = input[0]
 50.times do |i|

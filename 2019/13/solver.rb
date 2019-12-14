@@ -1,5 +1,5 @@
 require "advent"
-prog = Advent.input(2019, 13)
+prog = Advent.input()
 
 require "intcode"
 

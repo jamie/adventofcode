@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2018, 9)
+input = Advent.input()
 
 # 470 players; last marble is worth 72170 points
 

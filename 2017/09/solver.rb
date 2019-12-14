@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2017, 9)
+input = Advent.input()
 stream = input.chomp.split(//)
 
 $garbage = []

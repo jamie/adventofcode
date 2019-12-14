@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2015, 9)
+input = Advent.input()
 
 # Part 1
 map = Hash.new { |h, k| h[k] = {} }

@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input(2017, 21)
+input = Advent.input()
 require "pp"
 
 class Pattern
