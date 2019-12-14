@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input()
+input = Advent.input
 steps = input.split(",")
 
 # Cube coords, thanks redblobgames

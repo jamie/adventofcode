@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input().map { |line| line.split(" ").map(&:to_i) }
+input = Advent.input.map { |line| line.split(" ").map(&:to_i) }
 
 # Part 1
 triangles = input.each_slice(3).map(&:transpose).flatten(1)

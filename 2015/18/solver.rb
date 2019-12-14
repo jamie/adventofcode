@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input()
+input = Advent.input
 
 # Part 1
 board = input.dup

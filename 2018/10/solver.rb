@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input()
+input = Advent.input
 
 # position=< 9,  1> velocity=< 0,  2>
 # position=< 7,  0> velocity=<-1,  0>

@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input()
+input = Advent.input
 
 area = Hash.new { |h, k| h[k] = 0 }
 

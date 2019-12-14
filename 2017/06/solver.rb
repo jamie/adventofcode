@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input()
+input = Advent.input
 memory = input.split(/\s+/).map(&:to_i)
 
 seen = {}

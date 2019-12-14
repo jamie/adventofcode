@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input()
+input = Advent.input
 
 pos = [0, input[0].index("|")]
 dir = :d

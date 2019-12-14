@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input().map { |line| line.split("\t").map(&:to_i) }
+input = Advent.input.map { |line| line.split("\t").map(&:to_i) }
 
 puts input.map { |values| values.max - values.min }.inject(&:+)
 

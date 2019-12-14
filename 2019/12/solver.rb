@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input()
+input = Advent.input
 
 # Test inputs
 inpxut = <<IN.split("\n")

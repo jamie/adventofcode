@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input()
+input = Advent.input
 
 index = Hash[input.map do |line|
                line =~ /(\d+) <-> ([0-9, ]+)/

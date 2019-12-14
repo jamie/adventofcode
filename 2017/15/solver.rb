@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input()
+input = Advent.input
 a, b = input.map { |line| line.split(/\s/).last.to_i }
 # a, b = 65, 8921
 

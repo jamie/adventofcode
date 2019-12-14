@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input()
+input = Advent.input
 boxes = input.map(&:to_i)
 
 # Part 1

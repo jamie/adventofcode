@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input()
+input = Advent.input
 
 class Point < Struct.new(:x, :y, :z)
   def distance_to(other)

@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input()
+input = Advent.input
 
 initial_state = input[0].match(/state: (.*)/).captures[0]
 

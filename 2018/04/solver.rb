@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input().sort
+input = Advent.input.sort
 
 # Analysis
 sleeps = {}
