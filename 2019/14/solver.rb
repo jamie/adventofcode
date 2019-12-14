@@ -53,6 +53,7 @@ loop do
 
       if qty >= reaction[0]
         mul = qty / reaction[0]
+        mul += 1 unless mat == 'FUEL'
         chems[mat] -= reaction[0] * mul
 
         reaction[1].each do |m, q|
@@ -61,7 +62,6 @@ loop do
         end
       end
     end
-    # pp chems
     break if chems == prior_chems
   end
   break if chems['ORE'] > 1_000000_000000
@@ -69,4 +69,3 @@ loop do
 end
 
 puts n-1
-# 1330069, but that's wrong!
