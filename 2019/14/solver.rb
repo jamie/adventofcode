@@ -17,7 +17,7 @@ input.each do |line|
 end
 
 # Part 1
-chems = {'FUEL' => 1}
+chems = { "FUEL" => 1 }
 loop do
   prior_chems = chems.dup
   prior_chems.each do |mat, qty|
@@ -38,13 +38,13 @@ loop do
   break if chems == prior_chems
 end
 
-puts chems['ORE']
+puts chems["ORE"]
 
 # Part 2
 n = 1_330_000
 # n = 460662
 loop do
-  chems = {'FUEL' => n}
+  chems = { "FUEL" => n }
   loop do
     prior_chems = chems.dup
     prior_chems.each do |mat, qty|
@@ -53,7 +53,7 @@ loop do
 
       if qty >= reaction[0]
         mul = qty / reaction[0]
-        mul += 1 unless mat == 'FUEL'
+        mul += 1 unless mat == "FUEL"
         chems[mat] -= reaction[0] * mul
 
         reaction[1].each do |m, q|
@@ -64,8 +64,8 @@ loop do
     end
     break if chems == prior_chems
   end
-  break if chems['ORE'] > 1_000000_000000
+  break if chems["ORE"] > 1_000_000_000_000
   n += 1
 end
 
-puts n-1
+puts n - 1
