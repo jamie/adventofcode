@@ -1,9 +1,9 @@
-source 'https://rubygems.org/'
+source "https://rubygems.org/"
 
-gem 'tzinfo'
+gem "tzinfo"
 
-gem 'rubocop'
-gem 'rubocop-airbnb'
+gem "rubocop"
+gem "rubocop-airbnb"
 
-gem 'guard'
-gem 'guard-shell'
+gem "guard"
+gem "guard-shell"
