@@ -37,14 +37,11 @@ loop do
   # pp chems
   break if chems == prior_chems
 end
-
 puts chems["ORE"]
 
 # Part 2
-n = 1_330_000
-# n = 460662
-loop do
-  chems = { "FUEL" => n }
+fuel = Advent.rbsearch(1_000_000_000_000) do |f|
+  chems = { "FUEL" => f }
   loop do
     prior_chems = chems.dup
     prior_chems.each do |mat, qty|
@@ -64,8 +61,6 @@ loop do
     end
     break if chems == prior_chems
   end
-  break if chems["ORE"] > 1_000_000_000_000
-  n += 1
+  chems["ORE"]
 end
-
-puts n - 1
+puts fuel
