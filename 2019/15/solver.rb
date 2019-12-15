@@ -3,41 +3,31 @@ prog = Advent.input
 
 require "intcode"
 
-def pixel(i)
-  {
-    nil => " ",
-    0 => "#",
-    1 => ".",
-    2 => "o",
-  }[i]
-end
+PIXEL = { nil => " ", 0 => "#", 1 => ".", 2 => "o" }.freeze
 
 def draw(map)
   xs, ys = map.keys.transpose
   ys.min.upto(ys.max) do |j|
     xs.min.upto(xs.max) do |i|
-      print pixel(map[[i, j]])
+      print PIXEL[map[[i, j]]]
     end
     puts
   end
 end
 
-queue = [[1], [2], [3], [4]]
-
 map = {}
 map[[0, 0]] = 1
 
 # Part 1, fully map and record distance to O2 meter
-oxygen_distance = nil
-max_distance = 0
-
 droid = Intcode.new(prog)
+oxygen_distance = nil
+
+queue = [[1], [2], [3], [4]]
 loop do
   break if queue.empty?
   path = queue.shift
   x = path.count(4) - path.count(3)
   y = path.count(2) - path.count(1)
-  next if map[[x, y]]
 
   output = []
   droid.reset.input!(path).output!(output)
@@ -47,12 +37,11 @@ loop do
 
   next if output.last == 0
   oxygen_distance = path.size if output.last == 2
-  max_distance = [max_distance, path.size].max
 
-  queue << path + [1]
-  queue << path + [2]
-  queue << path + [3]
-  queue << path + [4]
+  queue << path + [1] unless map[[x, y - 1]] # North
+  queue << path + [2] unless map[[x, y + 1]] # South
+  queue << path + [3] unless map[[x - 1, y]] # West
+  queue << path + [4] unless map[[x + 1, y]] # East
 end
 
 puts oxygen_distance
@@ -60,8 +49,7 @@ puts oxygen_distance
 # draw(map)
 
 # Part 2, flood-fill oxygen
-x, y = map.key(2)
-oxy = [[x, y]]
+oxy = [map.key(2)]
 time = 0
 loop do
   break if map.values.count(1).zero?
