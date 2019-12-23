@@ -1,7 +1,7 @@
 require "advent"
 input = Advent.input
 
-require 'priority_deque'
+require "priority_deque"
 
 inpxut = <<STR.split("\n")
 #################
@@ -24,18 +24,18 @@ STR
 map = {}
 input.each_with_index do |row, y|
   row.split(//).each_with_index do |cell, x|
-    next if cell == '#' # Skip walls, uninteresting
-    map[[x,y]] = cell
+    next if cell == "#" # Skip walls, uninteresting
+    map[[x, y]] = cell
   end
 end
 
-start = map.key('@')
+start = map.key("@")
 
-keys = 'a'.upto('z').select { |key| map.key(key) }
-locked = 'A'.upto('Z').select { |key| map.key(key) }
+keys = "a".upto("z").select { |key| map.key(key) }
+locked = "A".upto("Z").select { |key| map.key(key) }
 
 distances ||= {}
-['@', ('a'..'z').to_a].flatten.each do |src_key|
+["@", ("a".."z").to_a].flatten.each do |src_key|
   src = map.key(src_key)
 
   queue = [[src, 0, []]]
@@ -47,7 +47,7 @@ distances ||= {}
 
     next unless map[cell] # skip walls
 
-    unless map[cell] == '.'
+    unless map[cell] == "."
       if keys.include? map[cell] # key
         distances[[src, cell]] ||= [dist, doors.dup.map(&:downcase)]
         distances[[cell, src]] ||= [dist, doors.dup.map(&:downcase)]
@@ -61,10 +61,10 @@ distances ||= {}
     seen << cell
     x, y = cell
     dist += 1
-    queue << [[x+1, y], dist, doors] unless seen.include?([x+1, y])
-    queue << [[x-1, y], dist, doors] unless seen.include?([x-1, y])
-    queue << [[x, y+1], dist, doors] unless seen.include?([x, y+1])
-    queue << [[x, y-1], dist, doors] unless seen.include?([x, y-1])
+    queue << [[x + 1, y], dist, doors] unless seen.include?([x + 1, y])
+    queue << [[x - 1, y], dist, doors] unless seen.include?([x - 1, y])
+    queue << [[x, y + 1], dist, doors] unless seen.include?([x, y + 1])
+    queue << [[x, y - 1], dist, doors] unless seen.include?([x, y - 1])
   end
 end
 

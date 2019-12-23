@@ -42,30 +42,28 @@ iterations = 1 # 101741582076661
 init_offset = 0 # 2939 # 2020
 
 10.times do |init_offset|
-
-offset = init_offset
-iterations.times do |iter|
-  # puts iter if iter % 1000 == 0
-  input.reverse.each do |command|
-    case command
-    when "deal into new stack"
-      offset = deck_size - (offset + 1)
-    when /cut (-?\d+)/
-      n = $1.to_i
-      n += deck_size if n < 0
-      offset += n
-    when /deal with increment (\d+)/
-      n = $1.to_i
-      offset *= (deck_size % n)
-    else
-      puts "I don't know how to #{command}"
-      exit
+  offset = init_offset
+  iterations.times do |iter|
+    # puts iter if iter % 1000 == 0
+    input.reverse.each do |command|
+      case command
+      when "deal into new stack"
+        offset = deck_size - (offset + 1)
+      when /cut (-?\d+)/
+        n = $1.to_i
+        n += deck_size if n < 0
+        offset += n
+      when /deal with increment (\d+)/
+        n = $1.to_i
+        offset *= (deck_size % n)
+      else
+        puts "I don't know how to #{command}"
+        exit
+      end
+      offset %= deck_size
     end
-    offset %= deck_size
+    puts offset
   end
-  puts offset
-end
-
 end
 
 # Not 63752835085254

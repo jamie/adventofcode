@@ -5,7 +5,7 @@ require "intcode"
 
 # Part 1
 SIZE = 50
-scan = SIZE.times.map{[]}
+scan = SIZE.times.map { [] }
 
 SIZE.times do |y|
   SIZE.times do |x|
