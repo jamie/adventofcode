@@ -32,7 +32,7 @@ def biodiversity(bugs)
   points = 1
   5.times.map do |y|
     5.times.map do |x|
-      total += points if bugs.include?([x,y])
+      total += points if bugs.include?([x, y])
       points *= 2
     end
   end
@@ -42,7 +42,7 @@ end
 bugs = []
 5.times.map do |x|
   5.times.map do |y|
-    bugs << [x, y] if input[y][x] == '#'
+    bugs << [x, y] if input[y][x] == "#"
   end
 end
 bugs.sort!
@@ -99,7 +99,7 @@ end
 bugs = []
 5.times.map do |x|
   5.times.map do |y|
-    bugs << [0, x, y] if input[y][x] == '#'
+    bugs << [0, x, y] if input[y][x] == "#"
   end
 end
 bugs.sort!
