@@ -61,34 +61,30 @@ end
 
 def step2(bugs)
   newbugs = []
-  zs = bugs.map(&:first)
+  zs = bugs.map{ |z| z / 100 }
   5.times.map do |x|
     5.times.map do |y|
       next if [x, y] == [2, 2]
       (zs.min - 1).upto(zs.max + 1) do |z|
-        adjacents = [
-          [z, x - 1, y],
-          [z, x + 1, y],
-          [z, x, y + 1],
-          [z, x, y - 1],
-        ]
-        adjacents << [z - 1, 1, 2] if x == 0
-        adjacents << [z - 1, 3, 2] if x == 4
-        adjacents << [z - 1, 2, 1] if y == 0
-        adjacents << [z - 1, 2, 3] if y == 4
-        adjacents += 5.times.map { |i| [z + 1, 0, i] } if [x, y] == [1, 2]
-        adjacents += 5.times.map { |i| [z + 1, 4, i] } if [x, y] == [3, 2]
-        adjacents += 5.times.map { |i| [z + 1, i, 0] } if [x, y] == [2, 1]
-        adjacents += 5.times.map { |i| [z + 1, i, 4] } if [x, y] == [2, 3]
+        bug = (x + y * 10 + z * 100)
+        adjacents = [bug - 1, bug + 1, bug - 10, bug + 10]
+        adjacents << (z - 1) * 100 + 21 if x == 0
+        adjacents << (z - 1) * 100 + 23 if x == 4
+        adjacents << (z - 1) * 100 + 12 if y == 0
+        adjacents << (z - 1) * 100 + 32 if y == 4
+        adjacents += 5.times.map { |i| (z + 1) * 100 + i * 10 } if [x, y] == [1, 2]
+        adjacents += 5.times.map { |i| (z + 1) * 100 + i * 10 + 4 } if [x, y] == [3, 2]
+        adjacents += 5.times.map { |i| (z + 1) * 100 + i } if [x, y] == [2, 1]
+        adjacents += 5.times.map { |i| (z + 1) * 100 + 40 + i } if [x, y] == [2, 3]
 
         adjacent = (bugs & adjacents).count
 
-        if bugs.include? [z, x, y]
+        if bugs.include? bug
           dead = adjacent != 1
-          newbugs << [z, x, y] if !dead
+          newbugs << bug if !dead
         else
           infest = adjacent == 1 || adjacent == 2
-          newbugs << [z, x, y] if infest
+          newbugs << bug if infest
         end
       end
     end
@@ -99,7 +95,7 @@ end
 bugs = []
 5.times.map do |x|
   5.times.map do |y|
-    bugs << [0, x, y] if input[y][x] == "#"
+    bugs << (x + y * 10) if input[y][x] == "#"
   end
 end
 bugs.sort!
