@@ -100,5 +100,5 @@ bugs = []
 end
 bugs.sort!
 
-200.times { |i| p [i, bugs.size]; bugs = step2(bugs) }
+200.times { |i| bugs = step2(bugs) }
 puts bugs.count
