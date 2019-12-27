@@ -61,7 +61,7 @@ end
 
 def step2(bugs)
   newbugs = []
-  zs = bugs.map{ |z| z / 100 }
+  zs = bugs.map { |z| z / 100 }
   5.times.map do |x|
     5.times.map do |y|
       next if [x, y] == [2, 2]
