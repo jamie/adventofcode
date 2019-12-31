@@ -30,15 +30,15 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     parallel (1.19.1)
-    parser (2.6.5.0)
+    parser (2.7.0.1)
       ast (~> 2.4.0)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    rack (2.0.7)
+    rack (2.0.8)
     rainbow (3.0.0)
     rb-fsevent (0.10.3)
-    rb-inotify (0.10.0)
+    rb-inotify (0.10.1)
       ffi (~> 1.0)
     rubocop (0.76.0)
       jaro_winkler (~> 1.5.1)
@@ -52,7 +52,7 @@ GEM
       rubocop-performance (~> 1.5.0)
       rubocop-rails (~> 2.3.2)
       rubocop-rspec (~> 1.30.0)
-    rubocop-performance (1.5.1)
+    rubocop-performance (1.5.2)
       rubocop (>= 0.71.0)
     rubocop-rails (2.3.2)
       rack (>= 1.1)
@@ -60,10 +60,9 @@ GEM
     rubocop-rspec (1.30.1)
       rubocop (>= 0.60.0)
     ruby-progressbar (1.10.1)
-    rufo (0.7.0)
     shellany (0.0.1)
-    thor (0.20.3)
-    tzinfo (2.0.0)
+    thor (1.0.1)
+    tzinfo (2.0.1)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.6.0)
 
@@ -75,7 +74,6 @@ DEPENDENCIES
   guard-shell
   rubocop
   rubocop-airbnb
-  rufo
   tzinfo
 
 BUNDLED WITH
