@@ -2,6 +2,10 @@ Solutions for http://adventofcode.com/
 
 Starting to be a bit of a language playground, see suffix on the year folders.
 
+Leaderboard results (mostly Ruby)
+
+- ✨ Complete
+- ⭐️ Leaderboard top-100
 
 |    | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 |
 |----|------|------|------|------|------|------|
@@ -30,6 +34,3 @@ Starting to be a bit of a language playground, see suffix on the year folders.
 |  3 |✨✨|✨✨|✨✨|✨✨|⭐️✨||
 |  2 |✨✨|✨✨|✨✨|✨✨|✨✨||
 |  1 |✨✨|✨✨|✨✨|✨⭐️|✨✨||
-
-- ✨ Complete
-- ⭐️ Leaderboard top-100
