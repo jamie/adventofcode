@@ -12,7 +12,8 @@ if ARGV[0] == "get"
 
   # hack to download input
   now = Time.now.getlocal("%+.2d:00" % AOC_OFFSET)
-  year, day = (ARGV[2] || now.year), (ARGV[1] || now.day)
+  year = ARGV[2] || now.year
+  day = ARGV[1] || (1 if now.month != 12) || now.day
   out = "%4d/%02d/input" % [year, day]
 
   if File.exist?(out)
