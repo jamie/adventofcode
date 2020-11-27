@@ -1,13 +1,8 @@
 #!/usr/bin/env ruby
 require "fileutils"
-
-begin
-  require "concurrent"
-  require "concurrent-edge" # for Throttle
-rescue LoadError
-  puts "Please install the concurrent-ruby and concurrent-ruby-edge gems."
-  exit
-end
+require "bundler/setup"
+require "concurrent"
+require "concurrent-edge"
 
 if ARGV[0] == "get"
   require "tzinfo"
