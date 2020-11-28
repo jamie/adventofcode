@@ -1,137 +1,123 @@
 require "advent"
 input = Advent.input
 
-# input = <<STR.split("\n")
-# ###########
-# #0.1.....2#
-# #.#######.#
-# #4.......3#
-# ###########
-# STR
+xinput = <<STR.split("\n")
+###########
+#0.1.....2#
+#.#######.#
+#4.......3#
+###########
+STR
 
 PATH = ".".freeze
-PATHRENDER = "#".freeze
+PATHRENDER = "█".freeze
 WALL = "#".freeze
 
-Loc = Struct.new(:x, :y, :s, :neighbours) do
-  def inspect
-    "<Loc x:#{x}, y:#{y}, s:#{s}>"
-  end
-
-  def delete
-    neighbours.each do |n|
-      n.neighbours.delete(self)
-    end
-  end
+def map_find_xy(node, input)
+  row = input.detect {|line| line =~ /#{node}/}
+  y = input.index(row)
+  x = row.index(node)
+  [x, y]
 end
 
-def render(map)
-  xs = map.keys.map(&:first)
-  ys = map.keys.map(&:last)
-  (ys.min..ys.max).each do |y|
-    (xs.min..xs.max).each do |x|
-      if map[[x, y]]
-        print map[[x, y]].s.gsub(PATH, PATHRENDER)
-      else
-        print " "
-      end
-    end
-    puts
-  end
+def manhattan(a, b)
+  [a,b].transpose.map{|x,y| (x-y).abs }.sum
 end
 
-all_locs = {}
-locations = []
+def astar_map(map, start, goal)
+  openset = Set.new
+  openset << start
+  came_from = {}
 
-input.each.with_index do |row, y|
-  row.split(//).each.with_index do |cell, x|
-    case cell
-    when WALL
-      # skip
+  gscore = Hash.new { 10**10 }
+  fscore = Hash.new { 10**10 }
+  
+  gscore[start] = 0
+  fscore[start] = manhattan(start, goal)
+  
+  loop do
+    return 10**10 if openset.empty?
+  
+    curr = openset.sort_by{|x| fscore[x]}.first
+    if curr == goal
+      path = [curr]
+      while came_from[curr]
+        curr = came_from[curr]
+        path << curr
+      end
+      return path.reverse
+    end
 
-    when PATH
-      loc = Loc.new(x, y, cell, [])
-      all_locs[[x, y]] = loc
-      # link horizontal
-      if all_locs[[x - 1, y]]
-        all_locs[[x - 1, y]].neighbours << loc
-        loc.neighbours << all_locs[[x - 1, y]]
-      end
-      # link vertical
-      if all_locs[[x, y - 1]]
-        all_locs[[x, y - 1]].neighbours << loc
-        loc.neighbours << all_locs[[x, y - 1]]
-      end
-    when "0".."9"
-      loc = Loc.new(x, y, cell, [])
-      locations[cell.to_i] = loc
-      all_locs[[x, y]] = loc
-      # link horizontal
-      if all_locs[[x - 1, y]]
-        all_locs[[x - 1, y]].neighbours << loc
-        loc.neighbours << all_locs[[x - 1, y]]
-      end
-      # link vertical
-      if all_locs[[x, y - 1]]
-        all_locs[[x, y - 1]].neighbours << loc
-        loc.neighbours << all_locs[[x, y - 1]]
+    openset.delete(curr)
+    
+    [[0, 1], [0, -1], [1, 0], [-1, 0]].each do |delta|
+      x,y = neighbour = [curr, delta].transpose.map(&:sum)
+      next if map[y][x] == WALL
+      
+      g = gscore[curr] + 1
+      if g < gscore[neighbour]
+        came_from[neighbour] = curr
+        gscore[neighbour] = g
+        fscore[neighbour] = g + manhattan(neighbour, goal)
+        openset << neighbour
       end
     end
   end
 end
 
-# Manually trim some additional paths
-[
-  [3, 7],
-  [1, 35],
-  [1, 23],
-  [7, 13],
-  [3, 29],
-  [7, 27],
-  [1, 31],
-  [5, 3],
-  [23, 3],
-  [31, 9],
-  [35, 9],
-  [37, 13],
-  [73, 1],
-  [85, 1],
-  [89, 1],
-  [89, 3],
-  [137, 37],
-  [155, 37],
-  [157, 29],
-  [159, 29],
-  [161, 10],
-  [165, 3],
-  [169, 31],
-  [180, 37],
-  [181, 1],
-].each do |x, y|
-  all_locs[[x, y]].delete
-  all_locs.delete([x, y])
-end
+numbers = input.join.scan(/[0-9]/).sort
+locations = Hash[numbers.map{|n| [n, map_find_xy(n, input)]}]
 
-size = all_locs.size + 1
-while all_locs.size < size
-  size = all_locs.size
-  all_locs.to_a.each do |key, loc|
-    # Trim dead ends
-    if loc.s == PATH && loc.neighbours.size < 2
-      loc.delete
-      all_locs.delete(key)
+distances = {}
+numbers.each do |start|
+  numbers.each do |goal|
+    if start < goal
+      distance = astar_map(input, locations[start], locations[goal]).size - 1
+      distances[start] ||= {}
+      distances[start][goal] = distance
+      distances[goal] ||= {}
+      distances[goal][start] = distance
     end
   end
 end
 
-print (1..18).map { |i| "         #{i % 10}" }.join
-puts
-print (((1..9).to_a + [0]) * 18).join
-puts
+# Part 1
+paths = [[["0"], 0]]
+loop do
+  path, distance = paths.sort_by(&:last).first
 
-render(all_locs)
+  if path.size == distances.size
+    puts distance
+    break
+  end
 
-print (((1..9).to_a + [0]) * 18).join
-puts
+  numbers.each do |n|
+    next if path.include?(n)
+    cost = distances[path.last][n]
+    paths << [path + [n], distance + cost]
+  end
 
-puts all_locs.size
+  paths.delete([path, distance])
+end
+
+# Part 2
+loop do
+  path, distance = paths.sort_by(&:last).first
+  paths.delete([path, distance])
+
+  if path.size == distances.size + 1
+    puts distance
+    break
+  end
+
+  if path.size == distances.size
+    cost = distances[path.last]["0"]
+    paths << [path + ["0"], distance + cost]
+  else
+    numbers.each do |n|
+      next if path.include?(n)
+      cost = distances[path.last][n]
+      paths << [path + [n], distance + cost]
+    end
+  end
+end
