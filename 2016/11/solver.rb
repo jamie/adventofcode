@@ -45,7 +45,7 @@ class Elevator
 
   def pop_queue
     65.downto(1) do |i|
-      if queue[i].present?
+      if !queue[i].nil? && !queue[i].empty?
         return queue[i].shift
       end
     end
@@ -87,11 +87,11 @@ class Elevator
   end
 end
 
-# Example
-puts Elevator.new(
-  %w(HG HM LG LM),
-  [0, 1, 2, 1, 3, 1]
-).run
+# # Example
+# puts Elevator.new(
+#   %w(HG HM LG LM),
+#   [0, 1, 2, 1, 3, 1]
+# ).run
 
 # Part 1
 puts Elevator.new(
