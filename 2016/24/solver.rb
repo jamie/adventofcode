@@ -1,4 +1,5 @@
 require "advent"
+require "astar"
 input = Advent.input
 
 xinput = <<STR.split("\n")
@@ -9,60 +10,11 @@ xinput = <<STR.split("\n")
 ###########
 STR
 
-PATH = ".".freeze
-PATHRENDER = "█".freeze
-WALL = "#".freeze
-
 def map_find_xy(node, input)
   row = input.detect {|line| line =~ /#{node}/}
   y = input.index(row)
   x = row.index(node)
   [x, y]
-end
-
-def manhattan(a, b)
-  [a,b].transpose.map{|x,y| (x-y).abs }.sum
-end
-
-def astar_map(map, start, goal)
-  openset = Set.new
-  openset << start
-  came_from = {}
-
-  gscore = Hash.new { 10**10 }
-  fscore = Hash.new { 10**10 }
-  
-  gscore[start] = 0
-  fscore[start] = manhattan(start, goal)
-  
-  loop do
-    return 10**10 if openset.empty?
-  
-    curr = openset.sort_by{|x| fscore[x]}.first
-    if curr == goal
-      path = [curr]
-      while came_from[curr]
-        curr = came_from[curr]
-        path << curr
-      end
-      return path.reverse
-    end
-
-    openset.delete(curr)
-    
-    [[0, 1], [0, -1], [1, 0], [-1, 0]].each do |delta|
-      x,y = neighbour = [curr, delta].transpose.map(&:sum)
-      next if map[y][x] == WALL
-      
-      g = gscore[curr] + 1
-      if g < gscore[neighbour]
-        came_from[neighbour] = curr
-        gscore[neighbour] = g
-        fscore[neighbour] = g + manhattan(neighbour, goal)
-        openset << neighbour
-      end
-    end
-  end
 end
 
 numbers = input.join.scan(/[0-9]/).sort
