@@ -7,6 +7,17 @@ require "pathname"
 require "linked_list"
 require "priority_deque"
 
+DIRS = [
+  [-1, -1],
+  [-1, 0],
+  [-1, 1],
+  [0, -1],
+  [0, 1],
+  [1, -1],
+  [1, 0],
+  [1, 1],
+]
+
 module Advent
   def self.input(format = :to_s)
     work_dir = Pathname.new(caller_locations.first.path).dirname
