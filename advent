@@ -37,6 +37,7 @@ if ARGV[0] == "get"
     puts "> curl #{url}"
     session = File.read(".session")
     `curl -o #{out} -b session=#{session} #{url}`
+    `open https://adventofcode.com/#{"%d/day/%d"%[year,day]}`
   end
 
   exit
