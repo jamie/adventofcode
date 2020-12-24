@@ -9,12 +9,21 @@ if ARGV[0] == "get"
 
   AOC_TIMEZONE = TZInfo::Timezone.get("US/Eastern")
   AOC_OFFSET = AOC_TIMEZONE.current_period.utc_total_offset / 60 / 60
+  LOCAL_OFFSET = Time.now.utc_offset / 60 / 60
 
   # hack to download input
   now = Time.now.getlocal("%+.2d:00" % AOC_OFFSET)
   year = ARGV[2] || now.year
-  day = ARGV[1] || (1 if now.month != 12) || now.day
+  day = ARGV[1] || (1 if now.month != 12) || now.day + 1
   out = "%4d/%02d/input" % [year, day]
+
+  offset = LOCAL_OFFSET - AOC_OFFSET
+  tday = day.to_i
+  if offset < 0
+    tday -= 1
+    offset += 24
+  end
+  unlock_time = Time.local(year, 12, tday, offset)
 
   if File.exist?(out)
     day += 1
@@ -25,13 +34,23 @@ if ARGV[0] == "get"
   unless File.exist?(out)
     url = "https://adventofcode.com/%d/day/%d/input" % [year, day]
 
-    date = "%4d-12-%02d" % [year, day]
-    print "Waiting for #{date}" if now.strftime("%Y-%m-%d") < date
+    puts "Waiting for #{unlock_time}" if Time.now < unlock_time
     loop do
-      now = Time.now.getlocal("%+.2d:00" % AOC_OFFSET)
-      break if now.strftime("%Y-%m-%d") >= date
-      print "."
-      sleep 1
+      wait = (unlock_time - Time.now).to_i
+      break if wait < 0
+
+      wait2, sec = wait.divmod(60)
+      hour, min = wait2.divmod(60)
+      if hour > 1
+        puts "%d+ hours to go..." % [hour]
+        sleep 60 * 60
+      elsif min > 1
+        puts "%d+ minutes to go..." % [hour*60+min]
+        sleep 60
+      else
+        puts "%d seconds to go..." % [min*60+sec]
+        sleep 1
+      end
     end
 
     puts "> curl #{url}"
