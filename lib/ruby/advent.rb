@@ -10,6 +10,10 @@ require "priority_deque"
 DIRS = DIRS2D = [-1,0,1].product([-1,0,1]) - [[0,0]]
 DIRS3D = [-1,0,1].product([-1,0,1]).product([-1,0,1]).map(&:flatten) - [[0,0,0]]
 DIRS4D = [-1,0,1].product([-1,0,1]).product([-1,0,1]).product([-1,0,1]).map(&:flatten) - [[0,0,0,0]]
+HEXDIRS = [
+  [1, 0], [1, -1], [0, -1],
+  [-1, 0], [-1, 1], [0, 1],
+]
 
 module Advent
   def self.input(format = :to_s)
