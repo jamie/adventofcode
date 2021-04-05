@@ -3,8 +3,7 @@
 
 {:ok, input} = File.read("2020/01/input")
 numbers = input
-|> String.split("\n")
-|> Enum.reject(fn x -> x == "" end)
+|> String.split("\n", trim: true)
 |> Enum.map(&String.to_integer/1)
 
 # numbers = [
