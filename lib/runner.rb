@@ -3,8 +3,9 @@ class Runner
   attr_reader :year, :day
 
   LANG_EXTENSION = {
-    "ruby" => "rb",
+    "elixir" => "exs",
     "nim" => "nim",
+    "ruby" => "rb",
   }.freeze
 
   def self.find(year, day, lang)
@@ -107,6 +108,18 @@ class Runner
 
     def duration_s
       "          "
+    end
+  end
+
+  class Elixir < Runner
+    def lang
+      "elixir"
+    end
+
+    def local_execute
+      cmd = "MIX_QUIET=1 mix runner %04d %02d" % [year, day]
+      puts cmd if ENV["VERBOSE"]
+      `#{cmd}`
     end
   end
 
