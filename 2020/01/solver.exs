@@ -17,33 +17,34 @@ numbers = input
 
 # Part 1
 
-numbers
-|> Enum.with_index
-|> Enum.each(fn({x, i}) ->
-  numbers
-  |> Enum.slice((i+1)..-1)
-  |> Enum.each(fn(y) ->
-    if x + y == 2020 do
-      IO.puts(x*y)
-    end
-  end)
-end)
+## Explicit looping
+
+# numbers
+# |> Enum.with_index
+# |> Enum.each(fn({x, i}) ->
+#   numbers
+#   |> Enum.slice((i+1)..-1)
+#   |> Enum.each(fn(y) ->
+#     if x + y == 2020 do
+#       IO.puts(x * y)
+#     end
+#   end)
+# end)
+
+## List comprehensions!
+
+for x <- numbers,
+    y <- numbers,
+    x <= y,
+    x + y == 2020,
+    do: IO.puts(x * y)
 
 # Part 2
 
-numbers
-|> Enum.with_index
-|> Enum.each(fn({x, i}) ->
-  numbers
-  |> Enum.slice((i+1)..-1)
-  |> Enum.with_index
-  |> Enum.each(fn({y, j}) ->
-    numbers
-    |> Enum.slice((i+j+1)..-1)
-    |> Enum.each(fn(z) ->
-      if x + y + z == 2020 do
-        IO.puts(x*y*z)
-      end
-    end)
-  end)
-end)
+for x <- numbers,
+    y <- numbers,
+    z <- numbers,
+    x <= y,
+    y <= z,
+    x + y + z == 2020,
+    do: IO.puts(x * y * z)
