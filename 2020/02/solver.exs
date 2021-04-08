@@ -28,11 +28,9 @@ input
 
   chars = password |> String.graphemes()
 
-  matches =
+  1 ==
     [Enum.at(chars, lo), Enum.at(chars, hi)]
     |> Enum.count(fn c -> c == char end)
-
-  matches == 1
 end)
 |> Enum.count()
 |> IO.puts()
