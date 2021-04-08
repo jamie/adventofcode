@@ -3,16 +3,14 @@ defmodule Advent do
   Documentation for `Aoc`.
   """
 
-  @doc """
-  Hello world.
+  def read_lines(file) do
+    {:ok, input} = File.read(file)
+    input
+    |> String.split("\n", trim: true)
+  end
 
-  ## Examples
-
-      iex> Aoc.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def read_ints(file) do
+    read_lines(file)
+    |> Enum.map(&String.to_integer/1)
   end
 end

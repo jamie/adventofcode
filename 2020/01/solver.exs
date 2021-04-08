@@ -1,10 +1,4 @@
-# require "advent"
-# input = Advent.input
-
-{:ok, input} = File.read("2020/01/input")
-numbers = input
-|> String.split("\n", trim: true)
-|> Enum.map(&String.to_integer/1)
+numbers = Advent.read_ints("2020/01/input")
 
 # numbers = [
 #   1721,
@@ -16,23 +10,6 @@ numbers = input
 # ]
 
 # Part 1
-
-## Explicit looping
-
-# numbers
-# |> Enum.with_index
-# |> Enum.each(fn({x, i}) ->
-#   numbers
-#   |> Enum.slice((i+1)..-1)
-#   |> Enum.each(fn(y) ->
-#     if x + y == 2020 do
-#       IO.puts(x * y)
-#     end
-#   end)
-# end)
-
-## List comprehensions!
-
 for x <- numbers,
     y <- numbers,
     x <= y,
@@ -40,7 +17,6 @@ for x <- numbers,
     do: IO.puts(x * y)
 
 # Part 2
-
 for x <- numbers,
     y <- numbers,
     z <- numbers,
