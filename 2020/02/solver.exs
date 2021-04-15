@@ -16,7 +16,7 @@ input
     |> String.graphemes()
     |> Enum.count(fn c -> c == char end)
 
-  min <= freq && freq <= max
+  Enum.member?(min..max, freq)
 end)
 |> Enum.count()
 |> IO.puts()
