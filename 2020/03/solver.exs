@@ -1,4 +1,6 @@
-input = Advent.read_lines("2020/03/input")
+input =
+  Advent.read_lines("2020/03/input")
+  |> Enum.reject(&(&1 == ""))
 
 # Part 1
 input

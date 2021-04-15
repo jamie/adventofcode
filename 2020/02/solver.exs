@@ -1,5 +1,6 @@
 input =
   Advent.read_lines("2020/02/input")
+  |> Enum.reject(&(&1 == ""))
   |> Enum.map(fn line ->
     Regex.run(~r/(\d+)-(\d+) (.*): (.*)/, line, capture: :all_but_first)
   end)
