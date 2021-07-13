@@ -4,9 +4,8 @@ programs = "abcdefghijklmnop"
 
 moves = input.split(",")
 
-cycle_size = 60 # By inspection, sigh.
-
-(1_000_000_000 % cycle_size).times do |ii|
+def dance(programs, moves)
+  programs = programs.dup
   moves.each do |move|
     case move
     when /s(\d+)/
@@ -23,9 +22,22 @@ cycle_size = 60 # By inspection, sigh.
       puts "wtf move #{move}"
     end
   end
-
-  # Part 1
-  puts programs if ii.zero?
+  programs
 end
+
+# Part 1
+puts dance(programs, moves)
+
 # Part 2
-puts programs
+
+seen = [programs]
+
+loop do
+  programs = dance(programs, moves)
+  break if seen.include?(programs)
+  seen << programs
+end
+
+cycle_size = seen.size - seen.index(programs)
+puts seen[1000000000 % cycle_size]
+
