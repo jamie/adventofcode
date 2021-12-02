@@ -13,8 +13,8 @@ if ARGV[0] == "get"
 
   # hack to download input
   now = Time.now.getlocal("%+.2d:00" % AOC_OFFSET)
-  year = ARGV[2] || now.year
-  day = ARGV[1].to_i || (1 if now.month != 12) || now.day + 1
+  year = (ARGV[2] || now.year).to_i
+  day = (ARGV[1] || (1 if now.month != 12) || now.day + 1).to_i
   out = "%4d/%02d/input" % [year, day]
 
   offset = LOCAL_OFFSET - AOC_OFFSET
