@@ -3,7 +3,7 @@ source "https://rubygems.org/"
 gem "tzinfo"
 
 gem "rubocop"
-gem "rubocop-airbnb"
+gem "rubocop-shopify"
 
 gem "guard"
 gem "guard-shell"
