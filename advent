@@ -39,17 +39,15 @@ if ARGV[0] == "get"
       wait = (unlock_time - Time.now).to_i
       break if wait < 0
 
-      wait2, sec = wait.divmod(60)
-      hour, min = wait2.divmod(60)
-      if hour > 1
-        puts "%d+ hours to go..." % [hour]
-        sleep 60 * 60
-      elsif min > 1
-        puts "%d+ minutes to go..." % [hour*60+min]
+      if wait < 100
+        puts "%d seconds to go..." % [wait]
+        sleep 1
+      elsif wait < 100 * 60
+        puts "%d+ minutes to go..." % [wait/60]
         sleep 60
       else
-        puts "%d seconds to go..." % [min*60+sec]
-        sleep 1
+        puts "%d+ hours to go..." % [wait/60/60]
+        sleep 60 * 60
       end
     end
 
