@@ -1,6 +1,7 @@
 require "advent"
 input = Advent.input
 
+require 'set'
 allergens = Set.new
 ingredients = Set.new
 products = []
