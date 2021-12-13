@@ -45,7 +45,9 @@ boards = input
 sequence.each do |n|
   boards.each do |board|
     board.each do |row|
-      row[i] = nil if (i = row.index(n))
+      if (i = row.index(n))
+        row[i] = nil
+      end
     end
     if winning?(board)
       puts score(board) * n.to_i
@@ -66,7 +68,9 @@ boards = input
 sequence.each do |n|
   boards.each do |board|
     board.each do |row|
-      row[i] = nil if (i = row.index(n))
+      if (i = row.index(n))
+        row[i] = nil
+      end
     end
   end
   if boards.size == 1 && winning?(boards[0])
