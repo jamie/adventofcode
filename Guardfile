@@ -15,12 +15,16 @@ class AdventMatcher
 end
 
 require './lib/runner'
+require 'benchmark'
 
 def watch_for(suffix, runner)
   watch(AdventMatcher.new(suffix)) do |match|
     path = match[:script]
     puts ">> #{path}"
-    puts runner.new(path).build.execute!
+    bm = Benchmark.measure do
+      puts runner.new(path).build.execute!
+    end
+    puts bm
     puts
   end
 end
