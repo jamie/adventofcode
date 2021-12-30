@@ -2,27 +2,33 @@ require "advent"
 input = Advent.input
 
 # Translate input by hand to ruby, then hand-optimize
-def monad(digits)
-  w = x = y = z = 0
-
+def monad_digit(z, digit, n1, n2, n3, n4)
   w = digits.shift
   x *= 0
   x += z
-  x %= 26
+  x %= n1
   z /= 1
-  x += 10
+  x += n2
   x = x == w ? 1 : 0
   x = x == 0 ? 1 : 0
   y *= 0
-  y += 25
+  y += n3
   y *= x
   y += 1
   z *= y
   y *= 0
   y += w
-  y += 2
+  y += n4
   y *= x
   z += y
+
+  z
+end
+
+def monad(digits)
+  w = x = y = z = 0
+
+  z = monad_digit(z, digits.shift, 26, 10, 25, 2)
 
   w = digits.shift
   x *= 0
