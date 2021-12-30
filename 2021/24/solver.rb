@@ -21,11 +21,11 @@ def monad(digits)
   z
 end
 
-def monad_digit(z, w, n1, n2, n4)
-  if w == (z % 26 + n2)
-    z / n1
+def monad_digit(z, w, q, n1, n2)
+  if w == z % 26 + n1
+    (z / q)
   else
-    z / n1 * 26 + w + n4
+    (z / q) * 26 + w + n2
   end
 end
 
@@ -38,7 +38,6 @@ min = 11111111111111
 max = 99_999_999_999_999
 max.downto(min) do |i|
   digits = i.to_s.split(//).map(&:to_i)
-
   n_ += 1
   next if digits.include?(0)
   n += 1
@@ -50,7 +49,7 @@ max.downto(min) do |i|
   end
 
   sum += m
-  break if n >= 500_000
+  break if n >= 50_000
 end
 
 p [n, n_, sum]
