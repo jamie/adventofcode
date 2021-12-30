@@ -32,19 +32,25 @@ end
 # Part 1
 
 n = 0
+n_ = 0
+sum = 0
 min = 11111111111111
-max = 99999999999999
-min = max - 1_000_000
+max = 99_999_999_999_999
 max.downto(min) do |i|
   digits = i.to_s.split(//).map(&:to_i)
+
+  n_ += 1
   next if digits.include?(0)
+  n += 1
+
   m = monad(digits)
   if m == 0
     puts digits.join
     break
   end
-  # n = i if monad(digits) == 0
-  n += m
+
+  sum += m
+  break if n >= 500_000
 end
 
-puts n
+p [n, n_, sum]
