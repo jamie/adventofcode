@@ -2,293 +2,49 @@ require "advent"
 input = Advent.input
 
 # Translate input by hand to ruby, then hand-optimize
-def monad_digit(z, digit, n1, n2, n3, n4)
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= n1
-  z /= 1
-  x += n2
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += n3
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += n4
-  y *= x
-  z += y
-
+def monad(digits)
+  z = 0
+  z = monad_digit(z, digits.shift, 1, 10, 2)
+  z = monad_digit(z, digits.shift, 1, 14, 13)
+  z = monad_digit(z, digits.shift, 1, 14, 13)
+  z = monad_digit(z, digits.shift, 26, -13, 9)
+  z = monad_digit(z, digits.shift, 1, 10, 15)
+  z = monad_digit(z, digits.shift, 26, -13, 3)
+  z = monad_digit(z, digits.shift, 26, -7, 6)
+  z = monad_digit(z, digits.shift, 1, 11, 5)
+  z = monad_digit(z, digits.shift, 1, 10, 16)
+  z = monad_digit(z, digits.shift, 1, 13, 1)
+  z = monad_digit(z, digits.shift, 26, -4, 6)
+  z = monad_digit(z, digits.shift, 26, -9, 3)
+  z = monad_digit(z, digits.shift, 26, -13, 7)
+  z = monad_digit(z, digits.shift, 26, -9, 9)
   z
 end
 
-def monad(digits)
-  w = x = y = z = 0
-
-  z = monad_digit(z, digits.shift, 26, 10, 25, 2)
-
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= 26
-  z /= 1
-  x += 14
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += 25
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += 13
-  y *= x
-  z += y
-
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= 26
-  z /= 1
-  x += 14
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += 25
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += 13
-  y *= x
-  z += y
-
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= 26
-  z /= 26
-  x += -13
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += 25
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += 9
-  y *= x
-  z += y
-
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= 26
-  z /= 1
-  x += 10
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += 25
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += 15
-  y *= x
-  z += y
-
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= 26
-  z /= 26
-  x += -13
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += 25
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += 3
-  y *= x
-  z += y
-
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= 26
-  z /= 26
-  x += -7
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += 25
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += 6
-  y *= x
-  z += y
-
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= 26
-  z /= 1
-  x += 11
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += 25
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += 5
-  y *= x
-  z += y
-
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= 26
-  z /= 1
-  x += 10
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += 25
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += 16
-  y *= x
-  z += y
-
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= 26
-  z /= 1
-  x += 13
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += 25
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += 1
-  y *= x
-  z += y
-
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= 26
-  z /= 26
-  x += -4
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += 25
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += 6
-  y *= x
-  z += y
-
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= 26
-  z /= 26
-  x += -9
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += 25
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += 3
-  y *= x
-  z += y
-
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= 26
-  z /= 26
-  x += -13
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += 25
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += 7
-  y *= x
-  z += y
-
-  w = digits.shift
-  x *= 0
-  x += z
-  x %= 26
-  z /= 26
-  x += -9
-  x = x == w ? 1 : 0
-  x = x == 0 ? 1 : 0
-  y *= 0
-  y += 25
-  y *= x
-  y += 1
-  z *= y
-  y *= 0
-  y += w
-  y += 9
-  y *= x
-  z += y
-
-  z == 0
+def monad_digit(z, w, n1, n2, n4)
+  if w == (z % 26 + n2)
+    z / n1
+  else
+    z / n1 * 26 + w + n4
+  end
 end
 
 # Part 1
 
 n = 0
-min = 10000000000000
-max = min + 999999
-min.upto(max) do |i|
+min = 11111111111111
+max = 99999999999999
+min = max - 1_000_000
+max.downto(min) do |i|
   digits = i.to_s.split(//).map(&:to_i)
   next if digits.include?(0)
-  n = i if monad(digits)
+  m = monad(digits)
+  if m == 0
+    puts digits.join
+    break
+  end
+  # n = i if monad(digits) == 0
+  n += m
 end
 
 puts n
