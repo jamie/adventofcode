@@ -2,70 +2,69 @@ require "advent"
 require "astar"
 input = Advent.input
 
-xinput = <<STR.split("\n")
-             Z L X W       C                 
-             Z P Q B       K                 
-  ###########.#.#.#.#######.###############  
-  #...#.......#.#.......#.#.......#.#.#...#  
-  ###.#.#.#.#.#.#.#.###.#.#.#######.#.#.###  
-  #.#...#.#.#...#.#.#...#...#...#.#.......#  
-  #.###.#######.###.###.#.###.###.#.#######  
-  #...#.......#.#...#...#.............#...#  
-  #.#########.#######.#.#######.#######.###  
-  #...#.#    F       R I       Z    #.#.#.#  
-  #.###.#    D       E C       H    #.#.#.#  
-  #.#...#                           #...#.#  
-  #.###.#                           #.###.#  
-  #.#....OA                       WB..#.#..ZH
-  #.###.#                           #.#.#.#  
-CJ......#                           #.....#  
-  #######                           #######  
-  #.#....CK                         #......IC
-  #.###.#                           #.###.#  
-  #.....#                           #...#.#  
-  ###.###                           #.#.#.#  
-XF....#.#                         RF..#.#.#  
-  #####.#                           #######  
-  #......CJ                       NM..#...#  
-  ###.#.#                           #.###.#  
-RE....#.#                           #......RF
-  ###.###        X   X       L      #.#.#.#  
-  #.....#        F   Q       P      #.#.#.#  
-  ###.###########.###.#######.#########.###  
-  #.....#...#.....#.......#...#.....#.#...#  
-  #####.#.###.#######.#######.###.###.#.#.#  
-  #.......#.......#.#.#.#.#...#...#...#.#.#  
-  #####.###.#####.#.#.#.#.###.###.#.###.###  
-  #.......#.....#.#...#...............#...#  
-  #############.#.#.###.###################  
-               A O F   N                     
-               A A D   M                     
+xinput = <<~STR.split("\n")
+               Z L X W       C                 
+               Z P Q B       K                 
+    ###########.#.#.#.#######.###############  
+    #...#.......#.#.......#.#.......#.#.#...#  
+    ###.#.#.#.#.#.#.#.###.#.#.#######.#.#.###  
+    #.#...#.#.#...#.#.#...#...#...#.#.......#  
+    #.###.#######.###.###.#.###.###.#.#######  
+    #...#.......#.#...#...#.............#...#  
+    #.#########.#######.#.#######.#######.###  
+    #...#.#    F       R I       Z    #.#.#.#  
+    #.###.#    D       E C       H    #.#.#.#  
+    #.#...#                           #...#.#  
+    #.###.#                           #.###.#  
+    #.#....OA                       WB..#.#..ZH
+    #.###.#                           #.#.#.#  
+  CJ......#                           #.....#  
+    #######                           #######  
+    #.#....CK                         #......IC
+    #.###.#                           #.###.#  
+    #.....#                           #...#.#  
+    ###.###                           #.#.#.#  
+  XF....#.#                         RF..#.#.#  
+    #####.#                           #######  
+    #......CJ                       NM..#...#  
+    ###.#.#                           #.###.#  
+  RE....#.#                           #......RF
+    ###.###        X   X       L      #.#.#.#  
+    #.....#        F   Q       P      #.#.#.#  
+    ###.###########.###.#######.#########.###  
+    #.....#...#.....#.......#...#.....#.#...#  
+    #####.#.###.#######.#######.###.###.#.#.#  
+    #.......#.......#.#.#.#.#...#...#...#.#.#  
+    #####.###.#####.#.#.#.#.###.###.#.###.###  
+    #.......#.....#.#...#...............#...#  
+    #############.#.#.###.###################  
+                 A O F   N                     
+                 A A D   M                     
 STR
 
-PATH = '.'
+PATH = "."
 
 points = {}
 input[0..-2].each_with_index do |row, y|
   row[0..-2].size.times do |x|
-
     curr = input[y][x]
-    down = input[y+1][x]
-    right = input[y][x+1]
+    down = input[y + 1][x]
+    right = input[y][x + 1]
 
-    if "#{curr}#{down}" =~ /[A-Z][A-Z]/
+    if /[A-Z][A-Z]/.match?("#{curr}#{down}")
       key = "#{curr}#{down}"
-      if y > 0 && input[y-1][x] == PATH
-        points[[x, y-1]] = key
-      elsif y < input.size && input[y+2][x] == PATH
-        points[[x, y+2]] = key
+      if y > 0 && input[y - 1][x] == PATH
+        points[[x, y - 1]] = key
+      elsif y < input.size && input[y + 2][x] == PATH
+        points[[x, y + 2]] = key
       end
 
-    elsif "#{curr}#{right}" =~ /[A-Z][A-Z]/
+    elsif /[A-Z][A-Z]/.match?("#{curr}#{right}")
       key = "#{curr}#{right}"
-      if x > 0 && input[y][x-1] == PATH
-        points[[x-1, y]] = key
-      elsif x < row.size && input[y][x+2] == PATH
-        points[[x+2, y]] = key
+      if x > 0 && input[y][x - 1] == PATH
+        points[[x - 1, y]] = key
+      elsif x < row.size && input[y][x + 2] == PATH
+        points[[x + 2, y]] = key
       end
 
     end
@@ -131,7 +130,7 @@ seen = [start]
 loop do
   break if paths.empty?
 
-  path, distance = paths.sort_by{|path, distance|
+  path, distance = paths.sort_by { |path, distance|
     [
       path.last.last, # prioritize less recursion
       distance
@@ -148,10 +147,10 @@ loop do
     x0, y0, z0 = last
     x, y = point
 
-    if points[[x,y]].nil? || points[[x,y]] != points[[x0, y0]]
+    if points[[x, y]].nil? || points[[x, y]] != points[[x0, y0]]
       # Names are different, same floor
       z = z0
-    elsif x == 2 || y == 2 || y == input.size-3 || x == input[0].size-3
+    elsif x == 2 || y == 2 || y == input.size - 3 || x == input[0].size - 3
       # Destination is outside edge, so we went in
       z = z0 + 1
     else
@@ -162,8 +161,8 @@ loop do
     end
 
     # Skip backtracking
-    next if seen.include?([x,y,z])
-    seen << [x,y,z]
+    next if seen.include?([x, y, z])
+    seen << [x, y, z]
 
     next if path.include?([x, y, z])
     paths << [path + [[x, y, z]], distance + cost]

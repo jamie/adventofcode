@@ -19,10 +19,10 @@ class LinkedList
   end
 
   def append!(value)
-    if @cursor
-      @cursor = @cursor.append(value)
+    @cursor = if @cursor
+      @cursor.append(value)
     else
-      @cursor = Node.new(value)
+      Node.new(value)
     end
   end
 

@@ -7,7 +7,7 @@ sues = input.map do |line|
   name, options = line.split(": ", 2)
   {
     number: name.split(" ").last,
-    remembered: eval("{#{options}}"),
+    remembered: eval("{#{options}}")
   }
 end
 
@@ -21,7 +21,7 @@ detected = {
   goldfish: 5,
   trees: 3,
   cars: 2,
-  perfumes: 1,
+  perfumes: 1
 }
 
 match = sues.detect do |sue|
@@ -38,7 +38,7 @@ sues = input.map do |line|
   name, options = line.split(": ", 2)
   {
     number: name.split(" ").last,
-    remembered: eval("{#{options}}"),
+    remembered: eval("{#{options}}")
   }
 end
 
@@ -52,7 +52,7 @@ detected = {
   goldfish: [:<, 5],
   trees: [:>, 3],
   cars: [:==, 2],
-  perfumes: [:==, 1],
+  perfumes: [:==, 1]
 }
 
 match = sues.detect do |sue|

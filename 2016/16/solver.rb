@@ -9,15 +9,15 @@ SUM = {
   "11" => "1",
   "00" => "1",
   "10" => "0",
-  "01" => "0",
+  "01" => "0"
 }.freeze
 
 def sum(input)
   pairs = input.scan(/[01]{2}/)
   checksum = pairs.map { |i| SUM[i] }.join
   case checksum.size % 2
-  when 0; sum(checksum)
-  when 1; checksum
+  when 0 then sum(checksum)
+  when 1 then checksum
   end
 end
 

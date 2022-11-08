@@ -19,7 +19,9 @@ grid = xs.map do |i|
   end
 end
 
-counts = grid.flatten.inject(Hash.new(0)) { |h, e| h[e] += 1; h }
+counts = grid.flatten.each_with_object(Hash.new(0)) { |e, h|
+  h[e] += 1
+}
 
 # Remove anything touching an edge
 grid.first.uniq.each { |i| counts.delete(i) }

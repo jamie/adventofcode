@@ -43,10 +43,10 @@ if ARGV[0] == "get"
         puts "%d seconds to go..." % [wait]
         sleep 1
       elsif wait < 100 * 60
-        puts "%d+ minutes to go..." % [wait/60]
+        puts "%d+ minutes to go..." % [wait / 60]
         sleep 60
       else
-        puts "%d+ hours to go..." % [wait/60/60]
+        puts "%d+ hours to go..." % [wait / 60 / 60]
         sleep 60 * 60
       end
     end
@@ -54,7 +54,7 @@ if ARGV[0] == "get"
     puts "> curl #{url}"
     session = File.read(".session")
     `curl -o #{out} -b session=#{session} #{url}`
-    `open https://adventofcode.com/#{"%d/day/%d"%[year,day]}`
+    `open https://adventofcode.com/#{"%d/day/%d" % [year, day]}`
   end
 
   exit

@@ -10,41 +10,41 @@ require "intcode"
 
 # Manually collect safe items, bring to checkpoint
 # Unsafe: giant electromagnet, escape pod, photons, molten lava, infinite loop
-input = <<-COMMANDS.bytes
-west
-west
-north
-take space heater
-south
-east
-south
-south
-take sand
-north
-east
-take whirled peas
-west
-take festive hat
-north
-east
-south
-take weather machine
-north
-east
-take mug
-east
-south
-east
-south
-take easter egg
-north
-west
-west
-south
-west
-take shell
-south
-inv
+input = <<~COMMANDS.bytes
+  west
+  west
+  north
+  take space heater
+  south
+  east
+  south
+  south
+  take sand
+  north
+  east
+  take whirled peas
+  west
+  take festive hat
+  north
+  east
+  south
+  take weather machine
+  north
+  east
+  take mug
+  east
+  south
+  east
+  south
+  take easter egg
+  north
+  west
+  west
+  south
+  west
+  take shell
+  south
+  inv
 COMMANDS
 droid = Intcode.new(prog).input!(input)
 droid.execute
@@ -52,7 +52,7 @@ droid.execute
 # Drop all items
 all_items = [
   "easter egg", "festive hat", "mug", "sand",
-  "shell", "space heater", "weather machine", "whirled peas",
+  "shell", "space heater", "weather machine", "whirled peas"
 ]
 input.push(*all_items.map { |item| "drop #{item}\n" }.join.bytes)
 droid.execute
@@ -71,7 +71,7 @@ droid.execute
     droid.execute
 
     log = droid.output.map(&:chr).join
-    if log.split("\n")[-22 + count] !~ /you are ejected/
+    if !/you are ejected/.match?(log.split("\n")[-22 + count])
       puts log.match(/get in by typing (\d+)/)[1]
       exit
     end

@@ -12,14 +12,14 @@ require "intcode"
 
 # Jump if D AND !(A OR B OR C)
 
-springscript = <<SPRINGSCRIPT.bytes
-NOT A T
-NOT B J
-OR J T
-NOT C J
-OR T J
-AND D J
-WALK
+springscript = <<~SPRINGSCRIPT.bytes
+  NOT A T
+  NOT B J
+  OR J T
+  NOT C J
+  OR T J
+  AND D J
+  WALK
 SPRINGSCRIPT
 output = []
 springbot = Intcode.new(prog).input!(springscript).output!(output)
@@ -32,18 +32,18 @@ puts springbot.execute
 
 # Jump if D AND (H OR E) AND !(A OR B OR C)
 
-springscript = <<SPRINGSCRIPT.bytes
-NOT A T
-NOT B J
-OR J T
-NOT C J
-OR T J
-AND D J
-NOT H T
-NOT T T
-OR E T
-AND T J
-RUN
+springscript = <<~SPRINGSCRIPT.bytes
+  NOT A T
+  NOT B J
+  OR J T
+  NOT C J
+  OR T J
+  AND D J
+  NOT H T
+  NOT T T
+  OR E T
+  AND T J
+  RUN
 SPRINGSCRIPT
 output = []
 springbot = Intcode.new(prog).input!(springscript).output!(output)

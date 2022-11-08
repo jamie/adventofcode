@@ -39,30 +39,30 @@ class Room < Struct.new(:x, :y, :dist)
     return "╋" if [x, y] == [0, 0]
 
     case [!!east, !!west, !!north, !!south]
-    when [false, false, false, false]; fail "Empty Room!"
-    when [false, false, false, true]; "╷" # south
-    when [false, false, true, false]; "╵" # north
-    when [false, false, true, true]; "│"
-    when [false, true, false, false]; "╴" # west
-    when [false, true, false, true]; "┐"
-    when [false, true, true, false]; "┘"
-    when [false, true, true, true]; "┤"
-    when [true, false, false, false]; "╶" # east
-    when [true, false, false, true]; "┌"
-    when [true, false, true, false]; "└"
-    when [true, false, true, true]; "├"
-    when [true, true, false, false]; "─"
-    when [true, true, false, true]; "┬"
-    when [true, true, true, false]; "┴"
-    when [true, true, true, true]; "┼"
+    when [false, false, false, false] then fail "Empty Room!"
+    when [false, false, false, true] then "╷" # south
+    when [false, false, true, false] then "╵" # north
+    when [false, false, true, true] then "│"
+    when [false, true, false, false] then "╴" # west
+    when [false, true, false, true] then "┐"
+    when [false, true, true, false] then "┘"
+    when [false, true, true, true] then "┤"
+    when [true, false, false, false] then "╶" # east
+    when [true, false, false, true] then "┌"
+    when [true, false, true, false] then "└"
+    when [true, false, true, true] then "├"
+    when [true, true, false, false] then "─"
+    when [true, true, false, true] then "┬"
+    when [true, true, true, false] then "┴"
+    when [true, true, true, true] then "┼"
     end
   end
 end
 
 home = Room.new(0, 0, 0)
-map = { [0, 0] => home }
+map = {[0, 0] => home}
 stack = [home]
-input.split(//).each do |char|
+input.split("").each do |char|
   case char
   when "^", "$"
     next

@@ -16,13 +16,13 @@ STR
 # Part 1
 
 def step(line, mover)
-  empty = '.'
+  empty = "."
   line.map.with_index do |cell, i|
     if cell == mover
-      right = line[(i+1) % line.size]
+      right = line[(i + 1) % line.size]
       right == empty ? right : cell
     elsif cell == empty
-      left = line[(i-1) % line.size]
+      left = line[(i - 1) % line.size]
       left == mover ? left : cell
     else
       cell
@@ -30,21 +30,21 @@ def step(line, mover)
   end
 end
 
-seabed = input.map{|line| line.split(//)}
+seabed = input.map { |line| line.split("") }
 step = 0
 loop do
   step += 1
   changed = false
 
   seabed = seabed.map do |line|
-    line_ = step(line, '>')
+    line_ = step(line, ">")
     changed = true unless line == line_
     line_
   end
   seabed = seabed.transpose
 
   seabed = seabed.map do |line|
-    line_ = step(line, 'v')
+    line_ = step(line, "v")
     changed = true unless line == line_
     line_
   end

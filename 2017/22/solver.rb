@@ -6,19 +6,19 @@ Virus = Struct.new(:x, :y, :dir) do
     up: :right,
     right: :down,
     down: :left,
-    left: :up,
+    left: :up
   }.freeze
   TURN_LEFT = {
     up: :left,
     left: :down,
     down: :right,
-    right: :up,
+    right: :up
   }.freeze
   TURN_AROUND = {
     up: :down,
     down: :up,
     left: :right,
-    right: :left,
+    right: :left
   }.freeze
 
   def turn_right!
@@ -35,10 +35,10 @@ Virus = Struct.new(:x, :y, :dir) do
 
   def step!
     case dir
-    when :up; self.y -= 1
-    when :down; self.y += 1
-    when :left; self.x -= 1
-    when :right; self.x += 1
+    when :up then self.y -= 1
+    when :down then self.y += 1
+    when :left then self.x -= 1
+    when :right then self.x += 1
     end
   end
 end
@@ -65,7 +65,7 @@ virus = Virus.new(input.size / 2, input.size / 2, :up)
 
 infections = Hash.new { |h, k| h[k] = Hash.new { "." } }
 input.each_with_index do |row, y|
-  row.split(//).each_with_index do |cell, x|
+  row.split("").each_with_index do |cell, x|
     infections[y][x] = cell.chomp
   end
 end
@@ -92,7 +92,7 @@ virus = Virus.new(input.size / 2, input.size / 2, :up)
 
 infections = Hash.new { |h, k| h[k] = Hash.new { "." } }
 input.each_with_index do |row, y|
-  row.split(//).each_with_index do |cell, x|
+  row.split("").each_with_index do |cell, x|
     infections[y][x] = cell
   end
 end

@@ -6,7 +6,7 @@ TARGET = [31, 39].freeze
 
 def wall?(x, y)
   id = x * x + 3 * x + 2 * x * y + y + y * y + SEED
-  ones = id.to_s(2).split(//).select { |e| e == "1" }.size
+  ones = id.to_s(2).split("").select { |e| e == "1" }.size
   ones % 2 == 1
 end
 
@@ -20,7 +20,7 @@ while search.any?
     [0, 1],
     [1, 0],
     [0, -1],
-    [-1, 0],
+    [-1, 0]
   ].each do |dx, dy|
     xx, yy = x + dx, y + dy
 
@@ -49,7 +49,7 @@ while search.any?
     [0, 1],
     [1, 0],
     [0, -1],
-    [-1, 0],
+    [-1, 0]
   ].each do |dx, dy|
     xx, yy = x + dx, y + dy
 

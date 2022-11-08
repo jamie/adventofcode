@@ -4,9 +4,9 @@ input = Advent.input
 commands = input.map do |line|
   line =~ /(on|off) x=(.*),y=(.*),z=(.*)/
   op, xs, ys, zs = Regexp.last_match.captures
-  xs = Range.new(*xs.split('..').map(&:to_i))
-  ys = Range.new(*ys.split('..').map(&:to_i))
-  zs = Range.new(*zs.split('..').map(&:to_i))
+  xs = Range.new(*xs.split("..").map(&:to_i))
+  ys = Range.new(*ys.split("..").map(&:to_i))
+  zs = Range.new(*zs.split("..").map(&:to_i))
   [op, xs, ys, zs]
 end
 
@@ -27,8 +27,8 @@ commands.each do |op, xs, ys, zs|
   (xs & region || []).each do |x|
     (ys & region || []).each do |y|
       (zs & region || []).each do |z|
-        cubes[[x, y, z]] = true if op == 'on'
-        cubes[[x, y, z]] = false if op == 'off'
+        cubes[[x, y, z]] = true if op == "on"
+        cubes[[x, y, z]] = false if op == "off"
       end
     end
   end
@@ -53,7 +53,7 @@ class CubicRegion
       subregions = subregions.flat_map do |region|
         [
           CubicRegion.new(xs.begin...x, ys, zs),
-          CubicRegion.new(x..xs.end, ys, zs),
+          CubicRegion.new(x..xs.end, ys, zs)
         ]
       end
     end
@@ -61,7 +61,7 @@ class CubicRegion
       subregions = subregions.flat_map do |region|
         [
           CubicRegion.new(xs, ys.begin...y, zs),
-          CubicRegion.new(xs, y..ys.end, zs),
+          CubicRegion.new(xs, y..ys.end, zs)
         ]
       end
     end
@@ -69,7 +69,7 @@ class CubicRegion
       subregions = subregions.flat_map do |region|
         [
           CubicRegion.new(xs, ys, zs.begin...z),
-          CubicRegion.new(xs, ys, z..zs.end),
+          CubicRegion.new(xs, ys, z..zs.end)
         ]
       end
     end

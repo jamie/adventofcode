@@ -11,7 +11,7 @@ def render(screen)
         1 => "#",
         2 => "-",
         3 => "^",
-        4 => "o",
+        4 => "o"
       }[tile] || "?"
       print out
     end

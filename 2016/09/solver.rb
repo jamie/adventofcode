@@ -30,7 +30,7 @@ slices = input.scan(/[A-Z]+|\(\d+x\d+\)/)
 def count_all(slices)
   length = 0
 
-  while !slices.empty?
+  until slices.empty?
     # puts slices.size if rand(2000).zero?
 
     slice = slices.shift

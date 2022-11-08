@@ -11,20 +11,23 @@ exit
 # Part 1
 mob = {
   hp: 55,
-  atk: 8,
+  atk: 8
 }
 
 player = {
   hp: 50,
-  mp: 500,
+  mp: 500
 }
 
 spells = {
-  m: { mp: 53, immediate: ->(c, t) { t[:hp] -= 4 } },
-  d: { mp: 73, immediate: ->(c, t) { t[:hp] -= 2; c[:hp] += 2 } },
-  s: { mp: 113, ongoing: [:shield, 6] },
-  p: { mp: 173, ongoing: [:poison, 6] },
-  r: { mp: 229, ongoing: [:charge, 5] },
+  m: {mp: 53, immediate: ->(c, t) { t[:hp] -= 4 }},
+  d: {mp: 73, immediate: ->(c, t) {
+                           t[:hp] -= 2
+                           c[:hp] += 2
+                         }},
+  s: {mp: 113, ongoing: [:shield, 6]},
+  p: {mp: 173, ongoing: [:poison, 6]},
+  r: {mp: 229, ongoing: [:charge, 5]}
 }
 
 def win?(hero, boss, spells, actions)
@@ -37,8 +40,8 @@ def win?(hero, boss, spells, actions)
     # player turn
     effects.map(&:first).uniq.each do |effect|
       case effect
-      when :poison; boss[:hp] -= 3
-      when :charge; hero[:mp] += 101
+      when :poison then boss[:hp] -= 3
+      when :charge then hero[:mp] += 101
       end
     end
     effects.map! do |effect, duration|
@@ -54,8 +57,8 @@ def win?(hero, boss, spells, actions)
     # boss turn
     effects.map(&:first).uniq.each do |effect|
       case effect
-      when :poison; boss[:hp] -= 3
-      when :charge; hero[:mp] += 101
+      when :poison then boss[:hp] -= 3
+      when :charge then hero[:mp] += 101
       end
     end
     effects.map! do |effect, duration|
@@ -63,10 +66,10 @@ def win?(hero, boss, spells, actions)
     end.compact!
     return true if boss[:hp] <= 0
 
-    if effects.any? { |effect, duration| effect == :shield }
-      hero[:hp] -= boss[:atk] - 7
+    hero[:hp] -= if effects.any? { |effect, duration| effect == :shield }
+      boss[:atk] - 7
     else
-      hero[:hp] -= boss[:atk]
+      boss[:atk]
     end
     return false if hero[:hp] <= 0
   end
@@ -103,20 +106,23 @@ puts min
 # Part 2
 mob = {
   hp: 55,
-  atk: 8,
+  atk: 8
 }
 
 player = {
   hp: 50,
-  mp: 500,
+  mp: 500
 }
 
 spells = {
-  m: { mp: 53, immediate: ->(c, t) { t[:hp] -= 4 } },
-  d: { mp: 73, immediate: ->(c, t) { t[:hp] -= 2; c[:hp] += 2 } },
-  s: { mp: 113, ongoing: [:shield, 6] },
-  r: { mp: 229, ongoing: [:charge, 5] },
-  p: { mp: 173, ongoing: [:poison, 6] },
+  m: {mp: 53, immediate: ->(c, t) { t[:hp] -= 4 }},
+  d: {mp: 73, immediate: ->(c, t) {
+                           t[:hp] -= 2
+                           c[:hp] += 2
+                         }},
+  s: {mp: 113, ongoing: [:shield, 6]},
+  r: {mp: 229, ongoing: [:charge, 5]},
+  p: {mp: 173, ongoing: [:poison, 6]}
 }
 
 def win?(hero, boss, spells, actions)
@@ -132,8 +138,8 @@ def win?(hero, boss, spells, actions)
 
     effects.map(&:first).uniq.each do |effect|
       case effect
-      when :poison; boss[:hp] -= 3
-      when :charge; hero[:mp] += 101
+      when :poison then boss[:hp] -= 3
+      when :charge then hero[:mp] += 101
       end
     end
     effects.map! do |effect, duration|
@@ -149,8 +155,8 @@ def win?(hero, boss, spells, actions)
     # boss turn
     effects.map(&:first).uniq.each do |effect|
       case effect
-      when :poison; boss[:hp] -= 3
-      when :charge; hero[:mp] += 101
+      when :poison then boss[:hp] -= 3
+      when :charge then hero[:mp] += 101
       end
     end
     effects.map! do |effect, duration|
@@ -158,10 +164,10 @@ def win?(hero, boss, spells, actions)
     end.compact!
     return true if boss[:hp] <= 0
 
-    if effects.any? { |effect, duration| effect == :shield }
-      hero[:hp] -= boss[:atk] - 7
+    hero[:hp] -= if effects.any? { |effect, duration| effect == :shield }
+      boss[:atk] - 7
     else
-      hero[:hp] -= boss[:atk]
+      boss[:atk]
     end
     return false if hero[:hp] <= 0
   end

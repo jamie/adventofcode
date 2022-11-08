@@ -48,7 +48,7 @@ tx = target[0]..target[1]
 ty = target[2]..target[3]
 
 hits = 1.upto(tx.max).flat_map do |x|
-  (ty.min).upto(-ty.min).map do |y|
+  ty.min.upto(-ty.min).map do |y|
     [x, y] if probe([x, y], tx, ty)
   end
 end.compact.count

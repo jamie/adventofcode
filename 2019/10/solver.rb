@@ -5,7 +5,7 @@ input = Advent.input
 asteroids = []
 
 input.each_with_index do |row, y|
-  row.split(//).each_with_index do |cell, x|
+  row.split("").each_with_index do |cell, x|
     asteroids << [x, y] if cell == "#"
   end
 end

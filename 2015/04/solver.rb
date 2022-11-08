@@ -5,7 +5,7 @@ input = Advent.input
 i = 0
 loop do
   i += 1
-  if Digest::MD5.hexdigest(input + i.to_s) =~ /^00000/
+  if /^00000/.match?(Digest::MD5.hexdigest(input + i.to_s))
     puts i
     break
   end
@@ -15,7 +15,7 @@ end
 i = 0
 loop do
   i += 1
-  if Digest::MD5.hexdigest(input + i.to_s) =~ /^000000/
+  if /^000000/.match?(Digest::MD5.hexdigest(input + i.to_s))
     puts i
     break
   end

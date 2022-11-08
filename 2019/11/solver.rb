@@ -11,7 +11,7 @@ def debug(paint)
   y2 = paint.keys.map(&:last).max
   y1.upto(y2) do |y|
     x1.upto(x2) do |x|
-      print (paint[[x, y]] == 1 ? "#" : " ")
+      print(paint[[x, y]] == 1 ? "#" : " ")
     end
     puts
   end
@@ -44,7 +44,7 @@ output = []
 robot.reset.input!(input).output!(output)
 
 painter = GridWalker.new
-paint = { painter.pos => 1 }
+paint = {painter.pos => 1}
 loop do
   break if robot.halted
 

@@ -7,10 +7,10 @@ def run(jumps, lo, hi)
   while (0...jumps.size).include? i
     j = i
     i += jumps[j]
-    if jumps[j] >= 3
-      jumps[j] += hi
+    jumps[j] += if jumps[j] >= 3
+      hi
     else
-      jumps[j] += lo
+      lo
     end
     n += 1
   end

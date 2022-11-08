@@ -39,7 +39,7 @@ def update(hash, x, y)
   hash[[x, y]] = [
     hash[[x - 1, y - 1]], hash[[x, y - 1]], hash[[x + 1, y - 1]],
     hash[[x - 1, y]], hash[[x + 1, y]],
-    hash[[x - 1, y + 1]], hash[[x, y + 1]], hash[[x + 1, y + 1]],
+    hash[[x - 1, y + 1]], hash[[x, y + 1]], hash[[x + 1, y + 1]]
   ].compact.inject(&:+)
 end
 

@@ -5,9 +5,9 @@ input = Advent.input
 nice = 0
 
 input.each do |string|
-  if string =~ /[aeiou].*[aeiou].*[aeiou]/
-    if string =~ /(.)\1/
-      if string !~ /ab|cd|pq|xy/
+  if /[aeiou].*[aeiou].*[aeiou]/.match?(string)
+    if /(.)\1/.match?(string)
+      if !/ab|cd|pq|xy/.match?(string)
         nice += 1
       end
     end
@@ -20,8 +20,8 @@ puts nice
 nice = 0
 
 input.each do |string|
-  if string =~ /(..).*\1/
-    if string =~ /(.).\1/
+  if /(..).*\1/.match?(string)
+    if /(.).\1/.match?(string)
       nice += 1
     end
   end

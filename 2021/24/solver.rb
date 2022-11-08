@@ -20,8 +20,7 @@ def monad(digits)
   z = monad_digit(z, digits.shift, 26, -4, 6)
   z = monad_digit(z, digits.shift, 26, -9, 3)
   z = monad_digit(z, digits.shift, 26, -13, 7)
-  z = monad_digit(z, digits.shift, 26, -9, 9)
-  z
+  monad_digit(z, digits.shift, 26, -9, 9)
 end
 
 def monad_digit(z, w, q, n1, n2)

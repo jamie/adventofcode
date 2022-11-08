@@ -42,6 +42,6 @@ class KnotHash
   end
 
   def hexdigest
-    digest.pack("C*").unpack("H*")[0] # <- voodoo
+    digest.pack("C*").unpack1("H*") # <- voodoo
   end
 end

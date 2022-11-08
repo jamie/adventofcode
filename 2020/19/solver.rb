@@ -4,20 +4,20 @@ input = Advent.input
 message_rules = input[0...134]
 messages = input[135...-1]
 
-xmessage_rules = <<STR.split("\n")
-0: 4 1 5
-1: 2 3 | 3 2
-2: 4 4 | 5 5
-3: 4 5 | 5 4
-4: "a"
-5: "b"
+xmessage_rules = <<~STR.split("\n")
+  0: 4 1 5
+  1: 2 3 | 3 2
+  2: 4 4 | 5 5
+  3: 4 5 | 5 4
+  4: "a"
+  5: "b"
 STR
-xmessages = <<STR.split("\n")
-ababbb
-bababa
-abbbab
-aaabbb
-aaaabbb
+xmessages = <<~STR.split("\n")
+  ababbb
+  bababa
+  abbbab
+  aaabbb
+  aaaabbb
 STR
 
 rules = {}
@@ -46,21 +46,21 @@ loop do
     if rules[key].is_a? String
       value = rules.delete(key)
       rules.each do |kar, var|
-        next if var.kind_of? String
+        next if var.is_a? String
         var.each.with_index do |va, ia|
-          next if va.kind_of? String
+          next if va.is_a? String
           va.each.with_index do |v, i|
             va[i] = value if v == key
           end
-          if va.all?{|v| v.kind_of? String}
+          if va.all? { |v| v.is_a? String }
             var[ia] = va.join
           end
         end
-        if var.all?{|v| v.kind_of? String}
-          if var.size == 1
-            rules[kar] = var[0]
+        if var.all? { |v| v.is_a? String }
+          rules[kar] = if var.size == 1
+            var[0]
           else
-            rules[kar] = "(#{var.join("|")})"
+            "(#{var.join("|")})"
           end
         end
       end
@@ -74,7 +74,7 @@ end
 pattern = Regexp.new("^(#{rules[0]})$")
 # puts pattern
 
-puts messages.count{|message| message =~ pattern}
+puts messages.count { |message| message =~ pattern }
 
 # Part 2
 
@@ -110,21 +110,21 @@ loop do
     if rules[key].is_a? String
       value = rules.delete(key)
       rules.each do |kar, var|
-        next if var.kind_of? String
+        next if var.is_a? String
         var.each.with_index do |va, ia|
-          next if va.kind_of? String
+          next if va.is_a? String
           va.each.with_index do |v, i|
             va[i] = value if v == key
           end
-          if va.all?{|v| v.kind_of? String}
+          if va.all? { |v| v.is_a? String }
             var[ia] = va.join
           end
         end
-        if var.all?{|v| v.kind_of? String}
-          if var.size == 1
-            rules[kar] = var[0]
+        if var.all? { |v| v.is_a? String }
+          rules[kar] = if var.size == 1
+            var[0]
           else
-            rules[kar] = "(#{var.join("|")})"
+            "(#{var.join("|")})"
           end
         end
       end
@@ -140,10 +140,10 @@ r42 = rules[42]
 r31 = rules[31]
 
 r8a = "(#{r42})"
-r8b = "(#{r42}|#{r42+r8a})"
-r8c = "(#{r42}|#{r42+r8b})"
-r8d = "(#{r42}|#{r42+r8c})"
-r8e = "(#{r42}|#{r42+r8d})"
+r8b = "(#{r42}|#{r42 + r8a})"
+r8c = "(#{r42}|#{r42 + r8b})"
+r8d = "(#{r42}|#{r42 + r8c})"
+r8e = "(#{r42}|#{r42 + r8d})"
 
 r11a = "(#{r42}#{r31})"
 r11b = "(#{r42}#{r31}|#{r42}#{r11a}#{r31})"
@@ -156,4 +156,4 @@ r0 = "(#{r8e}#{r11e})"
 pattern = Regexp.new("^#{r0}$")
 # puts pattern
 
-puts messages.count{|message| message =~ pattern}
+puts messages.count { |message| message =~ pattern }

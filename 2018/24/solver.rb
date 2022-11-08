@@ -73,7 +73,7 @@ end
 
 input.shift # label
 i = 1
-while !input.first.empty?
+until input.first.empty?
   immune_system << parse(input.shift, "System", i, infection)
   i += 1
 end
@@ -81,7 +81,7 @@ input.shift # blank
 
 input.shift # label
 i = 1
-while !input.empty?
+until input.empty?
   infection << parse(input.shift, "Infect", i, immune_system)
   i += 1
 end

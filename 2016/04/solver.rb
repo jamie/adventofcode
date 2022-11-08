@@ -5,8 +5,11 @@ input = Advent.input
 sum = 0
 
 input.each do |line|
-  name, sector, checksum = line.scan(/([a-z-]+)-([\d]+)\[([a-z]{5})\]/)[0]
-  frequency = name.gsub("-", "").split(//).sort.inject({}) { |h, c| h[c] ||= 0; h[c] += 1; h }
+  name, sector, checksum = line.scan(/([a-z-]+)-(\d+)\[([a-z]{5})\]/)[0]
+  frequency = name.delete("-").split("").sort.each_with_object({}) { |c, h|
+    h[c] ||= 0
+    h[c] += 1
+  }
   expected_checksum = frequency.to_a.sort do |x, y|
     if x[1] != y[1]
       y[1] <=> x[1]
@@ -24,7 +27,7 @@ puts sum
 
 # Part 2
 input.each do |line|
-  name_enc, sector, checksum = line.scan(/([a-z-]+)-([\d]+)\[([a-z]{5})\]/)[0]
+  name_enc, sector, checksum = line.scan(/([a-z-]+)-(\d+)\[([a-z]{5})\]/)[0]
 
   rot = sector.to_i % 26
   a = 97

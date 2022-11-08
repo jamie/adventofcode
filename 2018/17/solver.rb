@@ -8,7 +8,7 @@ xmax = ymax = 0
 input.each do |line|
   base, min, max = line.match(/.=(\d+), .=(\d+)..(\d+)/).captures.map(&:to_i)
   range = (min..max)
-  if line =~ /^x/
+  if /^x/.match?(line)
     ymin = [ymin, range.min].min
     ymax = [ymax, range.max].max
     xmax = [xmax, base].max
@@ -30,15 +30,15 @@ xmin -= 1
 xmax += 1
 
 def grid.wall?(y, x)
-  %w(#).include?(self[y][x])
+  %w[#].include?(self[y][x])
 end
 
 def grid.support?(y, x)
-  %w(# ~).include?(self[y][x])
+  %w[# ~].include?(self[y][x])
 end
 
 def grid.empty?(y, x)
-  %w(.).include?(self[y][x])
+  %w[.].include?(self[y][x])
 end
 
 def grid.set(y, x, val)
@@ -96,9 +96,9 @@ end
 # Part 1
 grid[ymin..ymax].map do |line|
   line[xmin..xmax]
-end.flatten.select { |e| %w(| ~).include? e }.size.tap { |e| puts e }
+end.flatten.select { |e| %w[| ~].include? e }.size.tap { |e| puts e }
 
 # Part 2
 grid[ymin..ymax].map do |line|
   line[xmin..xmax]
-end.flatten.select { |e| %w(~).include? e }.size.tap { |e| puts e }
+end.flatten.select { |e| %w[~].include? e }.size.tap { |e| puts e }

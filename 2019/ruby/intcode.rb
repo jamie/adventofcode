@@ -48,34 +48,41 @@ class Intcode
     loop do
       @modes, opcode = memory[ip].divmod(100)
       words = case opcode
-              when 1 # add
-                write(3, val1 + val2); 4
-              when 2 # mul
-                write(3, val1 * val2); 4
-              when 3 # input
-                unless next_input?
-                  # print 'waiting for input'
-                  return
-                end
-                write(1, next_input); 2
-              when 4 # output
-                @output << val1; 2
-              when 5 # jump if nonzero
-                jump(val2, val1 != 0, 3)
-              when 6 # jump if zero
-                jump(val2, val1 == 0, 3)
-              when 7 # less than
-                write(3, val1 < val2 ? 1 : 0); 4
-              when 8 # equals
-                write(3, val1 == val2 ? 1 : 0); 4
-              when 9 # relative
-                @relative_base += val1; 2
-              when 99 # halt
-                @halted = true
-                break
-              else
-                fail "Unknown opcode: #{memory[ip]}"
-              end
+      when 1 # add
+        write(3, val1 + val2)
+        4
+      when 2 # mul
+        write(3, val1 * val2)
+        4
+      when 3 # input
+        unless next_input?
+          # print 'waiting for input'
+          return
+        end
+        write(1, next_input)
+        2
+      when 4 # output
+        @output << val1
+        2
+      when 5 # jump if nonzero
+        jump(val2, val1 != 0, 3)
+      when 6 # jump if zero
+        jump(val2, val1 == 0, 3)
+      when 7 # less than
+        write(3, val1 < val2 ? 1 : 0)
+        4
+      when 8 # equals
+        write(3, val1 == val2 ? 1 : 0)
+        4
+      when 9 # relative
+        @relative_base += val1
+        2
+      when 99 # halt
+        @halted = true
+        break
+      else
+        fail "Unknown opcode: #{memory[ip]}"
+      end
       @ip += words
     end
     @output.last
@@ -103,7 +110,7 @@ class Intcode
 
   def read(i)
     ii = ip + i
-    mode = @modes / (10 ** (i - 1)) % 10
+    mode = @modes / (10**(i - 1)) % 10
     val = memory[ii] || 0
     val += @relative_base if mode == 2
     val = memory[val] || 0 unless mode == 1

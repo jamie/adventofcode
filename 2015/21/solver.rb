@@ -5,13 +5,13 @@ input = Advent.input
 mob = {
   hp: 104,
   atk: 8,
-  def: 1,
+  def: 1
 }
 
 player = {
   hp: 100,
   atk: 0,
-  def: 0,
+  def: 0
 }
 
 weap = [
@@ -19,7 +19,7 @@ weap = [
   [:short, 10, 5, 0],
   [:hammer, 25, 6, 0],
   [:long, 40, 7, 0],
-  [:axe, 74, 8, 0],
+  [:axe, 74, 8, 0]
 ]
 
 arm = [
@@ -28,7 +28,7 @@ arm = [
   [:chain, 31, 0, 2],
   [:splint, 53, 0, 3],
   [:banded, 75, 0, 4],
-  [:plate, 102, 0, 5],
+  [:plate, 102, 0, 5]
 ]
 
 ring = [
@@ -39,7 +39,7 @@ ring = [
   [:atk3, 100, 3, 0],
   [:def1, 20, 0, 1],
   [:def2, 40, 0, 2],
-  [:def3, 80, 0, 3],
+  [:def3, 80, 0, 3]
 ]
 
 puts 78 # Worked out in head, exact match stats cheapest
@@ -48,13 +48,13 @@ puts 78 # Worked out in head, exact match stats cheapest
 mob = {
   hp: 104,
   atk: 8,
-  def: 1,
+  def: 1
 }
 
 player = {
   hp: 100,
   atk: 0,
-  def: 0,
+  def: 0
 }
 
 weap = [
@@ -62,7 +62,7 @@ weap = [
   [:short, 10, 5, 0],
   [:hammer, 25, 6, 0],
   [:long, 40, 7, 0],
-  [:axe, 74, 8, 0],
+  [:axe, 74, 8, 0]
 ]
 
 arm = [
@@ -71,7 +71,7 @@ arm = [
   [:chain, 31, 0, 2],
   [:splint, 53, 0, 3],
   [:banded, 75, 0, 4],
-  [:plate, 102, 0, 5],
+  [:plate, 102, 0, 5]
 ]
 
 ring = [
@@ -82,7 +82,7 @@ ring = [
   [:atk3, 100, 3, 0],
   [:def1, 20, 0, 1],
   [:def2, 40, 0, 2],
-  [:def3, 80, 0, 3],
+  [:def3, 80, 0, 3]
 ]
 
 max = 0

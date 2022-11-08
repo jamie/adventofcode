@@ -1,5 +1,5 @@
 require "advent"
-input = Advent.input.split(//).map(&:to_i)
+input = Advent.input.split("").map(&:to_i)
 
 PATTERN = [0, 1, 0, -1].freeze
 

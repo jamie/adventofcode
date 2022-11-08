@@ -13,7 +13,7 @@ input = Advent.input
 carts = []
 
 map = input.map.with_index do |row, y|
-  row.split(//).map.with_index do |cell, x|
+  row.split("").map.with_index do |cell, x|
     case cell
     when "v", "^"
       carts << [x, y, cell, 0]
@@ -82,13 +82,13 @@ loop do
       dir = "<"
     when [">", "/"]
       dir = "^"
-    when ["^", '\\']
+    when ["^", "\\"]
       dir = "<"
-    when ["<", '\\']
+    when ["<", "\\"]
       dir = "^"
-    when ["v", '\\']
+    when ["v", "\\"]
       dir = ">"
-    when [">", '\\']
+    when [">", "\\"]
       dir = "v"
     end
     cart[2] = dir

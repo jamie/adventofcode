@@ -2,7 +2,7 @@ require "advent"
 input = Advent.input
 
 SIZE = input.size
-yard = input.map { |line| line.split(//) }
+yard = input.map { |line| line.split("") }
 
 def step(yard)
   new_yard = ([""] * SIZE).map { [] }
@@ -17,9 +17,9 @@ def step(yard)
           next unless (0...SIZE).include?(x + dx)
           next if [dx, dy] == [0, 0]
           case yard[y + dy][x + dx]
-          when "."; ground += 1
-          when "|"; trees += 1
-          when "#"; lumber += 1
+          when "." then ground += 1
+          when "|" then trees += 1
+          when "#" then lumber += 1
           end
         end
       end
@@ -44,7 +44,7 @@ puts yard.flatten.count("|") * yard.flatten.count("#")
 # Part 2, 1b iterations is 40 days. Instead look for cycles
 old_score = 0
 yards = [yard]
-yard = input.map { |line| line.split(//) }
+yard = input.map { |line| line.split("") }
 1_000_000_000.times do |n|
   yard = step(yard)
   # Dunno why it's finding a cycle around n=10... Ignore that one

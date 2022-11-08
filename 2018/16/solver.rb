@@ -14,10 +14,10 @@ while input[0] != ""
   samples << [opcode, before, after]
 end
 
-OPNAMES = %w(
+OPNAMES = %w[
   addr addi mulr muli banr bani borr bori
   setr seti gtir gtri gtrr eqir eqri eqrr
-).freeze
+].freeze
 
 vague = 0
 samples.sort.uniq.each do |opcode, before, after|
@@ -63,7 +63,7 @@ end
 cpu = CPU.new([0, 0, 0, 0])
 input.shift
 input.shift
-while !input[0].nil?
+until input[0].nil?
   opcode = input.shift.split(" ").map(&:to_i)
   opcode[0] = opcode_map[opcode[0]]
   cpu.run(opcode)

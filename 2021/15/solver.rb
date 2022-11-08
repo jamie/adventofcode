@@ -13,13 +13,13 @@ inxput = <<~STR.split("\n")
   1293138521
   2311944581
 STR
-input = input.map { |line| line.split(//).map(&:to_i) }
+input = input.map { |line| line.split("").map(&:to_i) }
 
 # Part 1
 
 def lowest_risk(input)
   pos = [0, 0]
-  goal = [input.last.size-1, input.size-1]
+  goal = [input.last.size - 1, input.size - 1]
   raise "Non-square grid" if goal.uniq.size > 1
   bounds = (pos.first)..(goal.first)
 
@@ -35,11 +35,11 @@ def lowest_risk(input)
 
     [[-1, 0], [1, 0], [0, -1], [0, 1]].each do |dx, dy|
       x, y = pos
-      dpos = [x+dx, y+dy]
+      dpos = [x + dx, y + dy]
       next if seen[dpos]
 
-      if bounds.cover?(x+dx) && bounds.cover?(y+dy)
-        dcost = cost + input[y+dy][x+dx]
+      if bounds.cover?(x + dx) && bounds.cover?(y + dy)
+        dcost = cost + input[y + dy][x + dx]
         seen[dpos] = dcost
         distance = (goal[0] - dpos[0]) + (goal[1] - dpos[1])
         priority = dcost # TODO: Incorporate distance as a speed optimization?
@@ -57,20 +57,20 @@ puts lowest_risk(input)
 # Part 2
 
 def succ(n)
-  n == 9 ? 1 : n+1
+  n == 9 ? 1 : n + 1
 end
 
 n = input.last.size
 4.times do
   # Expand rows
   n.times do |x|
-    input.each { |row| row << succ(row[row.size-n]) }
+    input.each { |row| row << succ(row[row.size - n]) }
   end
 end
 4.times do
   # Expand columns
   n.times do |y|
-    input << input[input.size-n].map { |risk| succ(risk) }
+    input << input[input.size - n].map { |risk| succ(risk) }
   end
 end
 

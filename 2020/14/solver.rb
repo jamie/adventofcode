@@ -4,16 +4,16 @@ input = Advent.input
 # Common
 
 def masks_from(mask)
-  ors = ["0"]*36
-  ands = ["1"]*36
-  floats = [nil]*36
+  ors = ["0"] * 36
+  ands = ["1"] * 36
+  floats = [nil] * 36
   mask.each_char.with_index do |char, index|
     if char == "1"
       ors[index] = 1
     elsif char == "0"
       ands[index] = 0
     elsif char == "X"
-      floats[index] = 'X'
+      floats[index] = "X"
     end
   end
   [ors, ands, floats]
@@ -60,13 +60,13 @@ input.each do |line|
     floats.each.with_index do |float, i|
       next unless float == "X"
 
-      maska = ["0"]*36
+      maska = ["0"] * 36
       maska[i] = "1"
-      
-      maskb = ["1"]*36
+
+      maskb = ["1"] * 36
       maskb[i] = "0"
 
-      indices = indices.map {|index|
+      indices = indices.map { |index|
         [index | maska.join.to_i(2), index & maskb.join.to_i(2)]
       }.flatten
     end

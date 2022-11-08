@@ -40,4 +40,3 @@ end
 
 cycle_size = seen.size - seen.index(programs)
 puts seen[1000000000 % cycle_size]
-

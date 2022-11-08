@@ -5,17 +5,17 @@ class AdventMatcher
 
   def match(path)
     path = path.to_s
-    return nil unless path =~ @glob
-    year, lang, _file = path.split('/')
-    return nil unless year =~ /\d{4}/
+    return nil unless path&.match?(@glob)
+    year, lang, _file = path.split("/")
+    return nil unless /\d{4}/.match?(year)
     {
-      script: path,
+      script: path
     }
   end
 end
 
-require './lib/runner'
-require 'benchmark'
+require "./lib/runner"
+require "benchmark"
 
 def watch_for(suffix, runner)
   watch(AdventMatcher.new(suffix)) do |match|

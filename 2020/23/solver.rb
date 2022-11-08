@@ -1,7 +1,7 @@
 require "advent"
 require "node"
 input = Advent.input
-numbers = input.split(//).map(&:to_i)
+numbers = input.split("").map(&:to_i)
 
 def debug(list)
   initial = list.value
@@ -13,15 +13,15 @@ def debug(list)
 end
 
 def arrange(cups, iterations)
-  (cups.size-1).times do |i|
-    cups[i].right = cups[i+1]
-    cups[i+1].left = cups[i]
+  (cups.size - 1).times do |i|
+    cups[i].right = cups[i + 1]
+    cups[i + 1].left = cups[i]
   end
   cups[-1].right = cups[0]
   cups[0].left = cups[-1]
 
   lookup = {}
-  cups.each {|cup| lookup[cup.value] = cup}
+  cups.each { |cup| lookup[cup.value] = cup }
 
   current = cups[0]
 
@@ -56,7 +56,7 @@ end
 
 # Part 1
 
-cups = numbers.map{|num| Node.new(num) }
+cups = numbers.map { |num| Node.new(num) }
 
 arrange(cups, 100)
 
@@ -69,7 +69,7 @@ puts
 
 # Part 2
 
-cups = numbers.map{|num| Node.new(num) }
+cups = numbers.map { |num| Node.new(num) }
 10.upto(1_000_000).each do |num|
   cups << Node.new(num)
 end

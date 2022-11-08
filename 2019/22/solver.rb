@@ -31,10 +31,10 @@ puts cards.index(2019)
 
 exit # ugh reversing this is a mess, I'm giving up
 
-input = <<IN.split("\n")
-deal with increment 7
-deal with increment 9
-cut -2
+input = <<~IN.split("\n")
+  deal with increment 7
+  deal with increment 9
+  cut -2
 IN
 
 deck_size = 10 # 10007 # 119315717514047
@@ -45,7 +45,7 @@ init_offset = 0 # 2939 # 2020
   offset = init_offset
   iterations.times do |iter|
     # puts iter if iter % 1000 == 0
-    input.reverse.each do |command|
+    input.reverse_each do |command|
       case command
       when "deal into new stack"
         offset = deck_size - (offset + 1)

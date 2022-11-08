@@ -55,14 +55,14 @@ class Region < Struct.new(:xmin, :xmax, :ymin, :ymax, :zmin, :zmax)
 
   def point?
     xmin == xmax ||
-    ymin == ymax ||
-    zmin == zmax
+      ymin == ymax ||
+      zmin == zmax
   end
 
   def invalid?
     xmin > xmax ||
-    ymin > ymax ||
-    zmin > zmax
+      ymin > ymax ||
+      zmin > zmax
   end
 
   def subdivisions
@@ -78,7 +78,7 @@ class Region < Struct.new(:xmin, :xmax, :ymin, :ymax, :zmin, :zmax)
       Region.new(xmin, xmid, ymin, ymid, zmid + 1, zmax),
       Region.new(xmid + 1, xmax, ymin, ymid, zmid + 1, zmax),
       Region.new(xmin, xmid, ymid + 1, ymax, zmid + 1, zmax),
-      Region.new(xmid + 1, xmax, ymid + 1, ymax, zmid + 1, zmax),
+      Region.new(xmid + 1, xmax, ymid + 1, ymax, zmid + 1, zmax)
     ].reject(&:invalid?)
   end
 
@@ -94,7 +94,7 @@ class Region < Struct.new(:xmin, :xmax, :ymin, :ymax, :zmin, :zmax)
     Point.new(
       (xmin + xmax) / 2,
       (ymin + ymax) / 2,
-      (zmin + zmax) / 2,
+      (zmin + zmax) / 2
     )
   end
 end

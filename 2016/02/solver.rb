@@ -5,7 +5,7 @@ dir_index = {
   "U" => 0,
   "R" => 1,
   "D" => 2,
-  "L" => 3,
+  "L" => 3
 }
 
 # Part 1
@@ -19,14 +19,14 @@ moves = [
   [3, 6, 9, 5],
   [4, 8, 7, 7],
   [5, 9, 8, 7],
-  [6, 9, 9, 8],
+  [6, 9, 9, 8]
 ]
 
 num = 5
 out = []
 
 input.each do |line|
-  line.chomp.split(//).map { |c| dir_index[c] }.each do |step|
+  line.chomp.split("").map { |c| dir_index[c] }.each do |step|
     num = moves[num][step]
   end
   out << num
@@ -53,14 +53,14 @@ moves = [
   [7, 12, 13, 10],
   [8, 12, 12, 11],
 
-  [11, 13, 13, 13],
+  [11, 13, 13, 13]
 ]
 
 num = 5
 out = []
 
 input.each do |line|
-  line.chomp.split(//).map { |c| dir_index[c] }.each do |step|
+  line.chomp.split("").map { |c| dir_index[c] }.each do |step|
     num = moves[num][step]
   end
   out << num

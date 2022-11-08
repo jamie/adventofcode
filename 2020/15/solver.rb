@@ -1,7 +1,7 @@
 require "advent"
 input = Advent.input
 
-digits = input.split(',').map(&:to_i)
+digits = input.split(",").map(&:to_i)
 
 seen = {}
 digits.each.with_index do |d, i|

@@ -34,13 +34,13 @@ def score(board)
   board.flatten.compact.map(&:to_i).sum
 end
 
-sequence = input.shift.split(',').map(&:to_i)
+sequence = input.shift.split(",").map(&:to_i)
 
 boards = input
   .chunk(&:empty?)
   .map(&:last)
-  .reject {|group| group.size < 5}
-  .map {|board| board.map(&:split).map {|line| line.map(&:to_i)}}
+  .reject { |group| group.size < 5 }
+  .map { |board| board.map(&:split).map { |line| line.map(&:to_i) } }
 
 sequence.each do |n|
   boards.each do |board|
@@ -54,7 +54,7 @@ sequence.each do |n|
       break
     end
   end
-  break if boards.any? {|board| winning?(board)}
+  break if boards.any? { |board| winning?(board) }
 end
 
 # Part 2
@@ -62,8 +62,8 @@ end
 boards = input
   .chunk(&:empty?)
   .map(&:last)
-  .reject {|group| group.size < 5}
-  .map {|board| board.map(&:split).map {|line| line.map(&:to_i)}}
+  .reject { |group| group.size < 5 }
+  .map { |board| board.map(&:split).map { |line| line.map(&:to_i) } }
 
 sequence.each do |n|
   boards.each do |board|
@@ -77,5 +77,5 @@ sequence.each do |n|
     puts score(boards.first) * n
     break
   end
-  boards.reject! {|board| winning?(board)}
+  boards.reject! { |board| winning?(board) }
 end

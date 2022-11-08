@@ -21,7 +21,7 @@ end
 def walk(location, facing, distance)
   x, y = location
   distance = -distance if (facing == :south) || (facing == :west)
-  (facing == :north || facing == :south) ?
+  facing == :north || facing == :south ?
     [x, y + distance] :
     [x + distance, y]
 end
@@ -53,7 +53,7 @@ end
 def walk(location, facing, distance)
   x, y = location
   distance = -distance if (facing == :south) || (facing == :west)
-  (facing == :north || facing == :south) ?
+  facing == :north || facing == :south ?
     [x, y + distance] :
     [x + distance, y]
 end

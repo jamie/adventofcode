@@ -1,7 +1,10 @@
 require "advent"
 input = Advent.input
 
-starting_positions = input.map { |line| line =~ /: (\d+)/; $1.to_i }
+starting_positions = input.map { |line|
+  line =~ /: (\d+)/
+  $1.to_i
+}
 
 # Part 1
 
@@ -42,18 +45,20 @@ puts score.min * die.rollcount
 
 # Part 2
 
+# TODO: Needs some optimization, currently 9m27s runtime
+
 dirac = {
-  3 => 1,
-  4 => 3,
-  5 => 6,
-  6 => 7,
-  7 => 6,
-  8 => 3,
-  9 => 1,
+  3 => 1, # 1,1,1
+  4 => 3, # 1,1,2
+  5 => 6, # 1,1,3; 1,2,2
+  6 => 7, # 1,2,3; 2,2,2
+  7 => 6, # 1,3,3; 2,2,3
+  8 => 3, # 2,3,3
+  9 => 1 # 3,3,3
 }
 
 universes = {
-  ([0, 0, 0, 0] + starting_positions.dup) => 1,
+  ([0, 0, 0, 0] + starting_positions.dup) => 1
 }
 winners = [0, 0]
 
@@ -71,12 +76,12 @@ until universes.empty?
       winners[player] += universe_count * dirac_count
     else
       u_ = [
-        score1+score2, # Priority
+        score1 + score2, # Priority
         score2,
         score1,
         1 - player,
         pos2,
-        pos1,
+        pos1
       ] # swap player order
       universes[u_] ||= 0
       universes[u_] += universe_count * dirac_count

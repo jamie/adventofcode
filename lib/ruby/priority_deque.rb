@@ -1,7 +1,7 @@
 class PriorityDeque
   attr_reader :queue
 
-  def initialize(prior=:max)
+  def initialize(prior = :max)
     @prior = prior
     @queue = {}
   end

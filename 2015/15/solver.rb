@@ -8,7 +8,7 @@ ingredients = input.map do |line|
     Regexp.last_match(2).to_i,
     Regexp.last_match(3).to_i,
     Regexp.last_match(4).to_i,
-    Regexp.last_match(5).to_i,
+    Regexp.last_match(5).to_i
   ]
 end
 
@@ -40,7 +40,7 @@ ingredients = input.map do |line|
     Regexp.last_match(3).to_i,
     Regexp.last_match(4).to_i,
     Regexp.last_match(5).to_i,
-    Regexp.last_match(6).to_i,
+    Regexp.last_match(6).to_i
   ]
 end
 

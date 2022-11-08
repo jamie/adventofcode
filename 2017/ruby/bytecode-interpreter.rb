@@ -23,7 +23,7 @@ class Program
   end
 
   def run
-    step while !halted?
+    step until halted?
   end
 
   def step
@@ -31,16 +31,16 @@ class Program
     self.index += 1
 
     case statement
-    when /snd (.)/; snd(Regexp.last_match(1))
-    when /set (.) (.+)/; set(Regexp.last_match(1), Regexp.last_match(2))
-    when /add (.) (.+)/; add(Regexp.last_match(1), Regexp.last_match(2))
-    when /sub (.) (.+)/; sub(Regexp.last_match(1), Regexp.last_match(2))
-    when /mul (.) (.+)/; mul(Regexp.last_match(1), Regexp.last_match(2))
-    when /mod (.) (.+)/; mod(Regexp.last_match(1), Regexp.last_match(2))
-    when /rcv (.)/; rcv(Regexp.last_match(1))
-    when /jgz (.) (.+)/; jgz(Regexp.last_match(1), Regexp.last_match(2))
-    when /jnz (.) (.+)/; jnz(Regexp.last_match(1), Regexp.last_match(2))
-    when nil; return
+    when /snd (.)/ then snd(Regexp.last_match(1))
+    when /set (.) (.+)/ then set(Regexp.last_match(1), Regexp.last_match(2))
+    when /add (.) (.+)/ then add(Regexp.last_match(1), Regexp.last_match(2))
+    when /sub (.) (.+)/ then sub(Regexp.last_match(1), Regexp.last_match(2))
+    when /mul (.) (.+)/ then mul(Regexp.last_match(1), Regexp.last_match(2))
+    when /mod (.) (.+)/ then mod(Regexp.last_match(1), Regexp.last_match(2))
+    when /rcv (.)/ then rcv(Regexp.last_match(1))
+    when /jgz (.) (.+)/ then jgz(Regexp.last_match(1), Regexp.last_match(2))
+    when /jnz (.) (.+)/ then jnz(Regexp.last_match(1), Regexp.last_match(2))
+    when nil then nil
     else
       puts "Unknown instruction: #{input[index].inspect}"
       exit
@@ -50,7 +50,7 @@ class Program
   private
 
   def value(val, registers)
-    (val =~ /[0-9]/ ? val.to_i : registers[val])
+    (/[0-9]/.match?(val) ? val.to_i : registers[val])
   end
 
   def set(reg, val)

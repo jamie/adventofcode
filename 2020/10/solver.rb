@@ -1,22 +1,22 @@
 require "advent"
 input = Advent.input.map(&:to_i).sort
 
-jolts = [0] + input + [input.max+3]
+jolts = [0] + input + [input.max + 3]
 
 # Part 1
 
 diff = [0, 0, 0, 0]
 jolts.size.times do |i|
-  next unless jolts[i+1]
+  next unless jolts[i + 1]
 
-  diff[jolts[i+1]-jolts[i]] += 1
+  diff[jolts[i + 1] - jolts[i]] += 1
 end
 puts diff[1] * diff[3]
 
 # Part 2
 
 perms = 1
-chunks = jolts.chunk_while{ |x,y| y-x < 3}.to_a
+chunks = jolts.chunk_while { |x, y| y - x < 3 }.to_a
 chunks.each do |chunk|
   # Looking at live data + test data, values only diff by 1 or 3
   # So if we broke into chunks by 3, each chunk has values diff by 1

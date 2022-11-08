@@ -7,12 +7,12 @@ class Elevator
   def initialize(nodes, input)
     @nodes = nodes
     @input = input
-    @seen = { input[1..-1] => 0 }
-    @queue = { 17 => [input] }
+    @seen = {input[1..-1] => 0}
+    @queue = {17 => [input]}
   end
 
   def run
-    while !queue.empty?
+    until queue.empty?
       steps, elevator, *state = pop_queue
 
       next unless valid?(state)
@@ -52,14 +52,14 @@ class Elevator
   end
 
   def valid?(state)
-    floors = Hash[@nodes.zip(state)]
+    floors = @nodes.zip(state).to_h
     floors.each do |node, floor|
       # microchip
-      next if node =~ /G/
+      next if /G/.match?(node)
       next if floor == floors[node.tr("M", "G")] # same floor as own generator, safe
       floors.each do |gen_node, gen_floor|
         # generator
-        next if gen_node =~ /M/
+        next if /M/.match?(gen_node)
         return false if node[0] != gen_node[0] && floor == gen_floor
       end
     end
@@ -95,13 +95,13 @@ end
 
 # Part 1
 puts Elevator.new(
-  %w(SG SM PG PM TG TM RG RM CG CM),
+  %w[SG SM PG PM TG TM RG RM CG CM],
   [0, 1, 1, 1, 1, 1, 2, 3, 2, 2, 2, 2]
 ).run
 
 # Part 2
 exit
 puts Elevator.new(
-  %w(SG SM PG PM TG TM RG RM CG CM EG EM DG DM),
+  %w[SG SM PG PM TG TM RG RM CG CM EG EM DG DM],
   [0, 1, 1, 1, 1, 1, 2, 3, 2, 2, 2, 2, 1, 1, 1, 1]
 ).run

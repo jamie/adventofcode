@@ -17,7 +17,7 @@ input.each do |line|
 end
 
 # Part 1
-chems = { "FUEL" => 1 }
+chems = {"FUEL" => 1}
 loop do
   prior_chems = chems.dup
   prior_chems.each do |mat, qty|
@@ -41,7 +41,7 @@ puts chems["ORE"]
 
 # Part 2
 fuel = Advent.rbsearch(1_000_000_000_000) do |f|
-  chems = { "FUEL" => f }
+  chems = {"FUEL" => f}
   loop do
     prior_chems = chems.dup
     prior_chems.each do |mat, qty|

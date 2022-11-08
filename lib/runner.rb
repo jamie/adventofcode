@@ -5,7 +5,7 @@ class Runner
   LANG_EXTENSION = {
     "elixir" => "exs",
     "nim" => "nim",
-    "ruby" => "rb",
+    "ruby" => "rb"
   }.freeze
 
   def self.find(year, day, lang)
@@ -24,8 +24,6 @@ class Runner
     lang = LANG_EXTENSION.key(extension)
     if lang && script =~ /solve/
       const_get("Runner::#{lang.capitalize}").new(script)
-    else
-      nil
     end
   end
 

@@ -17,10 +17,10 @@ class Cave
     (0..@target[0]).map do |x|
       (0..@target[1]).map do |y|
         type, risk = case erosion(x, y) % 3
-                     when 0; [:rocky, 0]
-                     when 1; [:wet, 1]
-                     when 2; [:narrow, 2]
-                     end
+        when 0 then [:rocky, 0]
+        when 1 then [:wet, 1]
+        when 2 then [:narrow, 2]
+        end
         risk(x, y)
       end
     end.flatten.sum
@@ -28,16 +28,16 @@ class Cave
 
   def erosion(x, y)
     return @erosion[[x, y]] if @erosion[[x, y]]
-    if [x, y] == [0, 0]
-      geologic_index = 0
+    geologic_index = if [x, y] == [0, 0]
+      0
     elsif [x, y] == @target
-      geologic_index = 0
+      0
     elsif y == 0
-      geologic_index = x * 16807
+      x * 16807
     elsif x == 0
-      geologic_index = y * 48271
+      y * 48271
     else
-      geologic_index = erosion(x - 1, y) * erosion(x, y - 1)
+      erosion(x - 1, y) * erosion(x, y - 1)
     end
 
     @erosion[[x, y]] = (geologic_index + @depth) % 20183
@@ -67,7 +67,7 @@ class Cave
         [time - 1, gear, x - 1, y],
         [time - 1, gear, x + 1, y],
         [time - 1, gear, x, y + 1],
-        [time - 7, other_gear, x, y],
+        [time - 7, other_gear, x, y]
       ].each do |newtime, newgear, newx, newy|
         if newx < 0 || newy < 0
           next

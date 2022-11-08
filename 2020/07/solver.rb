@@ -2,16 +2,16 @@ require "advent"
 input = Advent.input
 
 containers = {}
-input.each do |line| 
-  container, contents = line.split(' bags contain ')
+input.each do |line|
+  container, contents = line.split(" bags contain ")
   containers[container] = []
 
   contents = contents.split(/ bags?[,.]/)
-  if contents == ['no other']
+  if contents == ["no other"]
     # NOP
   else
     contents.each do |content|
-      count, kind = content.split(' ', 2)
+      count, kind = content.split(" ", 2)
       containers[container] << [count, kind]
     end
   end
@@ -28,8 +28,8 @@ end
 
 matching = 0
 containers.keys.each do |root|
-  next if root == 'shiny gold'
-  if dig_for(containers, root, 'shiny gold')
+  next if root == "shiny gold"
+  if dig_for(containers, root, "shiny gold")
     matching += 1
   end
 end
@@ -54,4 +54,4 @@ def count_content(containers, bag)
   content
 end
 
-puts count_content(containers, 'shiny gold') - 1
+puts count_content(containers, "shiny gold") - 1

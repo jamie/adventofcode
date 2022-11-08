@@ -25,7 +25,7 @@ module ShellText
       lcyan: "\e[96m",
       white: "\e[97m",
 
-      bold: "\e[1m",
+      bold: "\e[1m"
     }.slice(*styles).values.join
     "#{style}#{string}#{reset}"
   end
@@ -36,7 +36,7 @@ class Map
 
   def initialize(input, elf_power: 3)
     @board = input.map.with_index do |line, y|
-      line.split(//).map.with_index do |char, x|
+      line.split("").map.with_index do |char, x|
         case char
         when "#"
           :wall
@@ -84,7 +84,7 @@ class Map
       at(x, y - 1),
       at(x - 1, y),
       at(x + 1, y),
-      at(x, y + 1),
+      at(x, y + 1)
     ]
     adjacent.select! { |e| e.is_a?(type) } if type
     adjacent
@@ -114,11 +114,9 @@ class Map
 
   def step!
     units(Unit).each do |unit|
-      begin
-        unit.act!(self)
-      rescue NoTarget
-        return
-      end
+      unit.act!(self)
+    rescue NoTarget
+      return
     end
     @rounds += 1
   end
@@ -178,31 +176,31 @@ class Unit
     distances = map.distances_from(x, y) # calculate once
 
     targets = map.units(enemy_class)
-    open_squares = targets.
-      map { |e| map.adjacent_to(e.x, e.y, type: EmptyCell) }.
-      flatten.
-      uniq.
-      map { |s| [distances[[s.x, s.y]], s.y, s.x, s] }. # sort by distance, reading order
-      select { |d, y, x, s| d }. # reject unpathable destinations
-      sort.
-      map(&:last)
+    open_squares = targets
+      .map { |e| map.adjacent_to(e.x, e.y, type: EmptyCell) }
+      .flatten
+      .uniq
+      .map { |s| [distances[[s.x, s.y]], s.y, s.x, s] } # sort by distance, reading order
+      .select { |d, y, x, s| d } # reject unpathable destinations
+      .sort
+      .map(&:last)
     destination = open_squares.first
     return unless destination
 
     target_distances = map.distances_from(destination.x, destination.y)
-    destination = map.adjacent_to(x, y, type: EmptyCell).
-      select { |e| target_distances[[e.x, e.y]] }.
-      sort_by { |e| [target_distances[[e.x, e.y]], e.y, e.x] }.
-      first
+    destination = map.adjacent_to(x, y, type: EmptyCell)
+      .select { |e| target_distances[[e.x, e.y]] }
+      .sort_by { |e| [target_distances[[e.x, e.y]], e.y, e.x] }
+      .first
 
     map.move!(self, destination)
   end
 
   def attack(map)
-    target = map.
-      adjacent_to(x, y, type: enemy_class).
-      sort_by(&:target_sort).
-      first
+    target = map
+      .adjacent_to(x, y, type: enemy_class)
+      .sort_by(&:target_sort)
+      .first
     if target
       target.hp -= @attack_power
       map.remove!(target) if target.hp <= 0

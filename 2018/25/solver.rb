@@ -12,7 +12,7 @@ Point = Struct.new(:x, :y, :z, :t) do
       x - other.x,
       y - other.y,
       z - other.z,
-      t - other.t,
+      t - other.t
     ].sum(&:abs)
   end
 end

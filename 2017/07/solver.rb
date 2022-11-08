@@ -36,7 +36,7 @@ def check_weight(node)
 
   weights = node.children.map { |c| check_weight(c) }
   if weights.uniq.size == 1
-    return node.weight + weights.inject(&:+)
+    node.weight + weights.inject(&:+)
   else
     diff = weights.max - weights.min
     id = weights.index(weights.max)

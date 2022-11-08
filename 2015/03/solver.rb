@@ -14,7 +14,7 @@ end
 
 gift!(world, x, y)
 
-input.split(//).each do |cmd|
+input.split("").each do |cmd|
   case cmd
   when ">"
     x += 1
@@ -47,7 +47,7 @@ gift!(world, santa)
 
 santas = [santa, robot]
 
-input.split(//).each do |cmd|
+input.split("").each do |cmd|
   actor = santas.shift
   case cmd
   when ">"

@@ -5,7 +5,7 @@ deck1 = input[1..25].map(&:to_i)
 deck2 = input[28..52].map(&:to_i)
 
 def score(deck)
-  deck.reverse.zip(1..deck.size).map{|a,b| a*b}.sum
+  deck.reverse.zip(1..deck.size).map { |a, b| a * b }.sum
 end
 
 loop do
@@ -27,11 +27,11 @@ puts score(deck1)
 deck1 = input[1..25].map(&:to_i)
 deck2 = input[28..52].map(&:to_i)
 
-def rcombat(d1, d2, depth=0)
+def rcombat(d1, d2, depth = 0)
   # p [depth, d1, d2]
   history = []
   loop do
-    signature = [d1.join(','), d2.join(',')].join('-')
+    signature = [d1.join(","), d2.join(",")].join("-")
     if history.include?(signature)
       return [1, d1]
     end
@@ -41,7 +41,7 @@ def rcombat(d1, d2, depth=0)
 
     winner = nil
     if d1.size >= c1 && d2.size >= c2
-      winner, _deck = rcombat(d1.dup[0...c1], d2.dup[0...c2], depth+1)
+      winner, _deck = rcombat(d1.dup[0...c1], d2.dup[0...c2], depth + 1)
     end
     if winner ? winner == 1 : c1 > c2
       d1 << c1 << c2

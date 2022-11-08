@@ -10,8 +10,8 @@ data = JSON.parse(input)
 
 def score(node)
   case node
-  when String; 0
-  when Numeric; node
+  when String then 0
+  when Numeric then node
   when Array
     node.map { |val| score(val) }.inject(&:+)
   when Hash

@@ -12,10 +12,10 @@ class GridWalker
   end
 
   TURNS = {
-    :n => [:w, :e],
-    :e => [:n, :s],
-    :s => [:e, :w],
-    :w => [:s, :n],
+    n: [:w, :e],
+    e: [:n, :s],
+    s: [:e, :w],
+    w: [:s, :n]
   }.freeze
 
   def left!
@@ -30,10 +30,10 @@ class GridWalker
 
   def forward!
     case dir
-    when :n; @y -= 1
-    when :s; @y += 1
-    when :e; @x += 1
-    when :w; @x -= 1
+    when :n then @y -= 1
+    when :s then @y += 1
+    when :e then @x += 1
+    when :w then @x -= 1
     end
     self
   end

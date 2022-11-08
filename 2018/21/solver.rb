@@ -75,10 +75,10 @@ end
 r5 = 0
 seen = []
 
-while !seen.include?(r5) # 30
+until seen.include?(r5) # 30
   seen << r5
   r2 = r5 | 65536 # 6
-  r5 = 7571367    # 7
+  r5 = 7571367 # 7
   r5 = (((r5 + (r2 & 255))) * 65899) & 0xffffff # 8-12, unrolled
   while 256 <= r2 # 13
     # r4 = 0 # 17

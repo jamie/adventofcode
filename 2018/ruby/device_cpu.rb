@@ -16,25 +16,25 @@ class CPU
     op, @a, @b, @c = opcode
 
     set case op
-        when "addr"; ra + rb
-        when "addi"; ra + @b
-        when "mulr"; ra * rb
-        when "muli"; ra * @b
-        when "banr"; ra & rb
-        when "bani"; ra & @b
-        when "borr"; ra | rb
-        when "bori"; ra | @b
-        when "setr"; ra
-        when "seti"; @a
-        when "gtir"; @a > rb ? 1 : 0
-        when "gtri"; ra > @b ? 1 : 0
-        when "gtrr"; ra > rb ? 1 : 0
-        when "eqir"; @a == rb ? 1 : 0
-        when "eqri"; ra == @b ? 1 : 0
-        when "eqrr"; ra == rb ? 1 : 0
-        else
-          "nil"
-        end
+    when "addr" then ra + rb
+    when "addi" then ra + @b
+    when "mulr" then ra * rb
+    when "muli" then ra * @b
+    when "banr" then ra & rb
+    when "bani" then ra & @b
+    when "borr" then ra | rb
+    when "bori" then ra | @b
+    when "setr" then ra
+    when "seti" then @a
+    when "gtir" then @a > rb ? 1 : 0
+    when "gtri" then ra > @b ? 1 : 0
+    when "gtrr" then ra > rb ? 1 : 0
+    when "eqir" then @a == rb ? 1 : 0
+    when "eqri" then ra == @b ? 1 : 0
+    when "eqrr" then ra == rb ? 1 : 0
+    else
+      "nil"
+    end
 
     @ip = registers[@ip_bind] if @ip_bind
     @ip += 1

@@ -3,11 +3,10 @@ input = Advent.input
 
 # Part 1
 molecule = input.pop
-transforms = input.inject({}) do |h, line|
+transforms = input.each_with_object({}) do |line, h|
   src, dst = line.chomp.split(" => ")
   h[src] ||= []
   h[src] << dst
-  h
 end
 
 transformed = []
@@ -23,11 +22,10 @@ end
 p transformed.uniq.size
 
 # Part 2
-transforms = input.inject({}) do |h, line|
+transforms = input.each_with_object({}) do |line, h|
   src, dst = line.chomp.split(" => ")
   fail if h[dst]
   h[dst] = src
-  h
 end
 
 def dig(depth, current, transforms)

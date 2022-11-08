@@ -3,7 +3,7 @@ prog = Advent.input
 
 require "intcode"
 
-PIXEL = { nil => " ", 0 => "#", 1 => ".", 2 => "o" }.freeze
+PIXEL = {nil => " ", 0 => "#", 1 => ".", 2 => "o"}.freeze
 
 def draw(map)
   xs, ys = map.keys.transpose

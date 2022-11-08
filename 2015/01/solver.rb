@@ -9,7 +9,7 @@ puts ups.size - downs.size
 # Part 2
 floor = 0
 pos = 0
-input.split(//).each do |char|
+input.split("").each do |char|
   pos += 1
   case char
   when "("

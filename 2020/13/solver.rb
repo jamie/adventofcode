@@ -5,23 +5,24 @@ input = Advent.input
 
 start = input[0].to_i
 
-busses = input[1].split(',').reject!{|bus| bus == 'x'}.map(&:to_i)
+busses = input[1].split(",").reject! { |bus| bus == "x" }.map(&:to_i)
 
-departure, wait, bus = busses.
-  map{|bus|
-    t = start.to_f/bus
-    f = t-t.to_i
-    d = (t-f+1)*bus
-    [d, d-start, bus]}.
-  sort.
-  first
+departure, wait, bus = busses
+  .map { |bus|
+  t = start.to_f / bus
+  f = t - t.to_i
+  d = (t - f + 1) * bus
+  [d, d - start, bus]
+}
+  .sort
+  .first
 
-puts wait.to_i*bus
+puts wait.to_i * bus
 
 # Part 2 - TODO: Algorithm
 
-schedule = input[1].split(',').map.with_index{|bus,i|
-  next if bus=='x'
+schedule = input[1].split(",").map.with_index { |bus, i|
+  next if bus == "x"
   [bus.to_i, i]
 }.compact
 

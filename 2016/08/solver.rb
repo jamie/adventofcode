@@ -1,8 +1,8 @@
 require "advent"
 input = Advent.input
 
-ON = "#".freeze #:on
-OFF = " ".freeze #:off
+ON = "#".freeze # :on
+OFF = " ".freeze # :off
 
 # Part 1
 screen = [
@@ -11,7 +11,7 @@ screen = [
   [OFF] * 50,
   [OFF] * 50,
   [OFF] * 50,
-  [OFF] * 50,
+  [OFF] * 50
 ]
 
 input.each do |line|
@@ -43,7 +43,7 @@ screen = [
   [OFF] * 50,
   [OFF] * 50,
   [OFF] * 50,
-  [OFF] * 50,
+  [OFF] * 50
 ]
 
 input.each do |line|

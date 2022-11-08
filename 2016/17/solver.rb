@@ -6,7 +6,7 @@ OPEN = /[bcdef]/
 # Part 1
 queue = [[0, 0, ""]]
 
-while !queue.empty?
+until queue.empty?
   x, y, path = queue.shift
 
   if [x, y] == [3, 3]
@@ -25,7 +25,7 @@ end
 queue = [[0, 0, ""]]
 longest = 0
 
-while !queue.empty?
+until queue.empty?
   x, y, path = queue.shift
 
   if [x, y] == [3, 3]

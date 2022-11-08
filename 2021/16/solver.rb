@@ -2,42 +2,42 @@ require "advent"
 input = Advent.input
 
 def decode_packet(bits, offset = 0)
-  version = bits[offset+0, 3].to_i(2)
-  type_id = bits[offset+3, 3].to_i(2)
+  version = bits[offset + 0, 3].to_i(2)
+  type_id = bits[offset + 3, 3].to_i(2)
   bits_consumed = 6
 
   case type_id
   when 4 # Literal
     i = 6
-    value = ''
+    value = ""
     loop do
       bits_consumed += 5
-      value << bits[offset+i+1, 4]
-      break if bits[offset+i] == '0'
+      value << bits[offset + i + 1, 4]
+      break if bits[offset + i] == "0"
       i += 5
     end
     result = value.to_i(2)
   else # Operator
-    length_type_id = bits[offset+6]
-    if length_type_id == '0'
-      length = bits[offset+7, 15].to_i(2)
+    length_type_id = bits[offset + 6]
+    if length_type_id == "0"
+      length = bits[offset + 7, 15].to_i(2)
       bits_consumed += 16
 
       result = []
       result_consumed = 0
       while result_consumed < length
-        packet = decode_packet(bits, offset+bits_consumed+result_consumed)
+        packet = decode_packet(bits, offset + bits_consumed + result_consumed)
         result << packet
         result_consumed += packet[:bits_consumed]
       end
     else # '1'
-      subpackets = bits[offset+7, 11].to_i(2)
+      subpackets = bits[offset + 7, 11].to_i(2)
       bits_consumed += 12
 
       result = []
       result_consumed = 0
       subpackets.times do
-        packet = decode_packet(bits, offset+bits_consumed+result_consumed)
+        packet = decode_packet(bits, offset + bits_consumed + result_consumed)
         result << packet
         result_consumed += packet[:bits_consumed]
       end
@@ -45,10 +45,10 @@ def decode_packet(bits, offset = 0)
     bits_consumed += result_consumed
   end
 
-  { version: version, type_id: type_id, value: result, bits_consumed: bits_consumed }
+  {version: version, type_id: type_id, value: result, bits_consumed: bits_consumed}
 end
 
-bits = input.to_i(16).to_s(2).rjust(input.size*4, '0')
+bits = input.to_i(16).to_s(2).rjust(input.size * 4, "0")
 sexp = decode_packet(bits)
 
 # Part 1

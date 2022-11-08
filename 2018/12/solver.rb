@@ -5,17 +5,16 @@ initial_state = input[0].match(/state: (.*)/).captures[0]
 
 patterns = input[2..33].map do |line|
   line.match(/(.....) => (.)/).captures
-end.inject({}) do |h, e|
+end.each_with_object({}) do |e, h|
   k, v = e
-  key = k.split(//).map { |kk| kk == "#" }
+  key = k.split("").map { |kk| kk == "#" }
   h[key] = (v == "#")
-  h
 end
 
 require "set"
 
 state = Set.new
-initial_state.split(//).each_with_index do |e, i|
+initial_state.split("").each_with_index do |e, i|
   state.add(i) if e == "#"
 end
 warmup = 150

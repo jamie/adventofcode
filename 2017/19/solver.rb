@@ -12,9 +12,9 @@ loop do
   when "+"
     case dir
     when :d, :u
-      dir = (input[pos[0]][pos[1] - 1] == "-") ? :l : :r
+      dir = input[pos[0]][pos[1] - 1] == "-" ? :l : :r
     when :r, :l
-      dir = (input[pos[0] - 1][pos[1]] == "|") ? :u : :d
+      dir = input[pos[0] - 1][pos[1]] == "|" ? :u : :d
     end
   when /[A-Z]/
     message << cur

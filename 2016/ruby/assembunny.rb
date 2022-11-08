@@ -13,7 +13,7 @@ class Assembunny
       "a" => 0,
       "b" => 0,
       "c" => 0,
-      "d" => 0,
+      "d" => 0
     }
   end
 
@@ -22,7 +22,7 @@ class Assembunny
   end
 
   def val(x)
-    if x =~ /\d/
+    if /\d/.match?(x)
       x.to_i
     else
       registers[x]
@@ -57,9 +57,9 @@ class Assembunny
           inst = prog[index][0]
           case prog[index].size
           when 2
-            prog[index][0] = (inst == "inc") ? "dec" : "inc"
+            prog[index][0] = inst == "inc" ? "dec" : "inc"
           when 3
-            prog[index][0] = (inst == "jnz") ? "cpy" : "jnz"
+            prog[index][0] = inst == "jnz" ? "cpy" : "jnz"
           end
         end
       when "out"

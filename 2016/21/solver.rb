@@ -29,7 +29,7 @@ input.each do |command|
     password[i..j] = password[i..j].reverse
   when /move position (\d+) to position (\d+)/
     i, j = Regexp.last_match(1).to_i, Regexp.last_match(2).to_i
-    pass = password.split(//)
+    pass = password.split("")
     char = pass.delete_at(i)
     pass.insert(j, char)
     password = pass.join
@@ -63,7 +63,7 @@ def rotl(password, n)
   password[n..-1] + password[0...n]
 end
 
-input.reverse.each do |command|
+input.reverse_each do |command|
   # p [password, command]
   case command
   when /swap position (\d+) with position (\d+)/
@@ -77,7 +77,7 @@ input.reverse.each do |command|
     password[i..j] = password[i..j].reverse
   when /move position (\d+) to position (\d+)/
     j, i = Regexp.last_match(1).to_i, Regexp.last_match(2).to_i
-    pass = password.split(//)
+    pass = password.split("")
     char = pass.delete_at(i)
     pass.insert(j, char)
     password = pass.join

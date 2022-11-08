@@ -1,11 +1,11 @@
 require "advent"
 input = Advent.input
 
-index = Hash[input.map do |line|
-               line =~ /(\d+) <-> ([0-9, ]+)/
-               room, neighbours = Regexp.last_match(1), Regexp.last_match(2).split(", ")
-               [room, neighbours]
-             end]
+index = input.map do |line|
+  line =~ /(\d+) <-> ([0-9, ]+)/
+  room, neighbours = Regexp.last_match(1), Regexp.last_match(2).split(", ")
+  [room, neighbours]
+end.to_h
 
 groups = 0
 

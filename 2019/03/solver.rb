@@ -9,13 +9,33 @@ def points(line)
     dist = dir[1..-1].to_i
     case dir[0]
     when "R"
-      dist.times { x += 1; t += 1; wire << [x, y]; times[[x, y]] ||= t }
+      dist.times {
+        x += 1
+        t += 1
+        wire << [x, y]
+        times[[x, y]] ||= t
+      }
     when "L"
-      dist.times { x -= 1; t += 1; wire << [x, y]; times[[x, y]] ||= t }
+      dist.times {
+        x -= 1
+        t += 1
+        wire << [x, y]
+        times[[x, y]] ||= t
+      }
     when "U"
-      dist.times { y -= 1; t += 1; wire << [x, y]; times[[x, y]] ||= t }
+      dist.times {
+        y -= 1
+        t += 1
+        wire << [x, y]
+        times[[x, y]] ||= t
+      }
     when "D"
-      dist.times { y += 1; t += 1; wire << [x, y]; times[[x, y]] ||= t }
+      dist.times {
+        y += 1
+        t += 1
+        wire << [x, y]
+        times[[x, y]] ||= t
+      }
     end
   end
   [wire, times]

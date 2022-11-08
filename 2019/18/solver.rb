@@ -3,27 +3,27 @@ input = Advent.input
 
 require "priority_deque"
 
-input = <<STR.split("\n") # 138
-#################
-#i.G..c...e..H.p#
-########.########
-#j.A..b...f..D.o#
-########@########
-#k.E..a...g..B.n#
-########.########
-#l.F..d...h..C.m#
-#################
+input = <<~STR.split("\n") # 138
+  #################
+  #i.G..c...e..H.p#
+  ########.########
+  #j.A..b...f..D.o#
+  ########@########
+  #k.E..a...g..B.n#
+  ########.########
+  #l.F..d...h..C.m#
+  #################
 STR
 
-input = <<STR.split("\n") # 8
-#########
-#b.A.@.a#
-#########
+input = <<~STR.split("\n") # 8
+  #########
+  #b.A.@.a#
+  #########
 STR
 
 map = {}
 input.each_with_index do |row, y|
-  row.split(//).each_with_index do |cell, x|
+  row.split("").each_with_index do |cell, x|
     next if cell == "#" # Skip walls, uninteresting
     map[[x, y]] = cell
   end

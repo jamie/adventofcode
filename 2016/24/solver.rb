@@ -2,23 +2,23 @@ require "advent"
 require "astar"
 input = Advent.input
 
-xinput = <<STR.split("\n")
-###########
-#0.1.....2#
-#.#######.#
-#4.......3#
-###########
+xinput = <<~STR.split("\n")
+  ###########
+  #0.1.....2#
+  #.#######.#
+  #4.......3#
+  ###########
 STR
 
 def map_find_xy(node, input)
-  row = input.detect {|line| line =~ /#{node}/}
+  row = input.detect { |line| line =~ /#{node}/ }
   y = input.index(row)
   x = row.index(node)
   [x, y]
 end
 
 numbers = input.join.scan(/[0-9]/).sort
-locations = Hash[numbers.map{|n| [n, map_find_xy(n, input)]}]
+locations = numbers.map { |n| [n, map_find_xy(n, input)] }.to_h
 
 distances = {}
 numbers.each do |start|

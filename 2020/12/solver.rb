@@ -67,4 +67,3 @@ input.each do |line|
   end
 end
 puts x.abs + y.abs
-

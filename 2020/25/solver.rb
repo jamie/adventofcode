@@ -35,4 +35,3 @@ puts value
 #   value = (value * cardkey) % MODULUS
 # end
 # puts value
-
