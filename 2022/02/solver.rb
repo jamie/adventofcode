@@ -1,15 +1,15 @@
 require "advent"
 input = Advent.input
 
-inpxut = <<END.split("\n")
-A Y
-B X
-C Z
+inpxut = <<~END.split("\n")
+  A Y
+  B X
+  C Z
 END
 
 # Part 1
 
-moves = input.map{_1.split(" ")}
+moves = input.map { _1.split(" ") }
 
 results = {
   # WIN
@@ -23,7 +23,7 @@ results = {
   # LOSE
   ["A", "Z"] => 0,
   ["B", "X"] => 0,
-  ["C", "Y"] => 0,
+  ["C", "Y"] => 0
 }
 
 points = {
@@ -49,7 +49,7 @@ move_for = {
   # LOSE
   ["A", "X"] => "Z",
   ["B", "X"] => "X",
-  ["C", "X"] => "Y",
+  ["C", "X"] => "Y"
 }
 
 puts(moves.map do |elf_move, result|

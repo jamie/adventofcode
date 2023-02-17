@@ -1,13 +1,13 @@
 require "advent"
 input = Advent.input
 
-inpxut = <<END.split("\n")
-vJrwpWtwJgWrhcsFMMfFFhFp
-jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
-PmmdzqPrVvPwwTWBwg
-wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
-ttgJtRGJQctTZtZT
-CrZsJsPPZsGzwwsLwLmpwMDw
+inpxut = <<~END.split("\n")
+  vJrwpWtwJgWrhcsFMMfFFhFp
+  jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+  PmmdzqPrVvPwwTWBwg
+  wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+  ttgJtRGJQctTZtZT
+  CrZsJsPPZsGzwwsLwLmpwMDw
 END
 
 # Part 1
@@ -30,7 +30,7 @@ puts priorities.sum
 # Part 2
 
 badges = input.each_slice(3).map do |elves|
-  badge = elves.map{_1.split("")}.inject(&:&)[0]
+  badge = elves.map { _1.split("") }.inject(&:&)[0]
   byte = badge.bytes.first
 
   if badge >= "a"
