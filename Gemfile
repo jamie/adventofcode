@@ -9,3 +9,5 @@ gem "guard-shell"
 
 gem "concurrent-ruby"
 gem "concurrent-ruby-edge"
+
+gem "debug"
