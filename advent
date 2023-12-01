@@ -18,12 +18,17 @@ if ARGV[0] == "get"
   out = "%4d/%02d/input" % [year, day]
 
   offset = LOCAL_OFFSET - AOC_OFFSET
+  tmon = 12
   tday = day.to_i
   if offset < 0
     tday -= 1
     offset += 24
   end
-  unlock_time = Time.local(year, 12, tday, offset)
+  if tday == 0
+    tmon -= 1
+    tday = 30
+  end
+  unlock_time = Time.local(year, tmon, tday, offset)
 
   if File.exist?(out)
     day += 1
