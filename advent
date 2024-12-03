@@ -57,7 +57,7 @@ if ARGV[0] == "get"
     end
 
     puts "> curl #{url}"
-    session = File.read(".session")
+    session = File.read(".session").chomp
     `curl -o #{out} -b session=#{session} #{url}`
     `open https://adventofcode.com/#{"%d/day/%d" % [year, day]}`
   end
