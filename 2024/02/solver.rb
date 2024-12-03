@@ -20,8 +20,8 @@ puts safe.count(true)
 
 safe = input.map do |line|
   values = line.scan(/[0-9]+/).map(&:to_i)
-  0.upto(values.size-1).any? do |i|
-    safe?(values[0...i] + values[i+1..-1])
+  values.combination(values.size - 1).any? do |subset|
+    safe?(subset)
   end
 end
 puts safe.count(true)
