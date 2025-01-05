@@ -45,15 +45,16 @@ if ARGV[0] == "get"
       break if wait < 0
 
       if wait < 100
-        puts "%d seconds to go..." % [wait]
+        print "\r%d seconds to go...    " % [wait]
         sleep 1
       elsif wait < 100 * 60
-        puts "%d+ minutes to go..." % [wait / 60]
+        print "\r%d+ minutes to go...    " % [wait / 60]
         sleep 60
       else
-        puts "%d+ hours to go..." % [wait / 60 / 60]
+        print "\r%d+ hours to go...    " % [wait / 60 / 60]
         sleep 60 * 60
       end
+      puts
     end
 
     puts "> curl #{url}"
